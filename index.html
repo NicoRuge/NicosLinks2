@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Links</title>
+    <meta name="description" content="A central hub for all my social media links and content.">
+
+    <!-- Google Fonts: Roboto & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Material Symbols -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-animation"></div>
+
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+        <span class="material-symbols-rounded">dark_mode</span>
+    </button>
+
+    <main class="container">
+        <div class="profile-section">
+            <div class="profile-image-container">
+                <img src="images/profile.jpg" alt="Nico Ruge" class="profile-image">
+            </div>
+            <h1 class="profile-name">Nico Ruge</h1>
+            <p class="profile-bio">Digital Creator & Developer</p>
+        </div>
+
+        <div class="links-container">
+            <!-- Portfolio -->
+            <a href="https://nico-ruge.de" class="link-card" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded link-icon">public</span>
+                <span class="link-text">Portfolio</span>
+                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+            </a>
+
+            <!-- Unsplash -->
+            <a href="https://unsplash.com/@nico_ruge" class="link-card" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded link-icon">image</span>
+                <span class="link-text">Unsplash</span>
+                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+            </a>
+
+            <!-- Camera Equipment (Popup) -->
+            <a href="#" class="link-card" id="equipment-card">
+                <span class="material-symbols-rounded link-icon">photo_camera</span>
+                <span class="link-text">Camera Equipment</span>
+                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/nicoruge" class="link-card" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded link-icon">work</span>
+                <span class="link-text">LinkedIn</span>
+                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/nico_ruge" class="link-card" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded link-icon">camera_alt</span>
+                <span class="link-text">Instagram</span>
+                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+            </a>
+
+            <!-- Twitter -->
+            <a href="https://x.com/Lord_NicolasX" class="link-card" target="_blank" rel="noopener noreferrer">
+                <span class="material-symbols-rounded link-icon">alternate_email</span>
+                <span class="link-text">Twitter / X</span>
+                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+            </a>
+
+            <!-- Rail Map Card -->
+            <a href="#" class="link-card" id="railmap-card">
+                <span class="material-symbols-rounded link-icon">train</span>
+                <span class="link-text">My Rail Map</span>
+                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+            </a>
+
+            <!-- Travel Widget -->
+            <div id="twlngwidget" class="travel-widget"></div>
+        </div>
+    </main>
+
+    <!-- Rail Map Modal -->
+    <div id="railmap-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close Modal">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+            <iframe src="railmap.html" title="My Rail Map" class="modal-iframe"></iframe>
+        </div>
+    </div>
+
+    <!-- Equipment Modal -->
+    <div id="equipment-modal" class="modal">
+        <div class="modal-content equipment-content">
+            <button class="close-modal" aria-label="Close Modal">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+            <h2>Camera Equipment</h2>
+
+            <div class="equipment-list-container">
+                <div class="equipment-group">
+                    <h3>Cameras</h3>
+                    <ul>
+                        <li>Sony Alpha 7 III <span class="text-secondary">(ILCE-7M3)</span></li>
+                        <li>Praktica Mat 35mm <span class="text-secondary">(ca. 1965)</span></li>
+                        <li>Polaroid Supercolor 635CL <span class="text-secondary">(ca. 1981)</span></li>
+                        <li>Google Pixel 9 Pro</li>
+                    </ul>
+                </div>
+
+                <div class="equipment-group">
+                    <h3>Lenses</h3>
+                    <ul>
+                        <li><span class="strikethrough">Sony FE 70-200mm f/4 G OSS <span
+                                    class="text-secondary">(SEL70200G)</span></span> <span class="text-secondary">(Its
+                                broken)</span></li>
+                        <li>Sigma Makro 105mm f/2.8 DG OS HSM</li>
+                        <li>Sony FE 28-70 f/3.5-5.6</li>
+                    </ul>
+                </div>
+
+                <div class="equipment-group">
+                    <h3>Flash</h3>
+                    <ul>
+                        <li>Yongnou Speedlite YN560 IV</li>
+                    </ul>
+                </div>
+
+                <div class="equipment-group">
+                    <h3>Software</h3>
+                    <ul>
+                        <li>Affinity</li>
+                        <li>Adobe Lightroom Classic</li>
+                        <li>Adobe Photoshop</li>
+                    </ul>
+                </div>
+
+                <div class="equipment-group">
+                    <h3>Storage</h3>
+                    <ul>
+                        <li>In-Camera:
+                            <ul>
+                                <li>RAW - SanDisk Extreme Pro 256 GB</li>
+                                <li>JPEG - SanDisk Ultra 32 GB</li>
+                            </ul>
+                        </li>
+                        <li>External:
+                            <ul>
+                                <li>Samsung T7 500 GB</li>
+                                <li>WD MyBook 4 TB</li>
+                                <li>Google Photos</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Nico Ruge</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="tw_widget.js"></script>
+</body>
+
+</html>
