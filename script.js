@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Modal Logic ---
-    const setupModal = (cardId, modalId) => {
+    const setupModal = (cardId, modalId, hashName) => {
         const card = document.getElementById(cardId);
         const modal = document.getElementById(modalId);
         if (!card || !modal) return;
@@ -51,14 +51,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeModalBtn = modal.querySelector('.close-modal');
 
         const openModal = (e) => {
-            e.preventDefault();
+            if (e) e.preventDefault();
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+            if (hashName) {
+                history.pushState(null, null, `#${hashName}`);
+            }
         };
 
         const closeModal = () => {
             modal.classList.remove('show');
             document.body.style.overflow = '';
+            if (hashName) {
+                history.pushState(null, null, ' '); // Remove hash
+            }
         };
 
         card.addEventListener('click', openModal);
@@ -78,8 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal();
             }
         });
+
+        // Check initial hash
+        if (hashName && window.location.hash === `#${hashName}`) {
+            openModal();
+        }
     };
 
-    setupModal('railmap-card', 'railmap-modal');
-    setupModal('equipment-card', 'equipment-modal');
+    setupModal('railmap-card', 'railmap-modal', 'railmap');
+    setupModal('equipment-card', 'equipment-modal', 'equipment');
 });

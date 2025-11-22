@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="de">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,39 +11,96 @@
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 
   <style>
-    html, body { height: 100%; margin: 0 }
-    #map { position: absolute; inset: 0 }
+    html,
+    body {
+      height: 100%;
+      margin: 0
+    }
+
+    #map {
+      position: absolute;
+      inset: 0
+    }
+
     .home-btn {
-      position: absolute; top: 12px; left: 60px;
-      background: #fff; border: 1px solid rgba(0,0,0,.15); border-radius: 8px;
-      padding: 8px 12px; font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: #111; text-decoration: none;
+      position: absolute;
+      top: 12px;
+      left: 60px;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, .15);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: #111;
+      text-decoration: none;
     }
-    .home-btn:hover { background: #f6f6f6 }
+
+    .home-btn:hover {
+      background: #f6f6f6
+    }
+
     .panel {
-      position: absolute; top: 12px; right: 12px;
-      background: #fff; border: 1px solid rgba(0,0,0,.15); border-radius: 8px;
-      padding: 8px 10px; font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, .15);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif
     }
-    .panel h3 { margin: 0 0 6px 0; font-size: 14px }
-    .row { display: flex; align-items: center; gap: 8px; margin: 6px 0 }
-    .attribution { position: absolute; left: 12px; bottom: 12px; background: rgba(255,255,255,.9); padding: 4px 6px; border-radius: 6px; font-size: 12px }
+
+    .panel h3 {
+      margin: 0 0 6px 0;
+      font-size: 14px
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 6px 0
+    }
+
+    .attribution {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      background: rgba(255, 255, 255, .9);
+      padding: 4px 6px;
+      border-radius: 6px;
+      font-size: 12px
+    }
   </style>
 </head>
+
 <body>
   <div id="map"></div>
 
   <a class="home-btn" href="index.html" role="button">Home</a>
 
   <div class="panel" id="ui">
-    <h3>Kartenebenen</h3>
+    <h3>Hintergrundkarte</h3>
     <div class="row">
-      <label><input type="checkbox" id="toggle-orm"> OpenRailwayMap</label>
+      <label><input type="radio" name="basemap" value="dark" checked> Dunkel</label>
     </div>
-  </div>
-
-  <div class="attribution">
-    Daten: © OpenStreetMap Mitwirkende. Gleis-Overlay: © OpenRailwayMap
+    <div class="row">
+      <label><input type="radio" name="basemap" value="light"> Hell</label>
+    </div>
+    <div class="row">
+      <label><input type="radio" name="basemap" value="satellite"> Satellit</label>
+    </div>
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;">
+    <h3>Verkehrsmittel</h3>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="nationalExpress,national" checked>
+        National Express</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="regionalExp,regional" checked>
+        Regional Express</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="suburban" checked> Suburban</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="subway" checked> Subway</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="tram" unchecked> Tram</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="bus" unchecked> Bus</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="ferry" unchecked> Ferry</label></div>
   </div>
 
   <script>
@@ -51,16 +109,23 @@
 
     // Karte initialisieren (Style je nach gewähltem Theme aus index.html)
     const savedTheme = (localStorage.getItem('theme') || 'dark');
-    try { document.documentElement.setAttribute('data-theme', savedTheme); } catch (_) {}
-    const baseStyle = savedTheme === 'dark'
-      ? 'mapbox://styles/mapbox/dark-v11'
-      : 'mapbox://styles/mapbox/streets-v12';
+    try { document.documentElement.setAttribute('data-theme', savedTheme); } catch (_) { }
+
+    const styles = {
+      dark: 'mapbox://styles/mapbox/dark-v11',
+      light: 'mapbox://styles/mapbox/streets-v12',
+      satellite: 'mapbox://styles/mapbox/satellite-streets-v12'
+    };
+
+    // Set initial radio selection
+    const initialStyleKey = savedTheme === 'dark' ? 'dark' : 'light';
+    document.querySelector(`input[name="basemap"][value="${initialStyleKey}"]`).checked = true;
 
     const map = new mapboxgl.Map({
       container: "map",
-      style: baseStyle,
-      center: [9.0, 50.5],
-      zoom: 6,
+      style: styles[initialStyleKey],
+      center: [5.0, 50.0], // Europe Mainland
+      zoom: 4,
       pitch: 0,
       bearing: 0
     });
@@ -70,129 +135,181 @@
     map.addControl(new mapboxgl.FullscreenControl(), "top-left");
     map.addControl(new mapboxgl.ScaleControl({ unit: "metric" }), "bottom-left");
 
-    // Optionales OpenRailwayMap Overlay als Raster-Layer
-    map.on("load", () => {
-      // Hide base-map road layers (keep rail-related layers visible)
-      const hideRoadLayers = () => {
-        const style = map.getStyle();
-        if (!style || !style.layers) return;
-        for (const layer of style.layers) {
-          const id = layer.id || "";
-          const srcLayer = layer["source-layer"] || "";
-          const filterText = JSON.stringify(layer.filter || "");
-          const isRoadishId = id.startsWith("road-") || id.startsWith("bridge-") || id.startsWith("tunnel-") || id === "road-label";
-          const isRoadSource = srcLayer === "road" || srcLayer === "road_label";
-          const isRailRelated = /\b(rail|tram|subway|light_rail)\b/i.test(id) || /"rail"|"tram"|"subway"|"light_rail"/.test(filterText);
-          // detect admin-0 (country) and admin-1 (state/province) boundary line layers
-          const isAdminSource = srcLayer === "admin";
-          const isBoundaryId = /boundary/i.test(id);
-          const adminLevelIdMatch = /(^|-)admin-(0|1)(-|$)/i.test(id);
-          const adminLevelFilter01 = /admin\s*[_-]?level\W*(0|1)/i.test(filterText);
-          const adminKeyword = /\b(country|state|province|admin-0|admin-1)\b/i.test(id);
-          const isAdmin01Boundary = (isBoundaryId && (adminLevelIdMatch || adminLevelFilter01 || adminKeyword)) ||
-                                     (isAdminSource && (adminLevelFilter01 || adminKeyword));
+    // Globaler Speicher für die GeoJSON-Daten
+    let tripsData = null;
 
-          if (((isRoadishId || isRoadSource) && !isRailRelated) || (isAdmin01Boundary && layer.type !== "symbol")) {
-            try {
-              if (map.getLayer(id)) {
-                map.setLayoutProperty(id, "visibility", "none");
-              }
-            } catch (_) { /* ignore non-toggleable layers */ }
-          }
+    // Funktion zum Hinzufügen der Custom Layers (wird beim Start und nach Style-Wechsel aufgerufen)
+    function addCustomLayers() {
+      // Safety check: Style must be loaded to add layers
+      if (!map.getStyle()) return;
+
+      // 1. OpenRailwayMap Source & Layer
+      if (!map.getSource("open-railway-map")) {
+        map.addSource("open-railway-map", {
+          type: "raster",
+          tiles: ["https://a.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png"],
+          tileSize: 256,
+          attribution: "© OpenRailwayMap"
+        });
+      }
+      if (!map.getLayer("open-railway-map")) {
+        map.addLayer({
+          id: "open-railway-map",
+          type: "raster",
+          source: "open-railway-map",
+          layout: { visibility: "visible" },
+          paint: { "raster-opacity": 0.5 }
+        });
+      }
+
+      // 2. Trips GeoJSON Source & Layer
+      if (tripsData) {
+        if (!map.getSource("trips")) {
+          map.addSource("trips", { type: "geojson", data: tripsData });
         }
-      };
+        if (!map.getLayer("trips-lines")) {
+          map.addLayer({
+            id: "trips-lines",
+            type: "line",
+            source: "trips",
+            layout: { "line-cap": "round", "line-join": "round" },
+            paint: {
+              "line-color": [
+                "match", ["get", "category"],
+                "nationalExpress", "#0073ff",
+                "national", "#00eeff",
+                "regionalExp", "#d1024e",
+                "regional", "#a6026c",
+                "suburban", "#fc0000",
+                "subway", "#F69A00",
+                "tram", "#2FC5CC",
+                "bus", "#238443",
+                "ferry", "#800",
+                "#333333"
+              ],
+              "line-width": ["interpolate", ["linear"], ["zoom"], 6, 2.5, 14, 8],
+              "line-opacity": 0.95
+            }
+          });
+          updateTripFilter(); // Apply current filter
+        }
+      }
+    }
+
+    // Hide base-map road layers (keep rail-related layers visible)
+    const hideRoadLayers = () => {
+      const style = map.getStyle();
+      if (!style || !style.layers) return;
+      for (const layer of style.layers) {
+        const id = layer.id || "";
+        const srcLayer = layer["source-layer"] || "";
+        const filterText = JSON.stringify(layer.filter || "");
+        const isRoadishId = id.startsWith("road-") || id.startsWith("bridge-") || id.startsWith("tunnel-") || id === "road-label";
+        const isRoadSource = srcLayer === "road" || srcLayer === "road_label";
+        const isRailRelated = /\b(rail|tram|subway|light_rail)\b/i.test(id) || /"rail"|"tram"|"subway"|"light_rail"/.test(filterText);
+        // detect admin-0 (country) and admin-1 (state/province) boundary line layers
+        const isAdminSource = srcLayer === "admin";
+        const isBoundaryId = /boundary/i.test(id);
+        const adminLevelIdMatch = /(^|-)admin-(0|1)(-|$)/i.test(id);
+        const adminLevelFilter01 = /admin\s*[_-]?level\W*(0|1)/i.test(filterText);
+        const adminKeyword = /\b(country|state|province|admin-0|admin-1)\b/i.test(id);
+        const isAdmin01Boundary = (isBoundaryId && (adminLevelIdMatch || adminLevelFilter01 || adminKeyword)) ||
+          (isAdminSource && (adminLevelFilter01 || adminKeyword));
+
+        if (((isRoadishId || isRoadSource) && !isRailRelated) || (isAdmin01Boundary && layer.type !== "symbol")) {
+          try {
+            if (map.getLayer(id)) {
+              map.setLayoutProperty(id, "visibility", "none");
+            }
+          } catch (_) { /* ignore non-toggleable layers */ }
+        }
+      }
+    };
+
+    // Event: Style fertig geladen (initial oder nach Wechsel)
+    map.on("style.load", () => {
       hideRoadLayers();
+      addCustomLayers();
+    });
 
-      map.addSource("open-railway-map", {
-        type: "raster",
-        tiles: ["https://a.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png"],
-        tileSize: 256,
-        attribution: "© OpenRailwayMap"
+    // Ensure we try to add layers once the map is fully loaded initially as well
+    map.on("load", () => {
+      addCustomLayers();
+    });
+
+    // Daten einmalig laden
+    const sources = [
+      ["nationalExpress", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/nationalExpress.geojson"],
+      ["national", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/national.geojson"],
+      ["regionalExp", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/regionalExp.geojson"],
+      ["regional", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/regional.geojson"],
+      ["suburban", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/suburban.geojson"],
+      ["subway", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/subway.geojson"],
+      ["tram", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/tram.geojson"],
+      ["bus", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/bus.geojson"],
+      ["ferry", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/ferry.geojson"]
+    ];
+
+    Promise.all(sources.map(async ([cat, url]) => {
+      const r = await fetch(url);
+      const j = await r.json();
+      j.features.forEach((f, i) => {
+        f.properties = { category: cat, ...(f.properties || {}) };
+        if (!f.properties.id) f.properties.id = `${cat}-${i}`;
+      });
+      return j.features;
+    }))
+      .then(all => {
+        tripsData = { type: "FeatureCollection", features: all.flat() };
+
+        // Try to add layers immediately if style is ready
+        addCustomLayers();
+
+        // auf Bounds zoomen (deaktiviert, damit Startansicht bleibt)
+        /*
+        const bounds = new mapboxgl.LngLatBounds();
+        tripsData.features.forEach(f => {
+          if (f.geometry?.type === "LineString") {
+            f.geometry.coordinates.forEach(c => bounds.extend(c));
+          }
+        });
+        if (!bounds.isEmpty()) map.fitBounds(bounds, { padding: 24, maxZoom: 7 });
+        */
+      })
+      .catch(e => console.warn("Fehler beim Laden der externen GeoJSONs:", e));
+
+    // Filter Logic
+    function updateTripFilter() {
+      if (!map.getLayer("trips-lines")) return;
+
+      const selectedCategories = [];
+      document.querySelectorAll('.filter-cb:checked').forEach(cb => {
+        const vals = cb.value.split(','); // Split the value by comma to get multiple categories 
+        selectedCategories.push(...vals); // Add all values to the array              
       });
 
-      map.addLayer({
-        id: "open-railway-map",
-        type: "raster",
-        source: "open-railway-map",
-        layout: { visibility: "none" },
-        paint: { "raster-opacity": 0.5 }
-      });
-
-      // Externe GeoJSONs laden und zusammenführen
-const sources = [
-  ["nationalExpress","https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/nationalExpress.geojson"],
-  ["national","https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/national.geojson"],
-  ["regionalExp","https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/regionalExp.geojson"],
-  ["regional","https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/regional.geojson"],
-  ["suburban","https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/suburban.geojson"],
-  ["subway","https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/subway.geojson"],
-  ["tram","https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/tram.geojson"],
-  ["bus","https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/bus.geojson"],
-  ["ferry","https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/ferry.geojson"]
-];
-
-Promise.all(sources.map(async ([cat,url]) => {
-  const r = await fetch(url);
-  const j = await r.json();
-  j.features.forEach((f,i) => {
-    f.properties = { category: cat, ...(f.properties||{}) };
-    if (!f.properties.id) f.properties.id = `${cat}-${i}`;
-  });
-  return j.features;
-}))
-.then(all => {
-  const merged = { type: "FeatureCollection", features: all.flat() };
-
-  map.addSource("trips", { type: "geojson", data: merged });
-
-  map.addLayer({
-    id: "trips-lines",
-    type: "line",
-    source: "trips",
-    layout: { "line-cap": "round", "line-join": "round" },
-    paint: {
-      "line-color": [
-        "match", ["get","category"],
-        "nationalExpress","#0073ff",
-        "national","#00eeff",
-        "regionalExp","#d1024e",
-        "regional","#a6026c",
-        "suburban","#fc0000",
-        "subway","#F69A00",
-        "tram","#2FC5CC",
-        "bus","#238443",
-        "ferry","#800",
-        "#333333"
-      ],
-      "line-width": ["interpolate",["linear"],["zoom"],6,2.5,14,8],
-      "line-opacity": 0.95
+      if (selectedCategories.length === 0) {
+        // Hide all if nothing selected
+        map.setFilter("trips-lines", ["in", "category", ""]);
+      } else {
+        map.setFilter("trips-lines", ["in", "category", ...selectedCategories]);
+      }
     }
-  });
 
-  // auf Bounds zoomen
-  const bounds = new mapboxgl.LngLatBounds();
-  merged.features.forEach(f => {
-    if (f.geometry?.type === "LineString") {
-      f.geometry.coordinates.forEach(c => bounds.extend(c));
-    }
-  });
-  if (!bounds.isEmpty()) map.fitBounds(bounds, { padding: 24, maxZoom: 7 });
-})
-.catch(e => console.warn("Fehler beim Laden der externen GeoJSONs:", e));
-
-      // UI Toggle
-      const ormToggle = document.getElementById("toggle-orm");
-      ormToggle.addEventListener("change", () => {
-        const visible = ormToggle.checked ? "visible" : "none";
-        map.setLayoutProperty("open-railway-map", "visibility", visible);
+    // UI Event Listeners
+    // 1. Base Map Switcher
+    document.querySelectorAll('input[name="basemap"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const styleKey = e.target.value;
+        map.setStyle(styles[styleKey]);
       });
     });
 
-    // Hilfsfunktion: Sobald Streckendaten da sind, kannst du die Bounds anpassen
-    // Beispiel:
-    // const bounds = new mapboxgl.LngLatBounds();
-    // geojson.features.forEach(f => f.geometry.coordinates.forEach(c => bounds.extend(c)));
-    // map.fitBounds(bounds, { padding: 24, maxZoom: 10 });
+    // 2. Category Filter
+    document.querySelectorAll('.filter-cb').forEach(cb => {
+      cb.addEventListener('change', updateTripFilter);
+    });
   </script>
 </body>
+
 </html>
