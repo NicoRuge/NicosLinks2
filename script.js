@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = themeToggle.querySelector('.material-symbols-rounded');
+    const themeText = themeToggle.querySelector('.sidebar-text');
 
     // Check for saved theme preference, otherwise use system preference
     const getPreferredTheme = () => {
@@ -15,12 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
 
-        // Update icon
+        // Update icon and text
         if (theme === 'dark') {
             themeIcon.textContent = 'light_mode';
+            themeText.textContent = 'Light Mode';
             themeToggle.setAttribute('aria-label', 'Switch to Light Mode');
         } else {
             themeIcon.textContent = 'dark_mode';
+            themeText.textContent = 'Dark Mode';
             themeToggle.setAttribute('aria-label', 'Switch to Dark Mode');
         }
     };
@@ -42,55 +45,63 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Modal Logic ---
-    const setupModal = (cardId, modalId, hashName) => {
-        const card = document.getElementById(cardId);
-        const modal = document.getElementById(modalId);
-        if (!card || !modal) return;
+    // --- Navigation Logic ---
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    const sections = document.querySelectorAll('.content-section');
 
-        const closeModalBtn = modal.querySelector('.close-modal');
+    const switchSection = (targetId) => {
+        // Hide all sections
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
 
-        const openModal = (e) => {
-            if (e) e.preventDefault();
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-            if (hashName) {
-                history.pushState(null, null, `#${hashName}`);
-            }
-        };
-
-        const closeModal = () => {
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-            if (hashName) {
-                history.pushState(null, null, ' '); // Remove hash
-            }
-        };
-
-        card.addEventListener('click', openModal);
-
-        if (closeModalBtn) {
-            closeModalBtn.addEventListener('click', closeModal);
+        // Show target section
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.classList.add('active');
         }
 
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
+        // Update sidebar active state
+        sidebarLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.dataset.target === targetId) {
+                link.classList.add('active');
             }
         });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('show')) {
-                closeModal();
-            }
-        });
-
-        // Check initial hash
-        if (hashName && window.location.hash === `#${hashName}`) {
-            openModal();
+        // Update URL hash
+        const hash = targetId.replace('-section', '');
+        if (hash === 'home') {
+            history.pushState(null, null, ' '); // Clear hash for home
+        } else {
+            history.pushState(null, null, `#${hash}`);
         }
     };
 
-    setupModal('railmap-card', 'railmap-modal', 'railmap');
-    setupModal('equipment-card', 'equipment-modal', 'equipment');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.dataset.target;
+            switchSection(targetId);
+        });
+    });
+
+    // Handle initial hash
+    const handleHashChange = () => {
+        const hash = window.location.hash.slice(1); // Remove #
+        if (hash) {
+            const targetId = `${hash}-section`;
+            if (document.getElementById(targetId)) {
+                switchSection(targetId);
+            }
+        } else {
+            switchSection('home-section');
+        }
+    };
+
+    // Listen for hash changes (back/forward button)
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Initial check
+    handleHashChange();
 });

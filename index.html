@@ -24,159 +24,233 @@
 <body>
     <div class="background-animation"></div>
 
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-        <span class="material-symbols-rounded">dark_mode</span>
-    </button>
-
-    <main class="container">
-        <div class="profile-section">
-            <div class="profile-image-container">
-                <img src="images/profile.jpg" alt="Nico Ruge" class="profile-image">
+    <div class="main-wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-profile">
+                    <img src="images/profile.jpg" alt="Nico Ruge" class="sidebar-avatar">
+                    <span class="sidebar-name">Nico Ruge</span>
+                </div>
             </div>
-            <h1 class="profile-name">Nico Ruge</h1>
-            <p class="profile-bio">Digital Creator & Developer</p>
-        </div>
-
-        <div class="links-container">
-            <!-- Quick Links -->
-            <div class="quick-links">
-                <a href="https://linkedin.com/in/nicoruge" class="quick-link-btn" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn">
-                    <span class="material-symbols-rounded">work</span>
-                </a>
-                <a href="mailto:mail@nico-ruge.de" class="quick-link-btn" aria-label="Email">
-                    <span class="material-symbols-rounded">mail</span>
-                </a>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#home" class="sidebar-link active" data-target="home-section">
+                        <span class="material-symbols-rounded">home</span>
+                        <span class="sidebar-text">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#equipment" class="sidebar-link" data-target="equipment-section">
+                        <span class="material-symbols-rounded">photo_camera</span>
+                        <span class="sidebar-text">Camera Equipment</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#photography" class="sidebar-link" data-target="photography-section">
+                        <span class="material-symbols-rounded">photo_library</span>
+                        <span class="sidebar-text">Photography</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#railmap" class="sidebar-link" data-target="railmap-section">
+                        <span class="material-symbols-rounded">train</span>
+                        <span class="sidebar-text">Rail Map</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="sidebar-theme-toggle" aria-label="Toggle Dark Mode">
+                    <span class="material-symbols-rounded">dark_mode</span>
+                    <span class="sidebar-text">Dark Mode</span>
+                </button>
             </div>
+        </nav>
 
-            <!-- Portfolio -->
-            <a href="https://nico-ruge.de" class="link-card" target="_blank" rel="noopener noreferrer">
-                <span class="material-symbols-rounded link-icon">public</span>
-                <span class="link-text">Portfolio</span>
-                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
-            </a>
+        <main class="content-area">
+            <!-- Home Section -->
+            <section id="home-section" class="content-section active">
+                <div class="container">
+                    <div class="profile-section">
+                        <div class="profile-image-container">
+                            <img src="images/profile.jpg" alt="Nico Ruge" class="profile-image">
+                        </div>
+                        <h1 class="profile-name">Nico Ruge</h1>
+                        <p class="profile-bio">Hobby Photographer + Data Analyser<br>Rostock / Darmstadt</p>
+                    </div>
 
-            <!-- Unsplash -->
-            <a href="https://unsplash.com/@nico_ruge" class="link-card" target="_blank" rel="noopener noreferrer">
-                <span class="material-symbols-rounded link-icon">image</span>
-                <span class="link-text">Unsplash</span>
-                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
-            </a>
+                    <div class="links-container">
+                        <!-- Quick Links -->
+                        <div class="quick-links">
+                            <a href="https://linkedin.com/in/nicoruge" class="quick-link-btn" target="_blank"
+                                rel="noopener noreferrer" aria-label="LinkedIn">
+                                <span class="material-symbols-rounded">work</span>
+                            </a>
+                            <a href="mailto:mail@nico-ruge.de" class="quick-link-btn" aria-label="Email">
+                                <span class="material-symbols-rounded">mail</span>
+                            </a>
+                        </div>
 
-            <!-- Camera Equipment (Popup) -->
-            <a href="#" class="link-card" id="equipment-card">
-                <span class="material-symbols-rounded link-icon">photo_camera</span>
-                <span class="link-text">Camera Equipment</span>
-                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
-            </a>
+                        <!-- Portfolio -->
+                        <a href="https://nico-ruge.de" class="link-card" target="_blank" rel="noopener noreferrer">
+                            <span class="material-symbols-rounded link-icon">public</span>
+                            <span class="link-text">Portfolio</span>
+                            <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+                        </a>
 
-            <!-- Instagram -->
-            <a href="https://instagram.com/nico_ruge" class="link-card" target="_blank" rel="noopener noreferrer">
-                <span class="material-symbols-rounded link-icon">camera_alt</span>
-                <span class="link-text">Instagram</span>
-                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
-            </a>
+                        <!-- Unsplash -->
+                        <a href="https://unsplash.com/@nico_ruge" class="link-card" target="_blank"
+                            rel="noopener noreferrer">
+                            <span class="material-symbols-rounded link-icon">image</span>
+                            <span class="link-text">Unsplash</span>
+                            <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+                        </a>
 
-            <!-- Twitter -->
-            <a href="https://x.com/Lord_NicolasX" class="link-card" target="_blank" rel="noopener noreferrer">
-                <span class="material-symbols-rounded link-icon">alternate_email</span>
-                <span class="link-text">Twitter / X</span>
-                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
-            </a>
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/nico_ruge" class="link-card" target="_blank"
+                            rel="noopener noreferrer">
+                            <span class="material-symbols-rounded link-icon">camera_alt</span>
+                            <span class="link-text">Instagram</span>
+                            <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+                        </a>
 
-            <!-- Rail Map Card -->
-            <a href="#" class="link-card" id="railmap-card">
-                <span class="material-symbols-rounded link-icon">train</span>
-                <span class="link-text">My Rail Map</span>
-                <span class="material-symbols-rounded link-arrow">arrow_forward</span>
-            </a>
+                        <!-- Twitter -->
+                        <a href="https://x.com/Lord_NicolasX" class="link-card" target="_blank"
+                            rel="noopener noreferrer">
+                            <span class="material-symbols-rounded link-icon">alternate_email</span>
+                            <span class="link-text">Twitter / X</span>
+                            <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+                        </a>
 
-            <!-- Travel Widget -->
-            <div id="twlngwidget" class="travel-widget"></div>
-        </div>
-    </main>
-
-    <!-- Rail Map Modal -->
-    <div id="railmap-modal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" aria-label="Close Modal">
-                <span class="material-symbols-rounded">close</span>
-            </button>
-            <iframe src="railmap.html" title="My Rail Map" class="modal-iframe"></iframe>
-        </div>
-    </div>
-
-    <!-- Equipment Modal -->
-    <div id="equipment-modal" class="modal">
-        <div class="modal-content equipment-content">
-            <button class="close-modal" aria-label="Close Modal">
-                <span class="material-symbols-rounded">close</span>
-            </button>
-            <h2>Camera Equipment</h2>
-
-            <div class="equipment-list-container">
-                <div class="equipment-group">
-                    <h3>Cameras</h3>
-                    <ul>
-                        <li>Sony Alpha 7 III <span class="text-secondary">(ILCE-7M3)</span></li>
-                        <li>Praktica Mat 35mm <span class="text-secondary">(ca. 1965)</span></li>
-                        <li>Polaroid Supercolor 635CL <span class="text-secondary">(ca. 1981)</span></li>
-                        <li>Google Pixel 9 Pro</li>
-                    </ul>
+                        <!-- Travel Widget -->
+                        <div id="twlngwidget" class="travel-widget"></div>
+                    </div>
                 </div>
+            </section>
 
-                <div class="equipment-group">
-                    <h3>Lenses</h3>
-                    <ul>
-                        <li><span class="strikethrough">Sony FE 70-200mm f/4 G OSS <span
-                                    class="text-secondary">(SEL70200G)</span></span> <span class="text-secondary">(Its
-                                broken)</span></li>
-                        <li>Sigma Makro 105mm f/2.8 DG OS HSM</li>
-                        <li>Sony FE 28-70 f/3.5-5.6</li>
-                    </ul>
-                </div>
-
-                <div class="equipment-group">
-                    <h3>Flash</h3>
-                    <ul>
-                        <li>Yongnou Speedlite YN560 IV</li>
-                    </ul>
-                </div>
-
-                <div class="equipment-group">
-                    <h3>Software</h3>
-                    <ul>
-                        <li>Affinity</li>
-                        <li>Adobe Lightroom Classic</li>
-                        <li>Adobe Photoshop</li>
-                    </ul>
-                </div>
-
-                <div class="equipment-group">
-                    <h3>Storage</h3>
-                    <ul>
-                        <li>In-Camera:
+            <!-- Equipment Section -->
+            <section id="equipment-section" class="content-section">
+                <div class="container">
+                    <h2>Camera Equipment</h2>
+                    <div class="equipment-list-container">
+                        <div class="equipment-group">
+                            <h3>Cameras</h3>
                             <ul>
-                                <li>RAW - SanDisk Extreme Pro 256 GB</li>
-                                <li>JPEG - SanDisk Ultra 32 GB</li>
+                                <li>Sony Alpha 7 III <span class="text-secondary">(ILCE-7M3)</span></li>
+                                <li>Praktica Mat 35mm <span class="text-secondary">(ca. 1965)</span></li>
+                                <li>Polaroid Supercolor 635CL <span class="text-secondary">(ca. 1981)</span></li>
+                                <li>Google Pixel 9 Pro</li>
                             </ul>
-                        </li>
-                        <li>External:
-                            <ul>
-                                <li>Samsung T7 500 GB</li>
-                                <li>WD MyBook 4 TB</li>
-                                <li>Google Photos</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+                        </div>
 
-    <footer class="footer">
-        <p>&copy; 2024 Nico Ruge</p>
-    </footer>
+                        <div class="equipment-group">
+                            <h3>Lenses</h3>
+                            <ul>
+                                <li><span class="strikethrough">Sony FE 70-200mm f/4 G OSS <span
+                                            class="text-secondary">(SEL70200G)</span></span> <span
+                                        class="text-secondary">(Its
+                                        broken)</span></li>
+                                <li>Sigma Makro 105mm f/2.8 DG OS HSM</li>
+                                <li>Sony FE 28-70 f/3.5-5.6</li>
+                            </ul>
+                        </div>
+
+                        <div class="equipment-group">
+                            <h3>Flash</h3>
+                            <ul>
+                                <li>Yongnou Speedlite YN560 IV</li>
+                            </ul>
+                        </div>
+
+                        <div class="equipment-group">
+                            <h3>Software</h3>
+                            <ul>
+                                <li>Affinity</li>
+                                <li>Adobe Lightroom Classic</li>
+                                <li>Adobe Photoshop</li>
+                            </ul>
+                        </div>
+
+                        <div class="equipment-group">
+                            <h3>Storage</h3>
+                            <ul>
+                                <li>In-Camera:
+                                    <ul>
+                                        <li>RAW - SanDisk Extreme Pro 256 GB</li>
+                                        <li>JPEG - SanDisk Ultra 32 GB</li>
+                                    </ul>
+                                </li>
+                                <li>External:
+                                    <ul>
+                                        <li>Samsung T7 500 GB</li>
+                                        <li>WD MyBook 4 TB</li>
+                                        <li>Google Photos</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Photography Section -->
+            <section id="photography-section" class="content-section">
+                <div class="container">
+                    <h2>Photography</h2>
+
+                    <!-- Portfolio Link -->
+                    <a href="https://nico-ruge.de" class="link-card" target="_blank" rel="noopener noreferrer"
+                        style="width: 100%; max-width: 100%;">
+                        <span class="material-symbols-rounded link-icon">public</span>
+                        <span class="link-text">Portfolio</span>
+                        <span class="material-symbols-rounded link-arrow">arrow_forward</span>
+                    </a>
+
+                    <!-- Masonry Grid -->
+                    <div class="masonry-grid">
+                        <a href="https://unsplash.com/photos/a-white-train-traveling-down-train-tracks-next-to-a-tall-building-yTPd7pUBpRM"
+                            target="_blank" rel="noopener noreferrer">
+                            <img src="https://unsplash.com/photos/yTPd7pUBpRM/download?w=600" alt="Train on tracks">
+                        </a>
+                        <a href="https://unsplash.com/photos/Bh9LJv_kUwE" target="_blank" rel="noopener noreferrer">
+                            <img src="https://unsplash.com/photos/Bh9LJv_kUwE/download?w=600" alt="Unsplash Image">
+                        </a>
+                        <a href="https://unsplash.com/photos/a-seagull-flying-over-a-body-of-water-v9J36Vz9e8c"
+                            target="_blank" rel="noopener noreferrer">
+                            <img src="https://unsplash.com/photos/v9J36Vz9e8c/download?w=600" alt="Seagull flying">
+                        </a>
+                        <a href="https://unsplash.com/photos/a-lighthouse-stands-tall-beside-the-sandy-beach-_9y356uXIAk"
+                            target="_blank" rel="noopener noreferrer">
+                            <img src="https://unsplash.com/photos/_9y356uXIAk/download?w=600" alt="Lighthouse">
+                        </a>
+                        <a href="https://unsplash.com/photos/a-snail-slowly-crawls-across-the-ground-Y1pqpmxOZ8M"
+                            target="_blank" rel="noopener noreferrer">
+                            <img src="https://unsplash.com/photos/Y1pqpmxOZ8M/download?w=600" alt="Snail">
+                        </a>
+                        <a href="https://unsplash.com/photos/hay-bale-sits-atop-a-harvested-field-ZRn8kkIN38k"
+                            target="_blank" rel="noopener noreferrer">
+                            <img src="https://unsplash.com/photos/ZRn8kkIN38k/download?w=600" alt="Hay bale">
+                        </a>
+                        <a href="https://unsplash.com/photos/VralncbzdlY" target="_blank" rel="noopener noreferrer">
+                            <img src="https://unsplash.com/photos/VralncbzdlY/download?w=600" alt="Unsplash Image">
+                        </a>
+                        <a href="https://unsplash.com/photos/a-statue-of-a-cat-sitting-on-top-of-snow-covered-ground-BbbCFkwU60Q"
+                            target="_blank" rel="noopener noreferrer">
+                            <img src="https://unsplash.com/photos/BbbCFkwU60Q/download?w=600" alt="Cat statue">
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rail Map Section -->
+            <section id="railmap-section" class="content-section full-height">
+                <iframe src="railmap.html" title="My Rail Map" class="section-iframe"></iframe>
+            </section>
+
+            <footer class="footer">
+                <p>&copy; 2025 Nico Ruge</p>
+            </footer>
+        </main>
+    </div>
 
     <script src="script.js"></script>
     <script src="tw_widget.js"></script>
