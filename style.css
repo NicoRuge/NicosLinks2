@@ -96,7 +96,7 @@ body {
     /* Gradient overlay on top of the image */
     background:
         var(--bg-gradient),
-        url('images/background.jpeg');
+        url('https://unsplash.com/photos/yTPd7pUBpRM/download?w=600');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

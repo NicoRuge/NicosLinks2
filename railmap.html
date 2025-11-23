@@ -143,24 +143,7 @@
       // Safety check: Style must be loaded to add layers
       if (!map.getStyle()) return;
 
-      // 1. OpenRailwayMap Source & Layer
-      if (!map.getSource("open-railway-map")) {
-        map.addSource("open-railway-map", {
-          type: "raster",
-          tiles: ["https://a.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png"],
-          tileSize: 256,
-          attribution: "© OpenRailwayMap"
-        });
-      }
-      if (!map.getLayer("open-railway-map")) {
-        map.addLayer({
-          id: "open-railway-map",
-          type: "raster",
-          source: "open-railway-map",
-          layout: { visibility: "visible" },
-          paint: { "raster-opacity": 0.5 }
-        });
-      }
+
 
       // 2. Trips GeoJSON Source & Layer
       if (tripsData) {
