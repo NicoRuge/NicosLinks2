@@ -1,19 +1,11 @@
-/*! Spotify Widget (vanilla JS) for @Lord_NicolasX
-   Drop-in usage:
-   <div id="spotify-widget"></div>
-   <script src="spotify_widget.js"></script>
-*/
 (function () {
     const CONFIG = {
-        // REPLACE THIS with your actual backend URL from the setup guide
-        // e.g., "https://your-site.netlify.app/.netlify/functions/spotify"
         apiEndpoint: "https://nico-ruge.netlify.app/.netlify/functions/spotify",
 
         targetId: "spotify-widget",
-        intervalMs: 10000, // Refresh every 10s
-        classPrefix: "sp-", // prefixes all CSS hooks
+        intervalMs: 10000,
+        classPrefix: "sp-",
 
-        // Mock data for initial display before backend is set up
         mockData: {
             isPlaying: true,
             item: {
@@ -94,7 +86,6 @@
     async function fetchStatus() {
         if (CONFIG.apiEndpoint === "MOCK_MODE") {
             console.log("Spotify Widget: Running in MOCK MODE. Update apiEndpoint in spotify_widget.js to connect to real data.");
-            // Simulate progress in mock mode
             CONFIG.mockData.progress_ms += 1000;
             if (CONFIG.mockData.progress_ms > CONFIG.mockData.item.duration_ms) {
                 CONFIG.mockData.progress_ms = 0;
@@ -110,11 +101,9 @@
             render(json);
         } catch (e) {
             console.error("Spotify Widget Error:", e);
-            // Don't overwrite with error immediately to avoid flickering, maybe show small error indicator
         }
     }
 
-    // initial render and refresh
     fetchStatus();
     setInterval(fetchStatus, CONFIG.intervalMs);
 })();
