@@ -742,3 +742,102 @@ body {
         column-count: 1;
     }
 }
+
+/* --- Spotify Widget Styles --- */
+.sp-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 16px;
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    color: var(--md-sys-color-on-surface);
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition-speed) var(--transition-ease),
+        box-shadow var(--transition-speed) var(--transition-ease);
+    margin-bottom: 8px;
+}
+
+.sp-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-hover-shadow);
+    background-color: var(--md-sys-color-surface);
+}
+
+.sp-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1DB954;
+    /* Spotify Green */
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.sp-icon {
+    font-size: 20px;
+    animation: pulse 2s infinite;
+}
+
+.sp-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sp-cover {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sp-info {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.sp-track {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--md-sys-color-on-surface);
+}
+
+.sp-artist {
+    font-size: 0.85rem;
+    color: var(--md-sys-color-on-surface-variant);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sp-progress-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.sp-progress-bar {
+    flex-grow: 1;
+    height: 4px;
+    background-color: var(--md-sys-color-surface-variant);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.sp-progress-fill {
+    height: 100%;
+    background-color: var(--md-sys-color-primary);
+    border-radius: 999px;
+    transition: width 1s linear;
+}
