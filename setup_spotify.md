@@ -34,18 +34,17 @@ You need a "Refresh Token" so your script can generate new Access Tokens forever
 
 ## Step 3: Deploy the Backend
 
-The easiest way is to use **Netlify Functions** (Free).
+I have already prepared the files for you:
+- `netlify/functions/spotify.js` is ready.
+- `netlify.toml` is in the root directory.
 
-1.  Create a folder `netlify/functions` in your project root.
-2.  Move `spotify_auth_server.js` into that folder and rename it to `spotify.js`.
-3.  Create a `netlify.toml` file in your project root:
-    ```toml
-    [build]
-      functions = "netlify/functions"
-    ```
-4.  Push your code to GitHub.
-5.  Connect your repo to Netlify.
-6.  In Netlify Site Settings > **Environment Variables**, add:
+1.  **Push your changes** to GitHub.
+2.  **Log in to Netlify** and "Add new site" -> "Import from an existing project".
+3.  Select your GitHub repository.
+4.  Netlify should detect the settings automatically (because of `netlify.toml`).
+5.  **Click "Deploy Site"**.
+6.  Once the site is created, go to **Site configuration > Environment variables**.
+7.  Add the following variables (using the values you got in Step 1 & 2):
     - `SPOTIFY_CLIENT_ID`
     - `SPOTIFY_CLIENT_SECRET`
     - `SPOTIFY_REFRESH_TOKEN`
