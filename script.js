@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
 
+        // Notify Railmap iframe
+        const railmapFrame = document.querySelector('iframe[src="railmap.html"]');
+        if (railmapFrame && railmapFrame.contentWindow) {
+            railmapFrame.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
+        }
+
         if (theme === 'dark') {
             themeIcon.textContent = 'light_mode';
             themeText.textContent = 'Light Mode';

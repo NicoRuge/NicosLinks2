@@ -80,17 +80,6 @@
   <a class="home-btn" href="index.html" role="button">Home</a>
 
   <div class="panel" id="ui">
-    <h3>Hintergrundkarte</h3>
-    <div class="row">
-      <label><input type="radio" name="basemap" value="dark" checked> Dunkel</label>
-    </div>
-    <div class="row">
-      <label><input type="radio" name="basemap" value="light"> Hell</label>
-    </div>
-    <div class="row">
-      <label><input type="radio" name="basemap" value="satellite"> Satellit</label>
-    </div>
-    <hr style="border: 0; border-top: 1px solid #eee; margin: 8px 0;">
     <h3>Verkehrsmittel</h3>
     <div class="row"><label><input type="checkbox" class="filter-cb" value="nationalExpress,national" checked>
         National Express</label></div>
@@ -117,9 +106,19 @@
       satellite: 'mapbox://styles/mapbox/satellite-streets-v12'
     };
 
-    // Set initial radio selection
+    // Set initial style based on saved theme or default to dark
     const initialStyleKey = savedTheme === 'dark' ? 'dark' : 'light';
-    document.querySelector(`input[name="basemap"][value="${initialStyleKey}"]`).checked = true;
+
+    // Listen for theme changes from parent
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'theme-change') {
+        const newTheme = event.data.theme;
+        const newStyleKey = newTheme === 'dark' ? 'dark' : 'light';
+        map.setStyle(styles[newStyleKey]);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      }
+    });
 
     const map = new mapboxgl.Map({
       container: "map",
@@ -280,13 +279,7 @@
     }
 
     // UI Event Listeners
-    // 1. Base Map Switcher
-    document.querySelectorAll('input[name="basemap"]').forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        const styleKey = e.target.value;
-        map.setStyle(styles[styleKey]);
-      });
-    });
+
 
     // 2. Category Filter
     document.querySelectorAll('.filter-cb').forEach(cb => {
