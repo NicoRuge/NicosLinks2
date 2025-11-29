@@ -1,0 +1,8 @@
+{
+  "name": "nicos-links",
+  "version": "1.0.0",
+  "description": "Personal links page with Spotify widget",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
