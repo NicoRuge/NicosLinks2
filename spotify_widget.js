@@ -7,7 +7,7 @@
     const CONFIG = {
         // REPLACE THIS with your actual backend URL from the setup guide
         // e.g., "https://your-site.netlify.app/.netlify/functions/spotify"
-        apiEndpoint: "MOCK_MODE",
+        apiEndpoint: "https://nico-ruge.netlify.app/.netlify/functions/spotify",
 
         targetId: "spotify-widget",
         intervalMs: 10000, // Refresh every 10s
@@ -60,14 +60,15 @@
         const coverUrl = track.album.images[0]?.url || '';
         const artistName = track.artists.map(a => a.name).join(', ');
 
-        const statusText = isPlaying ? "Now Playing" : "Last Played";
-        const icon = isPlaying ? "equalizer" : "history";
+        const statusText = isPlaying ? "Currently listening to:" : "Last listened to:";
+        const iconClass = isPlaying ? "sp-icon-playing" : "sp-icon-stopped";
+        const statusClass = isPlaying ? "sp-status-playing" : "sp-status-stopped";
 
         const html = `
         <div class="${CONFIG.classPrefix}card">
           <div class="${CONFIG.classPrefix}header">
-            <span class="material-symbols-rounded ${CONFIG.classPrefix}icon">${icon}</span>
-            <span class="${CONFIG.classPrefix}status">${statusText}</span>
+            <span class="${CONFIG.classPrefix}icon ${iconClass}"></span>
+            <span class="${CONFIG.classPrefix}status ${statusClass}">${statusText}</span>
           </div>
           
           <div class="${CONFIG.classPrefix}content">
