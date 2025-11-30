@@ -96,5 +96,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('hashchange', handleHashChange);
 
+    // Mobile Menu Logic
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const sidebarClose = document.getElementById('sidebar-close');
+
+    const toggleMenu = () => {
+        sidebar.classList.toggle('open');
+        sidebarOverlay.classList.toggle('active');
+        const isOpen = sidebar.classList.contains('open');
+        mobileMenuToggle.setAttribute('aria-expanded', isOpen);
+
+        if (isOpen) {
+            mobileMenuToggle.innerHTML = '<span class="material-symbols-rounded">close</span>';
+        } else {
+            mobileMenuToggle.innerHTML = '<span class="material-symbols-rounded">menu</span>';
+        }
+    };
+
+    const closeMenu = () => {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.innerHTML = '<span class="material-symbols-rounded">menu</span>';
+    };
+
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', toggleMenu);
+    }
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeMenu);
+    }
+
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', closeMenu);
+    }
+
+    // Close menu when clicking a link on mobile
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                closeMenu();
+            }
+        });
+    });
+
     handleHashChange();
 });
