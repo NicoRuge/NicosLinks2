@@ -1,4 +1,4 @@
-const fetch = require('node-fetch'); // You might need to install this: npm install node-fetch
+// const fetch = require('node-fetch'); // Native fetch is available in Node 18+
 
 /*
   SPOTIFY AUTH SERVER (Netlify Function / Node.js Script)
@@ -20,6 +20,10 @@ exports.handler = async function (event, context) {
     if (!client_id || !client_secret || !refresh_token) {
         return {
             statusCode: 500,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({ error: 'Missing environment variables' })
         };
     }
@@ -50,7 +54,7 @@ exports.handler = async function (event, context) {
         const access_token = tokenData.access_token;
 
         // 2. Try to get "Currently Playing"
-        const nowPlayingResponse = await fetch(NOW_PLAYING_ENDPOINT, {
+        const nowPlayingResponse = await fetch(`${NOW_PLAYING_ENDPOINT}?additional_types=track,episode`, {
             headers: { Authorization: `Bearer ${access_token}` }
         });
 
@@ -84,6 +88,10 @@ exports.handler = async function (event, context) {
     } catch (error) {
         return {
             statusCode: 500,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({ error: error.message })
         };
     }
