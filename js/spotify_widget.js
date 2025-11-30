@@ -4,21 +4,8 @@
         targetId: "spotify-widget",
         fetchIntervalMs: 10000,
         updateIntervalMs: 1000,
-        classPrefix: "sp-",
-
-        mockData: {
-            isPlaying: true,
-            item: {
-                name: "Neon Nights",
-                artists: [{ name: "Cyberpunk City" }],
-                album: {
-                    name: "Future Sounds",
-                    images: [{ url: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=300&q=80" }]
-                },
-                duration_ms: 240000
-            },
-            progress_ms: 120000
-        }
+        minLoadingTime: 5000,
+        classPrefix: "sp-"
     };
 
     const $ = (sel) => document.querySelector(sel);
@@ -28,22 +15,46 @@
     let currentState = {
         data: null,
         lastFetchTime: 0,
-        currentTrackSignature: null
+        currentTrackSignature: null,
+        loadingStartTime: null
     };
-
     function safe(txt) {
         return String(txt == null ? "" : txt);
     }
 
     function formatTime(ms) {
-        const s = Math.floor((ms / 1000) % 60);
-        const m = Math.floor((ms / 1000) / 60);
-        return `${m}:${s < 10 ? '0' : ''}${s}`;
+        const totalSeconds = Math.floor(ms / 1000);
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        if (hours > 0) {
+            return `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        } else {
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
     }
 
     function getTrackSignature(data) {
         if (!data || !data.item) return "no-track";
-        return `${data.item.name}-${data.item.id}`; // Use ID for uniqueness if available, or name
+        return `${data.item.name}-${data.item.id}`;
+    }
+
+    function renderLoading() {
+        currentState.loadingStartTime = Date.now();
+        container.innerHTML = `<div class="${CONFIG.classPrefix}card">
+          <div class="${CONFIG.classPrefix}header">
+            <span class="${CONFIG.classPrefix}icon ${CONFIG.classPrefix}icon-loading"></span>
+            <span class="${CONFIG.classPrefix}status">Loading...</span>
+          </div>
+          <div class="${CONFIG.classPrefix}content">
+            <div class="${CONFIG.classPrefix}cover" style="background-color: var(--md-sys-color-surface-variant);"></div>
+            <div class="${CONFIG.classPrefix}info">
+              <div class="${CONFIG.classPrefix}track" style="background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 1rem; width: 70%;"></div>
+              <div class="${CONFIG.classPrefix}artist" style="background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 0.85rem; width: 50%; margin-top: 4px;"></div>
+            </div>
+          </div>
+        </div>`;
     }
 
     function render() {
@@ -62,7 +73,7 @@
         const item = data.item;
         const isPlaying = data.isPlaying;
 
-        // Calculate interpolated progress
+
         let progress = data.progress_ms;
         if (isPlaying) {
             const elapsed = Date.now() - currentState.lastFetchTime;
@@ -75,26 +86,28 @@
 
         const newSignature = getTrackSignature(data);
 
-        // If track changed or we are coming from "not playing" state, do full render
         if (newSignature !== currentState.currentTrackSignature) {
-            // Determine if it's a track or an episode
             const isEpisode = item.type === 'episode';
 
             let coverUrl = '';
             let title = item.name;
             let artistName = '';
-            let contextName = ''; // Album or Show name
+            let contextName = '';
+            let trackUrl = '';
+            let artistUrl = '';
 
             if (isEpisode) {
-                // Podcast Episode
                 coverUrl = item.images?.[0]?.url || item.show?.images?.[0]?.url || '';
                 artistName = item.show?.publisher || item.show?.name || '';
                 contextName = item.show?.name || '';
+                trackUrl = item.external_urls?.spotify || '#';
+                artistUrl = item.show?.external_urls?.spotify || '#';
             } else {
-                // Music Track
                 coverUrl = item.album?.images?.[0]?.url || '';
                 artistName = item.artists?.map(a => a.name).join(', ') || '';
                 contextName = item.album?.name || '';
+                trackUrl = item.external_urls?.spotify || '#';
+                artistUrl = item.artists?.[0]?.external_urls?.spotify || '#';
             }
 
             const statusText = isPlaying ? "Currently listening to:" : "Last listened to:";
@@ -111,8 +124,8 @@
               <div class="${CONFIG.classPrefix}content">
                 <img src="${coverUrl}" alt="${safe(contextName)}" class="${CONFIG.classPrefix}cover">
                 <div class="${CONFIG.classPrefix}info">
-                  <div class="${CONFIG.classPrefix}track">${safe(title)}</div>
-                  <div class="${CONFIG.classPrefix}artist">${safe(artistName)}</div>
+                  <a href="${trackUrl}" target="_blank" rel="noopener noreferrer" class="${CONFIG.classPrefix}track">${safe(title)}</a>
+                  <a href="${artistUrl}" target="_blank" rel="noopener noreferrer" class="${CONFIG.classPrefix}artist">${safe(artistName)}</a>
                 </div>
               </div>
       
@@ -129,7 +142,6 @@
             container.innerHTML = html;
             currentState.currentTrackSignature = newSignature;
         } else if (isPlaying) {
-            // Just update progress if track is same and playing
             const timeEl = document.getElementById("sp-current-time");
             const fillEl = document.getElementById("sp-progress-fill");
 
@@ -139,32 +151,32 @@
     }
 
     async function fetchStatus() {
-        if (CONFIG.apiEndpoint === "MOCK_MODE") {
-            console.log("Spotify Widget: Running in MOCK MODE. Update apiEndpoint in spotify_widget.js to connect to real data.");
-            CONFIG.mockData.progress_ms += CONFIG.fetchIntervalMs;
-            if (CONFIG.mockData.progress_ms > CONFIG.mockData.item.duration_ms) {
-                CONFIG.mockData.progress_ms = 0;
-            }
-            currentState.data = CONFIG.mockData;
-            currentState.lastFetchTime = Date.now();
-            render();
-            return;
-        }
-
         try {
             const res = await fetch(CONFIG.apiEndpoint);
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            if (!res.ok) {
+                const errText = await res.text();
+                console.error("Spotify Backend Error:", errText);
+                throw new Error(`HTTP ${res.status}: ${errText}`);
+            }
             const json = await res.json();
-            console.log("Spotify Widget Response:", json); // DEBUG
+            console.log("Spotify Widget Response:", json);
             currentState.data = json;
             currentState.lastFetchTime = Date.now();
-            render();
+
+            const elapsed = Date.now() - currentState.loadingStartTime;
+            const remaining = Math.max(0, CONFIG.minLoadingTime - elapsed);
+
+            setTimeout(() => {
+                render();
+            }, remaining);
         } catch (e) {
             console.error("Spotify Widget Error:", e);
         }
     }
 
+    renderLoading();
     fetchStatus();
+
     setInterval(fetchStatus, CONFIG.fetchIntervalMs);
     setInterval(render, CONFIG.updateIntervalMs);
 })();

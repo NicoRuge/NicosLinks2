@@ -11,14 +11,14 @@
     intervalMs: 60000,
     locale: "en", // "de" or "en"
     linkText: { de: "Träwelling öffnen", en: "Open Träwelling" },
-    textNow: { de: "Nico ist gerade unterwegs", en: "Nico is travelling right now" },
+    textNow: { de: "Nico ist gerade unterwegs", en: "Currently travelling:" },
     textLastH: {
       de: h => `Nico war zuletzt vor ${h} Stunden unterwegs`,
-      en: h => `Nico was last travelling ${h}h ago`
+      en: h => `Last travelled ${h}h ago:`
     },
     textLastM: {
       de: m => `Nico war zuletzt vor ${m} Minuten unterwegs`,
-      en: m => `Nico was last travelling ${m}min ago`
+      en: m => `Last travelled ${m}min ago:`
     },
     classPrefix: "tw-" // prefixes all CSS hooks to avoid collisions
   };
@@ -27,8 +27,43 @@
   const container = document.getElementById(CONFIG.targetId);
   if (!container) return;
 
+  let widgetState = {
+    loadingStartTime: Date.now(),
+    minLoadingTime: 1000
+  };
+
   function safe(txt) {
     return String(txt == null ? "" : txt);
+  }
+
+  function renderLoading() {
+    widgetState.loadingStartTime = Date.now();
+    container.innerHTML = `<div class="${CONFIG.classPrefix}card" style="text-decoration: none;">
+      <div class="${CONFIG.classPrefix}header">
+        <span class="${CONFIG.classPrefix}icon ${CONFIG.classPrefix}icon-loading"></span>
+        <span class="${CONFIG.classPrefix}status">Loading...</span>
+      </div>
+      <div class="${CONFIG.classPrefix}tablewrap">
+        <table class="${CONFIG.classPrefix}wide" aria-label="Loading">
+          <tr>
+            <td class="${CONFIG.classPrefix}cell">
+              <div style="background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 1.1rem; width: 60%; margin: 0 auto;"></div>
+              <small style="display: block; background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 0.75rem; width: 80%; margin: 4px auto 0;"></small>
+            </td>
+            <td class="${CONFIG.classPrefix}cell center">
+              <div class="${CONFIG.classPrefix}linelabel" style="background-color: var(--md-sys-color-surface-variant); color: transparent;">...</div>
+            </td>
+            <td class="${CONFIG.classPrefix}cell">
+              <div style="background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 1.1rem; width: 60%; margin: 0 auto;"></div>
+              <small style="display: block; background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 0.75rem; width: 80%; margin: 4px auto 0;"></small>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="${CONFIG.classPrefix}progress">
+        <div class="${CONFIG.classPrefix}progressbar" style="width:0%"></div>
+      </div>
+    </div>`;
   }
 
   function shortenLineName(name) {
@@ -76,12 +111,17 @@
     const pct = progressPercent(dep, arr);
     const line = shortenLineName(t.lineName);
 
+    const statusText = headline(nowTravelling, dep, arr);
+    const iconClass = nowTravelling ? "tw-icon-travelling" : "tw-icon-stopped";
+    const statusClass = nowTravelling ? "tw-status-travelling" : "tw-status-stopped";
+
     const html = `
       <a class="${CONFIG.classPrefix}card" target="_blank" rel="noopener" 
          href="https://traewelling.de/@${encodeURIComponent(CONFIG.user)}"
          style="text-decoration: none;">
-        <div class="${CONFIG.classPrefix}headline">
-          ${headline(nowTravelling, dep, arr)}
+        <div class="${CONFIG.classPrefix}header">
+          <span class="${CONFIG.classPrefix}icon ${iconClass}"></span>
+          <span class="${CONFIG.classPrefix}status ${statusClass}">${statusText}</span>
         </div>
         <div class="${CONFIG.classPrefix}tablewrap">
           <table class="${CONFIG.classPrefix}wide" aria-label="Letzte Fahrt">
@@ -112,7 +152,13 @@
       const res = await fetch(url, { headers: { "Accept": "application/json" } });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
-      render(json);
+
+      const elapsed = Date.now() - widgetState.loadingStartTime;
+      const remaining = Math.max(0, widgetState.minLoadingTime - elapsed);
+
+      setTimeout(() => {
+        render(json);
+      }, remaining);
     } catch (e) {
       container.innerHTML = `<div class="${CONFIG.classPrefix}card">
         <div class="${CONFIG.classPrefix}title">Fehler beim Laden</div>
@@ -121,7 +167,7 @@
     }
   }
 
-  // initial render and refresh
+  renderLoading();
   fetchStatus();
   setInterval(fetchStatus, CONFIG.intervalMs);
 })();

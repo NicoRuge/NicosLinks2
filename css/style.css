@@ -74,7 +74,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "bahnschrift", sans-serif;
     background-color: var(--md-sys-color-background);
     color: var(--md-sys-color-on-background);
     min-height: 100vh;
@@ -156,7 +156,7 @@ body {
 }
 
 .sidebar-name {
-    font-family: 'Outfit', sans-serif;
+    font-family: "bahnschrift", sans-serif;
     font-weight: 700;
     font-size: 1.1rem;
     color: var(--md-sys-color-on-surface);
@@ -196,7 +196,7 @@ body {
 }
 
 .sidebar-text {
-    font-family: 'Outfit', sans-serif;
+    font-family: "bahnschrift", sans-serif;
     font-weight: 500;
 }
 
@@ -390,7 +390,7 @@ body {
 }
 
 .profile-name {
-    font-family: 'Outfit', sans-serif;
+    font-family: "bahnschrift", sans-serif;
     font-size: 2rem;
     font-weight: 700;
     color: #FFFFFF;
@@ -489,7 +489,7 @@ body {
 .link-text {
     flex-grow: 1;
     text-align: center;
-    font-family: 'Outfit', sans-serif;
+    font-family: "bahnschrift", sans-serif;
     font-weight: 500;
     font-size: 1.1rem;
     letter-spacing: 0.5px;
@@ -583,13 +583,66 @@ body {
     background-color: var(--md-sys-color-surface);
 }
 
-.tw-headline {
-    font-size: 0.95rem;
-    font-weight: 600;
-    font-family: 'Outfit', sans-serif;
-    color: var(--md-sys-color-primary);
-    text-align: center;
-    margin-bottom: 4px;
+.tw-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.tw-icon {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.tw-icon-travelling {
+    background-color: #1DB954;
+    position: relative;
+    z-index: 1;
+}
+
+.tw-icon-travelling::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: #1DB954;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    animation: spotify-pulse 2s infinite;
+}
+
+.tw-icon-stopped {
+    background-color: var(--md-sys-color-on-surface-variant);
+    opacity: 0.7;
+}
+
+.tw-icon-loading {
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--md-sys-color-surface-variant);
+    border-top-color: var(--md-sys-color-primary);
+    border-radius: 50%;
+    animation: sp-spin 0.8s linear infinite;
+}
+
+.tw-status {
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: "bahnschrift", sans-serif;
+}
+
+.tw-status-travelling {
+    color: #1DB954;
+}
+
+.tw-status-stopped {
+    color: var(--md-sys-color-on-surface-variant);
 }
 
 .tw-tablewrap {
@@ -882,13 +935,21 @@ body {
 }
 
 .sp-track {
-    font-family: 'Outfit', sans-serif;
-    font-weight: 600;
+    font-family: "bahnschrift", sans-serif;
+    font-weight: 700;
     font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--md-sys-color-on-surface);
+    text-decoration: none;
+    display: block;
+    transition: color var(--transition-speed) var(--transition-ease);
+}
+
+.sp-track:hover {
+    color: var(--md-sys-color-primary);
+    text-decoration: underline;
 }
 
 .sp-artist {
@@ -897,6 +958,14 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-decoration: none;
+    display: block;
+    transition: color var(--transition-speed) var(--transition-ease);
+}
+
+.sp-artist:hover {
+    color: var(--md-sys-color-primary);
+    text-decoration: underline;
 }
 
 .sp-progress-container {
@@ -920,4 +989,20 @@ body {
     background-color: var(--md-sys-color-primary);
     border-radius: 999px;
     transition: width 1s linear;
+}
+
+/* Spotify Widget Loading Spinner */
+.sp-icon-loading {
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--md-sys-color-surface-variant);
+    border-top-color: var(--md-sys-color-primary);
+    border-radius: 50%;
+    animation: sp-spin 0.8s linear infinite;
+}
+
+@keyframes sp-spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
