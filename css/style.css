@@ -673,6 +673,12 @@ body {
 .tw-tablewrap {
     overflow-x: auto;
     width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.tw-tablewrap::-webkit-scrollbar {
+    display: none;
 }
 
 .tw-wide {
