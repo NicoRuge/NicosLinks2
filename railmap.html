@@ -90,13 +90,14 @@
     <div class="row"><label><input type="checkbox" class="filter-cb" value="tram" unchecked> Tram</label></div>
     <div class="row"><label><input type="checkbox" class="filter-cb" value="bus" unchecked> Bus</label></div>
     <div class="row"><label><input type="checkbox" class="filter-cb" value="ferry" unchecked> Ferry</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="test" checked> Test</label></div>
   </div>
 
   <script>
-    // Eigener Mapbox Token hier eintragen
+
     mapboxgl.accessToken = "pk.eyJ1Ijoibmljb3J1Z2UiLCJhIjoiY21nODVoZ2R2MDNqOTJqczg3c3F4cmZ3MiJ9.1fgkuGwAxjLf26gtzgOm0w";
 
-    // Karte initialisieren (Style je nach gewähltem Theme aus index.html)
+
     const savedTheme = (localStorage.getItem('theme') || 'dark');
     try { document.documentElement.setAttribute('data-theme', savedTheme); } catch (_) { }
 
@@ -106,10 +107,8 @@
       satellite: 'mapbox://styles/mapbox/satellite-streets-v12'
     };
 
-    // Set initial style based on saved theme or default to dark
     const initialStyleKey = savedTheme === 'dark' ? 'dark' : 'light';
 
-    // Listen for theme changes from parent
     window.addEventListener('message', (event) => {
       if (event.data.type === 'theme-change') {
         const newTheme = event.data.theme;
@@ -129,22 +128,16 @@
       bearing: 0
     });
 
-    // Standard-Controls
     map.addControl(new mapboxgl.NavigationControl(), "top-left");
     map.addControl(new mapboxgl.FullscreenControl(), "top-left");
     map.addControl(new mapboxgl.ScaleControl({ unit: "metric" }), "bottom-left");
-
-    // Globaler Speicher für die GeoJSON-Daten
     let tripsData = null;
 
-    // Funktion zum Hinzufügen der Custom Layers (wird beim Start und nach Style-Wechsel aufgerufen)
     function addCustomLayers() {
-      // Safety check: Style must be loaded to add layers
       if (!map.getStyle()) return;
 
 
 
-      // 2. Trips GeoJSON Source & Layer
       if (tripsData) {
         if (!map.getSource("trips")) {
           map.addSource("trips", { type: "geojson", data: tripsData });
@@ -167,6 +160,7 @@
                 "tram", "#2FC5CC",
                 "bus", "#238443",
                 "ferry", "#800",
+                "test", "#ff00ff",
                 "#333333"
               ],
               "line-width": ["interpolate", ["linear"], ["zoom"], 6, 2.5, 14, 8],
@@ -177,8 +171,6 @@
         }
       }
     }
-
-    // Hide base-map road layers (keep rail-related layers visible)
     const hideRoadLayers = () => {
       const style = map.getStyle();
       if (!style || !style.layers) return;
@@ -189,7 +181,6 @@
         const isRoadishId = id.startsWith("road-") || id.startsWith("bridge-") || id.startsWith("tunnel-") || id === "road-label";
         const isRoadSource = srcLayer === "road" || srcLayer === "road_label";
         const isRailRelated = /\b(rail|tram|subway|light_rail)\b/i.test(id) || /"rail"|"tram"|"subway"|"light_rail"/.test(filterText);
-        // detect admin-0 (country) and admin-1 (state/province) boundary line layers
         const isAdminSource = srcLayer === "admin";
         const isBoundaryId = /boundary/i.test(id);
         const adminLevelIdMatch = /(^|-)admin-(0|1)(-|$)/i.test(id);
@@ -208,28 +199,25 @@
       }
     };
 
-    // Event: Style fertig geladen (initial oder nach Wechsel)
     map.on("style.load", () => {
       hideRoadLayers();
       addCustomLayers();
     });
-
-    // Ensure we try to add layers once the map is fully loaded initially as well
     map.on("load", () => {
       addCustomLayers();
     });
 
-    // Daten einmalig laden
     const sources = [
-      ["nationalExpress", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/nationalExpress.geojson"],
-      ["national", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/national.geojson"],
-      ["regionalExp", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/regionalExp.geojson"],
-      ["regional", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/regional.geojson"],
-      ["suburban", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/suburban.geojson"],
-      ["subway", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/subway.geojson"],
-      ["tram", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/tram.geojson"],
-      ["bus", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/bus.geojson"],
-      ["ferry", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/ferry.geojson"]
+      ["nationalExpress", "assets/geojson/nationalExpress.geojson"],
+      ["national", "assets/geojson/national.geojson"],
+      ["regionalExp", "assets/geojson/regionalExp.geojson"],
+      ["regional", "assets/geojson/regional.geojson"],
+      ["suburban", "assets/geojson/suburban.geojson"],
+      ["subway", "assets/geojson/subway.geojson"],
+      ["tram", "assets/geojson/tram.geojson"],
+      ["bus", "assets/geojson/bus.geojson"],
+      ["ferry", "assets/geojson/ferry.geojson"],
+      ["test", "assets/geojson/test.geojson"]
     ];
 
     Promise.all(sources.map(async ([cat, url]) => {
@@ -243,45 +231,38 @@
     }))
       .then(all => {
         tripsData = { type: "FeatureCollection", features: all.flat() };
-
-        // Try to add layers immediately if style is ready
         addCustomLayers();
-
-        // auf Bounds zoomen (deaktiviert, damit Startansicht bleibt)
-        /*
-        const bounds = new mapboxgl.LngLatBounds();
-        tripsData.features.forEach(f => {
-          if (f.geometry?.type === "LineString") {
-            f.geometry.coordinates.forEach(c => bounds.extend(c));
-          }
-        });
-        if (!bounds.isEmpty()) map.fitBounds(bounds, { padding: 24, maxZoom: 7 });
-        */
       })
-      .catch(e => console.warn("Fehler beim Laden der externen GeoJSONs:", e));
+      .catch(e => {
+        console.warn("Fehler beim Laden der externen GeoJSONs:", e);
+        const errorDiv = document.createElement('div');
+        errorDiv.style.position = 'absolute';
+        errorDiv.style.top = '50%';
+        errorDiv.style.left = '50%';
+        errorDiv.style.transform = 'translate(-50%, -50%)';
+        errorDiv.style.background = 'white';
+        errorDiv.style.padding = '20px';
+        errorDiv.style.border = '2px solid red';
+        errorDiv.style.zIndex = '9999';
+        errorDiv.innerText = 'Fehler beim Laden der Daten: ' + e.message + '\n\nBitte stellen Sie sicher, dass Sie einen lokalen Server verwenden (z.B. "python3 -m http.server").';
+        document.body.appendChild(errorDiv);
+      });
 
-    // Filter Logic
     function updateTripFilter() {
       if (!map.getLayer("trips-lines")) return;
-
       const selectedCategories = [];
       document.querySelectorAll('.filter-cb:checked').forEach(cb => {
-        const vals = cb.value.split(','); // Split the value by comma to get multiple categories 
-        selectedCategories.push(...vals); // Add all values to the array              
+        const vals = cb.value.split(',');
+        selectedCategories.push(...vals);
       });
 
       if (selectedCategories.length === 0) {
-        // Hide all if nothing selected
         map.setFilter("trips-lines", ["in", "category", ""]);
       } else {
         map.setFilter("trips-lines", ["in", "category", ...selectedCategories]);
       }
     }
 
-    // UI Event Listeners
-
-
-    // 2. Category Filter
     document.querySelectorAll('.filter-cb').forEach(cb => {
       cb.addEventListener('change', updateTripFilter);
     });
