@@ -187,12 +187,13 @@
         const srcLayer = layer["source-layer"] || "";
         const filterText = JSON.stringify(layer.filter || "");
 
-        // --- 1. Road & Boundary Hiding (Existing Logic) ---
+        // --- 1. Road & Boundary Hiding (Stricter Logic) ---
+        // Hide ALL roads, bridges, tunnels unless they are explicitly rail-related
         const isRoadishId = id.startsWith("road-") || id.startsWith("bridge-") || id.startsWith("tunnel-") || id === "road-label";
-        const isRoadSource = srcLayer === "road" || srcLayer === "road_label";
-        const isRailRelated = /\b(rail|tram|subway|light_rail)\b/i.test(id) || /"rail"|"tram"|"subway"|"light_rail"/.test(filterText);
+        // ONLY keep if ID explicitly mentions rail types. Ignore filter-text as it can be misleading.
+        const isRailRelated = /\b(rail|tram|subway|light_rail)\b/i.test(id);
 
-        // detect admin-0 (country) and admin-1 (state/province) boundary line layers
+        // administrative boundaries
         const isAdminSource = srcLayer === "admin";
         const isBoundaryId = /boundary/i.test(id);
         const adminLevelIdMatch = /(^|-)admin-(0|1)(-|$)/i.test(id);
@@ -202,8 +203,21 @@
         const isAdmin01Boundary = (isBoundaryId && (adminLevelIdMatch || adminLevelFilter01 || adminKeyword)) ||
           (isAdminSource && (adminLevelFilter01 || adminKeyword));
 
-        // Hide roads (if not rail) and administrative boundaries (lines)
-        if (((isRoadishId || isRoadSource) && !isRailRelated) || (isAdmin01Boundary && layer.type !== "symbol")) {
+        // Hide:
+        // 1. Roads that are NOT rail related
+        // 2. Admin boundaries that are NOT level 0/1 (Conceptually we want to show countries, but hide others. The logic below HIDES if it meets criteria. Wait, original logic was: "if ((road && !rail) || (adminBoundary)) { hide }". actually the original logic HIDERED admin-0/1 if they were NOT symbol.
+        // Let's look closer at original: `(isAdmin01Boundary && layer.type !== "symbol")` -> This HIDES country lines? 
+        // User said: "only show country names and Capical Names". Usually users want country BORDERS too. Use your judgment: usually borders are good.
+        // However, the prompt specifically asked to "Hide the Citynames... and only show country names...". It didn't mention borders.
+        // But preventing regression: The previous code HID `isAdmin01Boundary`. I will maintain that behavior for now unless it looks wrong. 
+        // Update: The previous code `isAdmin01Boundary` logic seems to be identifying Country/State boundaries. If I hide them, I have no borders.
+        // Let's re-read the code I am replacing. 
+        // `if (((isRoadishId || isRoadSource) && !isRailRelated) || (isAdmin01Boundary && layer.type !== "symbol"))`
+        // Yes, it was hiding Admin-0/1 lines. Maybe the user *wants* a clean map without borders? 
+        // Logic: "only show country NAMES". 
+        // I will stick to the previous behavior regarding borders to minimize regression, but FIX the road hiding.
+
+        if ((isRoadishId && !isRailRelated) || (isAdmin01Boundary && layer.type !== "symbol")) {
           try {
             if (map.getLayer(id)) {
               map.setLayoutProperty(id, "visibility", "none");
