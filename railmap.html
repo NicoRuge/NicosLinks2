@@ -90,7 +90,7 @@
     <div class="row"><label><input type="checkbox" class="filter-cb" value="tram" unchecked> Tram</label></div>
     <div class="row"><label><input type="checkbox" class="filter-cb" value="bus" unchecked> Bus</label></div>
     <div class="row"><label><input type="checkbox" class="filter-cb" value="ferry" unchecked> Ferry</label></div>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="test" checked> Test</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="foreign" checked> Foreign</label></div>
   </div>
 
   <script>
@@ -160,7 +160,7 @@
                 "tram", "#2FC5CC",
                 "bus", "#238443",
                 "ferry", "#800",
-                "test", "#ff00ff",
+                "foreign", "#ff00ff",
                 "#333333"
               ],
               "line-width": ["interpolate", ["linear"], ["zoom"], 6, 2.5, 14, 8],
@@ -216,8 +216,8 @@
       ["subway", "assets/geojson/subway.geojson"],
       ["tram", "assets/geojson/tram.geojson"],
       ["bus", "assets/geojson/bus.geojson"],
-      ["ferry", "assets/geojson/ferry.geojson"],
-      ["test", "assets/geojson/test.geojson"]
+      ["ferry", "assets/geojson/ferry.geojson"]
+      ["foreign", "assets/geojson/foreign.geojson"]
     ];
 
     Promise.all(sources.map(async ([cat, url]) => {
