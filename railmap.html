@@ -160,7 +160,6 @@
                 "match", ["get", "category"],
                 "nationalExpress", "#0073ff",
                 "national", "#00eeff",
-                "regionalExp", "#d1024e",
                 "regional", "#a6026c",
                 "suburban", "#fc0000",
                 "subway", "#F69A00",
@@ -219,17 +218,21 @@
       addCustomLayers();
     });
 
+    //GEOjson daten kombinieren in https://geojson.io
+    //GEOjson daten generieren in https://brouter.de/brouter-web
+    //GEOjson daten strippen in https://mapshaper.org/ command: -filter-fields
+
+
     // Daten einmalig laden
     const sources = [
-      ["nationalExpress", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/nationalExpress.geojson"],
-      ["national", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/national.geojson"],
-      ["regionalExp", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/regionalExp.geojson"],
-      ["regional", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/regional.geojson"],
-      ["suburban", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/suburban.geojson"],
-      ["subway", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/subway.geojson"],
-      ["tram", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/tram.geojson"],
-      ["bus", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/bus.geojson"],
-      ["ferry", "https://raw.githubusercontent.com/Fabian-C/Traewelling_uMap_SRC/main/Lord_NicolasX/ferry.geojson"]
+      ["nationalExpress", "assets/geojson/nationalExpress.geojson"],
+      ["national", "assets/geojson/national.geojson"],
+      ["regional", "assets/geojson/regional.geojson"],
+      ["suburban", "assets/geojson/suburban.geojson"],
+      ["subway", "assets/geojson/subway.geojson"],
+      ["tram", "assets/geojson/tram.geojson"],
+      ["bus", "assets/geojson/bus.geojson"],
+      ["ferry", "assets/geojson/ferry.geojson"]
     ];
 
     Promise.all(sources.map(async ([cat, url]) => {
