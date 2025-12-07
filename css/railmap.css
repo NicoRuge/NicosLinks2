@@ -1,0 +1,114 @@
+@keyframes sp-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- Railmap UI Styles --- */
+/* Extracted from railmap.html */
+
+html,
+body,
+#map-container-railmap {
+    /* Scope to prevent conflicts if needed, but the original was global */
+    height: 100%;
+    margin: 0;
+}
+
+#map {
+    position: absolute;
+    inset: 0;
+}
+
+.home-btn {
+    position: absolute;
+    top: 12px;
+    left: 60px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: #111;
+    text-decoration: none;
+}
+
+.home-btn:hover {
+    background: #f6f6f6;
+}
+
+.panel {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.panel h3 {
+    margin: 0;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+}
+
+.panel h3:hover {
+    opacity: 0.7;
+}
+
+.section {
+    margin-bottom: 12px;
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.collapsible-content {
+    display: block;
+    margin-top: 6px;
+}
+
+.collapsible-content.collapsed {
+    display: none;
+}
+
+.toggle-icon {
+    font-size: 10px;
+    transition: transform 0.2s;
+}
+
+.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.attribution {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgba(255, 255, 255, .9);
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: 12px;
+}

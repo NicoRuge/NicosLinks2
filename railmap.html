@@ -10,68 +10,8 @@
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 
-  <style>
-    html,
-    body {
-      height: 100%;
-      margin: 0
-    }
-
-    #map {
-      position: absolute;
-      inset: 0
-    }
-
-    .home-btn {
-      position: absolute;
-      top: 12px;
-      left: 60px;
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, .15);
-      border-radius: 8px;
-      padding: 8px 12px;
-      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: #111;
-      text-decoration: none;
-    }
-
-    .home-btn:hover {
-      background: #f6f6f6
-    }
-
-    .panel {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #fff;
-      border: 1px solid rgba(0, 0, 0, .15);
-      border-radius: 8px;
-      padding: 8px 10px;
-      font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif
-    }
-
-    .panel h3 {
-      margin: 0 0 6px 0;
-      font-size: 14px
-    }
-
-    .row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 6px 0
-    }
-
-    .attribution {
-      position: absolute;
-      left: 12px;
-      bottom: 12px;
-      background: rgba(255, 255, 255, .9);
-      padding: 4px 6px;
-      border-radius: 6px;
-      font-size: 12px
-    }
-  </style>
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/railmap.css">
 </head>
 
 <body>
@@ -80,16 +20,33 @@
   <a class="home-btn" href="index.html" role="button">Home</a>
 
   <div class="panel" id="ui">
-    <h3>Verkehrsmittel</h3>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="nationalExpress" checked>National
-        Express</label></div>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="regional" checked>Regional Express</label>
+    <div class="section">
+      <h3>Means of Transportation <span class="toggle-icon">▼</span></h3>
+      <div class="collapsible-content">
+        <div class="row"><label><input type="checkbox" class="filter-cb" value="nationalExpress" checked>National
+            Express</label></div>
+        <div class="row"><label><input type="checkbox" class="filter-cb" value="regional" checked>Regional
+            Express</label></div>
+        <div class="row"><label><input type="checkbox" class="filter-cb" value="suburban" checked> Suburban</label>
+        </div>
+        <div class="row"><label><input type="checkbox" class="filter-cb" value="subway" unchecked> Subway</label></div>
+        <div class="row"><label><input type="checkbox" class="filter-cb" value="tram" unchecked> Tram</label></div>
+        <div class="row"><label><input type="checkbox" class="filter-cb" value="bus" checked> Bus</label></div>
+        <div class="row"><label><input type="checkbox" class="filter-cb" value="ferry" unchecked> Ferry</label></div>
+      </div>
     </div>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="suburban" checked> Suburban</label></div>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="subway" checked> Subway</label></div>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="tram" unchecked> Tram</label></div>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="bus" unchecked> Bus</label></div>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="ferry" unchecked> Ferry</label></div>
+
+    <div class="section">
+      <h3>Legend <span class="toggle-icon">▼</span></h3>
+      <div class="collapsible-content">
+        <div class="row"><span class="legend-color" style="background:#ff0000"></span> National Express</div>
+        <div class="row"><span class="legend-color" style="background:#ff9900"></span> Regional</div>
+        <div class="row"><span class="legend-color" style="background:#f6ff00"></span> Suburban</div>
+        <div class="row"><span class="legend-color" style="background:#00ff11"></span> Subway</div>
+        <div class="row"><span class="legend-color" style="background:#0008ff"></span> Tram</div>
+        <div class="row"><span class="legend-color" style="background:#ff00fb"></span> Bus</div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -158,13 +115,13 @@
             paint: {
               "line-color": [
                 "match", ["get", "category"],
-                "nationalExpress", "#0073ff",
-                "national", "#00eeff",
-                "regional", "#a6026c",
+                "nationalExpress", "#ff0000",
+                "national", "#ff9900",
+                "regional", "#f6ff00",
                 "suburban", "#fc0000",
                 "subway", "#F69A00",
-                "tram", "#2FC5CC",
-                "bus", "#238443",
+                "tram", "#00ff11",
+                "bus", "#ff00fb",
                 "ferry", "#800",
                 "#333333"
               ],
@@ -319,6 +276,16 @@
     // 2. Category Filter
     document.querySelectorAll('.filter-cb').forEach(cb => {
       cb.addEventListener('change', updateTripFilter);
+    });
+    // 3. Collapsible Menus
+    document.querySelectorAll('.panel h3').forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        content.classList.toggle('collapsed');
+        // Toggle icon rotation class on header itself or parent if preferred, 
+        // here we toggle on header to target the icon via CSS
+        header.classList.toggle('collapsed');
+      });
     });
   </script>
 </body>
