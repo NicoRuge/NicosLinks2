@@ -159,7 +159,7 @@
               "line-color": [
                 "match", ["get", "category"],
                 "nationalExpress", "#0073ff",
-                "national", "#00eeff",
+                //"national", "#00eeff",
                 "regional", "#a6026c",
                 "suburban", "#fc0000",
                 "subway", "#F69A00",
@@ -202,20 +202,6 @@
 
         const isAdmin01Boundary = (isBoundaryId && (adminLevelIdMatch || adminLevelFilter01 || adminKeyword)) ||
           (isAdminSource && (adminLevelFilter01 || adminKeyword));
-
-        // Hide:
-        // 1. Roads that are NOT rail related
-        // 2. Admin boundaries that are NOT level 0/1 (Conceptually we want to show countries, but hide others. The logic below HIDES if it meets criteria. Wait, original logic was: "if ((road && !rail) || (adminBoundary)) { hide }". actually the original logic HIDERED admin-0/1 if they were NOT symbol.
-        // Let's look closer at original: `(isAdmin01Boundary && layer.type !== "symbol")` -> This HIDES country lines? 
-        // User said: "only show country names and Capical Names". Usually users want country BORDERS too. Use your judgment: usually borders are good.
-        // However, the prompt specifically asked to "Hide the Citynames... and only show country names...". It didn't mention borders.
-        // But preventing regression: The previous code HID `isAdmin01Boundary`. I will maintain that behavior for now unless it looks wrong. 
-        // Update: The previous code `isAdmin01Boundary` logic seems to be identifying Country/State boundaries. If I hide them, I have no borders.
-        // Let's re-read the code I am replacing. 
-        // `if (((isRoadishId || isRoadSource) && !isRailRelated) || (isAdmin01Boundary && layer.type !== "symbol"))`
-        // Yes, it was hiding Admin-0/1 lines. Maybe the user *wants* a clean map without borders? 
-        // Logic: "only show country NAMES". 
-        // I will stick to the previous behavior regarding borders to minimize regression, but FIX the road hiding.
 
         if ((isRoadishId && !isRailRelated) || (isAdmin01Boundary && layer.type !== "symbol")) {
           try {
@@ -271,8 +257,8 @@
 
     // Daten einmalig laden
     const sources = [
-      ["nationalExpress", "assets/geojson/nationalExpress.geojson"],
-      ["national", "assets/geojson/national.geojson"],
+      ["nationalExpress", "assets/geojson/nationalExpress_Simplified.geojson"],
+      //["national", "assets/geojson/national.geojson"],
       ["regional", "assets/geojson/regional.geojson"],
       ["suburban", "assets/geojson/suburban.geojson"],
       ["subway", "assets/geojson/subway.geojson"],
