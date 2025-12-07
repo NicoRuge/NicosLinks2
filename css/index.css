@@ -582,6 +582,11 @@ body {
     text-align: center;
 }
 
+/* Hide footer when railmap is active */
+#railmap-section.active~.footer {
+    display: none;
+}
+
 /* --- Travel Widget Styles --- */
 .tw-card {
     display: flex;
@@ -1101,4 +1106,3 @@ body {
         transform: rotate(360deg);
     }
 }
-
