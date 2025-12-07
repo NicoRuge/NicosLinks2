@@ -81,10 +81,10 @@
 
   <div class="panel" id="ui">
     <h3>Verkehrsmittel</h3>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="nationalExpress,national" checked>
-        National Express</label></div>
-    <div class="row"><label><input type="checkbox" class="filter-cb" value="regionalExp,regional" checked>
-        Regional Express</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="nationalExpress" checked>National
+        Express</label></div>
+    <div class="row"><label><input type="checkbox" class="filter-cb" value="regional" checked>Regional Express</label>
+    </div>
     <div class="row"><label><input type="checkbox" class="filter-cb" value="suburban" checked> Suburban</label></div>
     <div class="row"><label><input type="checkbox" class="filter-cb" value="subway" checked> Subway</label></div>
     <div class="row"><label><input type="checkbox" class="filter-cb" value="tram" unchecked> Tram</label></div>
@@ -159,7 +159,7 @@
               "line-color": [
                 "match", ["get", "category"],
                 "nationalExpress", "#0073ff",
-                //"national", "#00eeff",
+                "national", "#00eeff",
                 "regional", "#a6026c",
                 "suburban", "#fc0000",
                 "subway", "#F69A00",
@@ -258,7 +258,7 @@
     // Daten einmalig laden
     const sources = [
       ["nationalExpress", "assets/geojson/nationalExpress_Simplified.geojson"],
-      //["national", "assets/geojson/national.geojson"],
+      ["national", "assets/geojson/national.geojson"],
       ["regional", "assets/geojson/regional.geojson"],
       ["suburban", "assets/geojson/suburban.geojson"],
       ["subway", "assets/geojson/subway.geojson"],
