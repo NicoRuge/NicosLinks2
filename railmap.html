@@ -143,18 +143,16 @@
           type: "symbol",
           source: "sights",
           layout: {
-            layout: {
-              "text-field": [
-                "format",
-                ["concat", "⭐ ", ["get", "name"]], { "font-scale": 1 },
-                "\n", {},
-                ["get", "when"], { "font-scale": 0.8, "text-font": ["literal", ["DIN Offc Pro Italic", "Arial Unicode MS Regular"]] }
-              ],
-              "text-size": 14,
-              "text-offset": [0, 0.5],
-              "text-anchor": "top",
-              "text-allow-overlap": true
-            }
+            "text-field": [
+              "format",
+              ["concat", "⭐ ", ["get", "name"]], { "font-scale": 1 },
+              "\n", {},
+              ["get", "when"], { "font-scale": 0.8, "text-font": ["literal", ["DIN Offc Pro Italic", "Arial Unicode MS Regular"]] }
+            ],
+            "text-size": 14,
+            "text-offset": [0, 0.5],
+            "text-anchor": "top",
+            "text-allow-overlap": true
           }
         });
 
