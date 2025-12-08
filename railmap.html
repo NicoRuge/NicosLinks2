@@ -136,12 +136,12 @@
                 "match", ["get", "category"],
                 "nationalExpress", "#ff0000",
                 "national", "#ff9900",
-                "regional", "#f6ff00",
-                "suburban", "#fc0000",
-                "subway", "#F69A00",
+                "regional", "#ff8c00",
+                "suburban", "#ffff00",
+                "subway", "#1eff00",
                 "tram", "#00ff11",
                 "bus", "#ff00fb",
-                "ferry", "#800",
+                "ferry", "#9500ff",
                 "#333333"
               ],
               "line-width": ["interpolate", ["linear"], ["zoom"], 6, 2.5, 14, 8],
@@ -218,8 +218,6 @@
 
       loadIconsAndAddLayer();
     }
-
-    // Configure Map Layers: Hide roads, filter labels (Show only Countries & Capitals)
     const configureMapLayers = () => {
       const style = map.getStyle();
       if (!style || !style.layers) return;
@@ -228,14 +226,8 @@
         const id = layer.id || "";
         const srcLayer = layer["source-layer"] || "";
         const filterText = JSON.stringify(layer.filter || "");
-
-        // --- 1. Road & Boundary Hiding (Stricter Logic) ---
-        // Hide ALL roads, bridges, tunnels unless they are explicitly rail-related
         const isRoadishId = id.startsWith("road-") || id.startsWith("bridge-") || id.startsWith("tunnel-") || id === "road-label";
-        // ONLY keep if ID explicitly mentions rail types. Ignore filter-text as it can be misleading.
         const isRailRelated = /\b(rail|tram|subway|light_rail)\b/i.test(id);
-
-        // administrative boundaries
         const isAdminSource = srcLayer === "admin";
         const isBoundaryId = /boundary/i.test(id);
         const adminLevelIdMatch = /(^|-)admin-(0|1)(-|$)/i.test(id);
@@ -252,27 +244,20 @@
             }
           } catch (_) { /* ignore */ }
         }
-
-        // --- 2. Label Customization (Show only Countries & Capitals) ---
         if (layer.type === "symbol") {
-          // A. Country Labels: Ensure Visible
           if (id.includes("country-label")) {
             map.setLayoutProperty(id, "visibility", "visible");
           }
-          // B. Settlement Labels: Show ONLY Capitals (capital == 2)
           else if (id.includes("settlement-") || id.includes("place-city") || id.includes("place-town") || id.includes("place-village")) {
             try {
-              // Apply filter to only show national capitals (capital == 2)
               map.setFilter(id, ["==", ["get", "capital"], 2]);
               map.setLayoutProperty(id, "visibility", "visible");
             } catch (e) {
               console.warn("Could not set filter on", id, e);
             }
           }
-          // C. Hide other distracting labels (States, POIs, etc.)
           else {
             const isCountry = id.includes("country-label");
-            // Hide State labels, POIs, etc.
             if (!isCountry && (id.includes("state-label") || id.includes("poi-label") || id.includes("water-point-label") || id.includes("natural-point-label"))) {
               map.setLayoutProperty(id, "visibility", "none");
             }
@@ -280,14 +265,13 @@
         }
       }
     };
-
-    // Event: Style fertig geladen (initial oder nach Wechsel)
     map.on("style.load", () => {
       configureMapLayers();
       addCustomLayers();
     });
-
-    // Ensure we try to add layers once the map is fully loaded initially as well
+    map.on("load", () => {
+      addCustomLayers();
+    });
     map.on("load", () => {
       addCustomLayers();
     });
@@ -297,8 +281,6 @@
     //GEOjson daten strippen in https://mapshaper.org/ command: -filter-fields
     //GPX Editor https://gpx.studio
 
-
-    // Daten einmalig laden
     const sources = [
       ["nationalExpress", "assets/geojson/nationalExpress_Simplified.geojson"],
       ["national", "assets/geojson/national.geojson"],
