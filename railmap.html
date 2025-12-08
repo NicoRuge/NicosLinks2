@@ -360,30 +360,22 @@
       selectedTypes.forEach(type => {
         if (type === 'Other') {
           // If "Other" is selected, match anything NOT in the main list
-          // We must explicitly list the main types and return false, default true
-          const otherMatcher = ["match", ["get", "type"]];
-          mainTypes.forEach(t => {
-            otherMatcher.push(t);
-            otherMatcher.push(false);
-          });
-          otherMatcher.push(true); // default: true (is Other)
-          filter.push(otherMatcher);
+          // Construct: ["!", ["in", ["get", "type"], "Monument", "Airport", "Station"]]
+          const inExpr = ["in", ["get", "type"]].concat(mainTypes);
+          filter.push(["!", inExpr]);
         } else {
           filter.push(["==", ["get", "type"], type]);
         }
       });
 
+      console.log("Applying Sights Filter:", JSON.stringify(filter));
+
       if (selectedTypes.length === 0) {
         map.setFilter("sights-layer", ["in", "type", ""]); // Hide all
       } else if (selectedTypes.includes('Other') && selectedTypes.length === 1) {
         // Only other
-        const otherMatcher = ["match", ["get", "type"]];
-        mainTypes.forEach(t => {
-          otherMatcher.push(t);
-          otherMatcher.push(false);
-        });
-        otherMatcher.push(true);
-        map.setFilter("sights-layer", otherMatcher);
+        const inExpr = ["in", ["get", "type"]].concat(mainTypes);
+        map.setFilter("sights-layer", ["!", inExpr]);
       } else {
         map.setFilter("sights-layer", filter);
       }
