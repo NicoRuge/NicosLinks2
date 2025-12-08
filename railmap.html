@@ -314,6 +314,34 @@
         }
       });
     });
+    // 4. Sights Layer Interactions (Popups & Cursor)
+    map.on('click', 'sights-layer', (e) => {
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      const props = e.features[0].properties;
+      const name = props.name || "Unknown";
+      const when = props.when || "";
+
+      // Ensure that if the map is zoomed out such that multiple
+      // copies of the feature are visible, the popup appears
+      // over the copy being pointed to.
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      new mapboxgl.Popup()
+        .setLngLat(coordinates)
+        .setHTML(`<strong>${name}</strong><br>${when}`)
+        .addTo(map);
+    });
+
+    map.on('mouseenter', 'sights-layer', () => {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+
+    map.on('mouseleave', 'sights-layer', () => {
+      map.getCanvas().style.cursor = '';
+    });
+
     // 3. Collapsible Menus
     document.querySelectorAll('.panel h3').forEach(header => {
       header.addEventListener('click', () => {
