@@ -21,8 +21,9 @@
 
   <div class="panel" id="ui">
     <div class="section">
-      <h3>Means of Transportation <span class="toggle-icon">▼</span></h3>
-      <div class="collapsible-content">
+      <h3><label><input type="checkbox" class="group-toggle" data-group="trains" checked> Train Rides</label> <span
+          class="toggle-icon">▼</span></h3>
+      <div class="collapsible-content" id="group-trains">
         <div class="row"><span class="legend-color" style="background:#ff0000"></span> <label><input type="checkbox"
               class="filter-cb" value="nationalExpress" checked>National
             Express</label> </div>
@@ -36,23 +37,33 @@
               class="filter-cb" value="subway" unchecked> Subway</label> </div>
         <div class="row"><span class="legend-color" style="background:#1100ff"></span> <label><input type="checkbox"
               class="filter-cb" value="tram" unchecked> Tram</label> </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3><label><input type="checkbox" class="group-toggle" data-group="other" checked> Other Public Transport</label>
+        <span class="toggle-icon">▼</span>
+      </h3>
+      <div class="collapsible-content" id="group-other">
         <div class="row"><span class="legend-color" style="background:#ff00fb"></span> <label><input type="checkbox"
               class="filter-cb" value="bus" checked> Bus</label> </div>
         <div class="row"><span class="legend-color" style="background:#9500ff"></span> <label><input type="checkbox"
               class="filter-cb" value="ferry" unchecked> Ferry</label> </div>
-        <div class="row"><span class="legend-icon">📷</span> <label><input type="checkbox" class="layer-toggle"
-              data-layer="sights" checked> Sights (Besucht)</label> </div>
-        <!-- Sights Submenu -->
-        <div id="sights-submenu" style="margin-left: 20px;">
-          <div class="row"><span class="legend-icon">⭐</span> <label><input type="checkbox" class="sight-filter-cb"
-                value="Monument" checked> Monument</label></div>
-          <div class="row"><span class="legend-icon">✈️</span> <label><input type="checkbox" class="sight-filter-cb"
-                value="Airport" checked> Airport</label></div>
-          <div class="row"><span class="legend-icon">🚆</span> <label><input type="checkbox" class="sight-filter-cb"
-                value="Station" checked> Station</label></div>
-          <div class="row"><span class="legend-icon">📍</span> <label><input type="checkbox" class="sight-filter-cb"
-                value="Other" checked> Others</label></div>
-        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3><label><input type="checkbox" class="group-toggle" data-group="sights" checked> Sights</label> <span
+          class="toggle-icon">▼</span></h3>
+      <div class="collapsible-content" id="group-sights">
+        <div class="row"><span class="legend-icon">⭐</span> <label><input type="checkbox" class="sight-filter-cb"
+              value="Monument" checked> Monument</label></div>
+        <div class="row"><span class="legend-icon">✈️</span> <label><input type="checkbox" class="sight-filter-cb"
+              value="Airport" checked> Airport</label></div>
+        <div class="row"><span class="legend-icon">🚆</span> <label><input type="checkbox" class="sight-filter-cb"
+              value="Station" checked> Station</label></div>
+        <div class="row"><span class="legend-icon">📍</span> <label><input type="checkbox" class="sight-filter-cb"
+              value="Other" checked> Others</label></div>
       </div>
     </div>
   </div>
@@ -330,11 +341,6 @@
         if (map.getLayer(layerName)) {
           map.setLayoutProperty(layerName, 'visibility', isVisible ? 'visible' : 'none');
         }
-        // Specific logic for sights submenu visibility
-        if (e.target.dataset.layer === 'sights') {
-          const submenu = document.getElementById('sights-submenu');
-          if (submenu) submenu.style.display = isVisible ? 'block' : 'none';
-        }
       });
     });
 
@@ -373,6 +379,37 @@
     document.querySelectorAll('.sight-filter-cb').forEach(cb => {
       cb.addEventListener('change', updateSightsFilter);
     });
+
+    // Group Toggles
+    document.querySelectorAll('.group-toggle').forEach(toggle => {
+      toggle.addEventListener('change', (e) => {
+        const groupName = e.target.dataset.group;
+        const isChecked = e.target.checked;
+        const groupContent = document.getElementById('group-' + groupName);
+
+        if (groupContent) {
+          // Handle standard filter checkboxes
+          const filterCbs = groupContent.querySelectorAll('.filter-cb');
+          if (filterCbs.length > 0) {
+            filterCbs.forEach(cb => cb.checked = isChecked);
+            if (typeof updateTripFilter === 'function') updateTripFilter();
+          }
+
+          // Handle sight filter checkboxes
+          const sightCbs = groupContent.querySelectorAll('.sight-filter-cb');
+          if (sightCbs.length > 0) {
+            sightCbs.forEach(cb => cb.checked = isChecked);
+            updateSightsFilter();
+          }
+        }
+      });
+
+      // Stop propagation so clicking the checkbox doesn't collapse the section
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
+
     // 4. Sights Layer Interactions (Popups & Cursor)
     map.on('click', 'sights-layer', (e) => {
       const coordinates = e.features[0].geometry.coordinates.slice();
