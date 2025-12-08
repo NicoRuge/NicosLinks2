@@ -52,7 +52,7 @@
         {
             "type": "Feature",
             "properties": {
-                " name": "Colosseum",
+                "name": "Colosseum",
                 "when": "1.1.2000",
                 "type": "Monument"
             },
