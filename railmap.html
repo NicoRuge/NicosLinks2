@@ -159,33 +159,64 @@
           data: "assets/geojson/sights.geojson"
         });
       }
-      if (!map.getLayer("sights-layer")) {
-        map.addLayer({
-          id: "sights-layer",
-          type: "symbol",
-          source: "sights",
-          layout: {
-            "icon-image": [
-              "match",
-              ["get", "type"],
-              "Monument", "star",
-              "Airport", "airport",
-              "Station", "rail",
-              "marker"
-            ],
-            "icon-size": 1.5,
-            "icon-allow-overlap": true
-          }
-        });
 
-        // Ensure toggle state matches layer visibility
-        const toggle = document.querySelector('.layer-toggle[data-layer="sights"]');
-        if (toggle) {
-          const isVisible = toggle.checked;
-          map.setLayoutProperty("sights-layer", "visibility", isVisible ? "visible" : "none");
+      // Load custom emoji icons if not already loaded
+      const iconConfigs = [
+        { name: 'icon-monument', emoji: '⭐' },
+        { name: 'icon-airport', emoji: '✈️' },
+        { name: 'icon-station', emoji: '🚆' },
+        { name: 'icon-other', emoji: '📍' }
+      ];
+
+      const loadIconsAndAddLayer = async () => {
+        for (const config of iconConfigs) {
+          if (!map.hasImage(config.name)) {
+            // Create emoji image using canvas
+            const size = 40;
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            ctx.font = `${size - 8}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(config.emoji, size / 2, size / 2);
+
+            const imageData = ctx.getImageData(0, 0, size, size);
+            map.addImage(config.name, imageData);
+          }
         }
-        updateSightsFilter();
-      }
+
+        if (!map.getLayer("sights-layer")) {
+          map.addLayer({
+            id: "sights-layer",
+            type: "symbol",
+            source: "sights",
+            layout: {
+              "icon-image": [
+                "match",
+                ["get", "type"],
+                "Monument", "icon-monument",
+                "Airport", "icon-airport",
+                "Station", "icon-station",
+                "icon-other"
+              ],
+              "icon-size": 1,
+              "icon-allow-overlap": true
+            }
+          });
+
+          // Ensure toggle state matches layer visibility
+          const toggle = document.querySelector('.layer-toggle[data-layer="sights"]');
+          if (toggle) {
+            const isVisible = toggle.checked;
+            map.setLayoutProperty("sights-layer", "visibility", isVisible ? "visible" : "none");
+          }
+          updateSightsFilter();
+        }
+      };
+
+      loadIconsAndAddLayer();
     }
 
     // Configure Map Layers: Hide roads, filter labels (Show only Countries & Capitals)
