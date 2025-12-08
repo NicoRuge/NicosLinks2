@@ -5,7 +5,8 @@
             "type": "Feature",
             "properties": {
                 "name": "Eiffel Tower",
-                "when": "1.1.2000"
+                "when": "1.1.2000",
+                "type": "Monument"
             },
             "geometry": {
                 "coordinates": [
@@ -13,7 +14,232 @@
                     48.8582614732118
                 ],
                 "type": "Point"
-            }
+            },
+            "id": 0
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Louvre",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    2.3358521119641864,
+                    48.861016877315706
+                ],
+                "type": "Point"
+            },
+            "id": 1
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Arc de Triomphe",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    2.295036472928956,
+                    48.8737766115695
+                ],
+                "type": "Point"
+            },
+            "id": 2
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                " name": "Colosseum",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    12.49234219576428,
+                    41.890268685787134
+                ],
+                "type": "Point"
+            },
+            "id": 3
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Saint Peter's Square",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    12.457329584286185,
+                    41.90224326519632
+                ],
+                "type": "Point"
+            },
+            "id": 4
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Pantheon",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    12.476979074169549,
+                    41.8985934427497
+                ],
+                "type": "Point"
+            },
+            "id": 5
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Plaza de Espana",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    -5.987008974323459,
+                    37.37710348777189
+                ],
+                "type": "Point"
+            },
+            "id": 6
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Royale Palace of Madrid",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    -3.71426754491668,
+                    40.41810139587727
+                ],
+                "type": "Point"
+            },
+            "id": 7
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Milan Cathedral",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    9.1915416050754,
+                    45.46421496077059
+                ],
+                "type": "Point"
+            },
+            "id": 8
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Sforza Castle",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    9.179382782431333,
+                    45.470387838125475
+                ],
+                "type": "Point"
+            },
+            "id": 9
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Galleria Vittorio Emanuele II",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    9.190009529019221,
+                    45.46562816469125
+                ],
+                "type": "Point"
+            },
+            "id": 11
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Central Park",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    -73.96569402490739,
+                    40.78247728269389
+                ],
+                "type": "Point"
+            },
+            "id": 11
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "9/11 Memorial and Museum",
+                "when": "1.1.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    -74.01323516551587,
+                    40.711567235037705
+                ],
+                "type": "Point"
+            },
+            "id": 12
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Stonewall Inn",
+                "when": "1.11.2000",
+                "type": "Monument"
+            },
+            "geometry": {
+                "coordinates": [
+                    -74.00216052713556,
+                    40.73381676069633
+                ],
+                "type": "Point"
+            },
+            "id": 13
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "KEF - Keflavík International Airport",
+                "when": "1.1.2000",
+                "type": "Airport"
+            },
+            "geometry": {
+                "coordinates": [
+                    -22.62372818256091,
+                    63.99561769560901
+                ],
+                "type": "Point"
+            },
+            "id": 15
         }
     ]
 }

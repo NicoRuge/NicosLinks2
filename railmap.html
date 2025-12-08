@@ -42,6 +42,17 @@
               class="filter-cb" value="ferry" unchecked> Ferry</label> </div>
         <div class="row"><span class="legend-icon">📷</span> <label><input type="checkbox" class="layer-toggle"
               data-layer="sights" checked> Sights (Besucht)</label> </div>
+        <!-- Sights Submenu -->
+        <div id="sights-submenu" style="margin-left: 20px;">
+          <div class="row"><span class="legend-icon">⭐</span> <label><input type="checkbox" class="sight-filter-cb"
+                value="Monument" checked> Monument</label></div>
+          <div class="row"><span class="legend-icon">✈️</span> <label><input type="checkbox" class="sight-filter-cb"
+                value="Airport" checked> Airport</label></div>
+          <div class="row"><span class="legend-icon">🚆</span> <label><input type="checkbox" class="sight-filter-cb"
+                value="Station" checked> Station</label></div>
+          <div class="row"><span class="legend-icon">📍</span> <label><input type="checkbox" class="sight-filter-cb"
+                value="Other" checked> Others</label></div>
+        </div>
       </div>
     </div>
   </div>
@@ -140,13 +151,19 @@
       if (!map.getLayer("sights-layer")) {
         map.addLayer({
           id: "sights-layer",
-          type: "circle",
+          type: "symbol",
           source: "sights",
-          paint: {
-            "circle-radius": 6,
-            "circle-color": "#ff8c00",
-            "circle-stroke-width": 2,
-            "circle-stroke-color": "#ffffff"
+          layout: {
+            "text-field": [
+              "match",
+              ["get", "type"],
+              "Monument", "⭐",
+              "Airport", "✈️",
+              "Station", "🚆",
+              "📍"
+            ],
+            "text-size": 20,
+            "text-allow-overlap": true
           }
         });
 
@@ -156,6 +173,7 @@
           const isVisible = toggle.checked;
           map.setLayoutProperty("sights-layer", "visibility", isVisible ? "visible" : "none");
         }
+        updateSightsFilter();
       }
     }
 
@@ -312,7 +330,48 @@
         if (map.getLayer(layerName)) {
           map.setLayoutProperty(layerName, 'visibility', isVisible ? 'visible' : 'none');
         }
+        // Specific logic for sights submenu visibility
+        if (e.target.dataset.layer === 'sights') {
+          const submenu = document.getElementById('sights-submenu');
+          if (submenu) submenu.style.display = isVisible ? 'block' : 'none';
+        }
       });
+    });
+
+    // 2.2 Sights Type Filter
+    function updateSightsFilter() {
+      if (!map.getLayer("sights-layer")) return;
+
+      const selectedTypes = [];
+      document.querySelectorAll('.sight-filter-cb:checked').forEach(cb => {
+        selectedTypes.push(cb.value);
+      });
+
+      // "Other" captures anything not in the main categories
+      const mainTypes = ["Monument", "Airport", "Station"];
+      const filter = ["any"];
+
+      selectedTypes.forEach(type => {
+        if (type === 'Other') {
+          // If "Other" is selected, match anything NOT in the main list
+          filter.push(["!", ["in", ["get", "type"], ["literal", mainTypes]]]);
+        } else {
+          filter.push(["==", ["get", "type"], type]);
+        }
+      });
+
+      if (selectedTypes.length === 0) {
+        map.setFilter("sights-layer", ["in", "type", ""]); // Hide all
+      } else if (selectedTypes.includes('Other') && selectedTypes.length === 1) {
+        // Only other
+        map.setFilter("sights-layer", ["!", ["in", ["get", "type"], ["literal", mainTypes]]]);
+      } else {
+        map.setFilter("sights-layer", filter);
+      }
+    }
+
+    document.querySelectorAll('.sight-filter-cb').forEach(cb => {
+      cb.addEventListener('change', updateSightsFilter);
     });
     // 4. Sights Layer Interactions (Popups & Cursor)
     map.on('click', 'sights-layer', (e) => {
