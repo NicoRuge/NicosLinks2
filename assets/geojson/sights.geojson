@@ -1,0 +1,19 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Eiffel Tower",
+                "when": "1.1.2000"
+            },
+            "geometry": {
+                "coordinates": [
+                    2.2945230517578636,
+                    48.8582614732118
+                ],
+                "type": "Point"
+            }
+        }
+    ]
+}

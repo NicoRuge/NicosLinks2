@@ -40,6 +40,8 @@
               class="filter-cb" value="bus" checked> Bus</label> </div>
         <div class="row"><span class="legend-color" style="background:#9500ff"></span> <label><input type="checkbox"
               class="filter-cb" value="ferry" unchecked> Ferry</label> </div>
+        <div class="row"><span class="legend-icon">📷</span> <label><input type="checkbox" class="layer-toggle"
+              data-layer="sights" checked> Sights (Besucht)</label> </div>
       </div>
     </div>
   </div>
@@ -127,6 +129,42 @@
           updateTripFilter(); // Apply current filter
         }
       }
+
+      // 3. Sights Source & Layer
+      if (!map.getSource("sights")) {
+        map.addSource("sights", {
+          type: "geojson",
+          data: "assets/geojson/sights.geojson"
+        });
+      }
+      if (!map.getLayer("sights-layer")) {
+        map.addLayer({
+          id: "sights-layer",
+          type: "symbol",
+          source: "sights",
+          layout: {
+            layout: {
+              "text-field": [
+                "format",
+                ["concat", "⭐ ", ["get", "name"]], { "font-scale": 1 },
+                "\n", {},
+                ["get", "when"], { "font-scale": 0.8, "text-font": ["literal", ["DIN Offc Pro Italic", "Arial Unicode MS Regular"]] }
+              ],
+              "text-size": 14,
+              "text-offset": [0, 0.5],
+              "text-anchor": "top",
+              "text-allow-overlap": true
+            }
+          }
+        });
+
+        // Ensure toggle state matches layer visibility
+        const toggle = document.querySelector('.layer-toggle[data-layer="sights"]');
+        if (toggle) {
+          const isVisible = toggle.checked;
+          map.setLayoutProperty("sights-layer", "visibility", isVisible ? "visible" : "none");
+        }
+      }
     }
 
     // Configure Map Layers: Hide roads, filter labels (Show only Countries & Capitals)
@@ -205,6 +243,7 @@
     //GEOjson daten kombinieren in https://geojson.io
     //GEOjson daten generieren in https://brouter.de/brouter-web
     //GEOjson daten strippen in https://mapshaper.org/ command: -filter-fields
+    //GPX Editor https://gpx.studio
 
 
     // Daten einmalig laden
@@ -271,6 +310,17 @@
     // 2. Category Filter
     document.querySelectorAll('.filter-cb').forEach(cb => {
       cb.addEventListener('change', updateTripFilter);
+    });
+
+    // 2.1 Layer Toggles
+    document.querySelectorAll('.layer-toggle').forEach(toggle => {
+      toggle.addEventListener('change', (e) => {
+        const layerName = e.target.dataset.layer + '-layer';
+        const isVisible = e.target.checked;
+        if (map.getLayer(layerName)) {
+          map.setLayoutProperty(layerName, 'visibility', isVisible ? 'visible' : 'none');
+        }
+      });
     });
     // 3. Collapsible Menus
     document.querySelectorAll('.panel h3').forEach(header => {
