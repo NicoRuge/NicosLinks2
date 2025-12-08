@@ -360,9 +360,14 @@
       selectedTypes.forEach(type => {
         if (type === 'Other') {
           // If "Other" is selected, match anything NOT in the main list
-          // valid: ["match", input, [values...], resultIfMatch, resultIfNoMatch]
-          // Returns true if NOT in mainTypes (i.e. is Other)
-          filter.push(["match", ["get", "type"], mainTypes, false, true]);
+          // We must explicitly list the main types and return false, default true
+          const otherMatcher = ["match", ["get", "type"]];
+          mainTypes.forEach(t => {
+            otherMatcher.push(t);
+            otherMatcher.push(false);
+          });
+          otherMatcher.push(true); // default: true (is Other)
+          filter.push(otherMatcher);
         } else {
           filter.push(["==", ["get", "type"], type]);
         }
@@ -372,8 +377,13 @@
         map.setFilter("sights-layer", ["in", "type", ""]); // Hide all
       } else if (selectedTypes.includes('Other') && selectedTypes.length === 1) {
         // Only other
-        const otherFilter = ["match", ["get", "type"], mainTypes, false, true];
-        map.setFilter("sights-layer", otherFilter);
+        const otherMatcher = ["match", ["get", "type"]];
+        mainTypes.forEach(t => {
+          otherMatcher.push(t);
+          otherMatcher.push(false);
+        });
+        otherMatcher.push(true);
+        map.setFilter("sights-layer", otherMatcher);
       } else {
         map.setFilter("sights-layer", filter);
       }
