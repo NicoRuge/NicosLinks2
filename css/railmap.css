@@ -13,6 +13,7 @@ body,
     /* Scope to prevent conflicts if needed, but the original was global */
     height: 100%;
     margin: 0;
+    text-transform: none;
 }
 
 #map {
