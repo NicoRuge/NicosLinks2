@@ -21,8 +21,12 @@
 
   <div class="panel" id="ui">
     <div class="section">
-      <h3><label><input type="checkbox" class="group-toggle" data-group="trains" checked> Train Rides</label> <span
-          class="toggle-icon">▼</span></h3>
+      <h3>
+        <label class="group-checkbox-label"><input type="checkbox" class="group-toggle" data-group="trains"
+            checked></label>
+        <span class="section-title">Train Rides</span>
+        <span class="toggle-icon">▼</span>
+      </h3>
       <div class="collapsible-content" id="group-trains">
         <div class="row"><span class="legend-color" style="background:#ff0000"></span> <label><input type="checkbox"
               class="filter-cb" value="nationalExpress" checked>National
@@ -41,7 +45,10 @@
     </div>
 
     <div class="section">
-      <h3><label><input type="checkbox" class="group-toggle" data-group="other" checked> Other Public Transport</label>
+      <h3>
+        <label class="group-checkbox-label"><input type="checkbox" class="group-toggle" data-group="other"
+            checked></label>
+        <span class="section-title">Other Public Transport</span>
         <span class="toggle-icon">▼</span>
       </h3>
       <div class="collapsible-content" id="group-other">
@@ -53,8 +60,12 @@
     </div>
 
     <div class="section">
-      <h3><label><input type="checkbox" class="group-toggle" data-group="sights" checked> Sights</label> <span
-          class="toggle-icon">▼</span></h3>
+      <h3>
+        <label class="group-checkbox-label"><input type="checkbox" class="group-toggle" data-group="sights"
+            checked></label>
+        <span class="section-title">Sights</span>
+        <span class="toggle-icon">▼</span>
+      </h3>
       <div class="collapsible-content" id="group-sights">
         <div class="row"><span class="legend-icon">⭐</span> <label><input type="checkbox" class="sight-filter-cb"
               value="Monument" checked> Monument</label></div>
@@ -171,7 +182,6 @@
       const loadIconsAndAddLayer = async () => {
         for (const config of iconConfigs) {
           if (!map.hasImage(config.name)) {
-            // Create emoji image using canvas
             const size = 40;
             const canvas = document.createElement('canvas');
             canvas.width = size;
@@ -456,13 +466,13 @@
       map.getCanvas().style.cursor = '';
     });
 
-    // 3. Collapsible Menus
-    document.querySelectorAll('.panel h3').forEach(header => {
-      header.addEventListener('click', () => {
+    // 3. Collapsible Menus - only trigger on title/icon, not checkbox
+    document.querySelectorAll('.panel h3 .section-title, .panel h3 .toggle-icon').forEach(element => {
+      element.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const header = e.target.closest('h3');
         const content = header.nextElementSibling;
         content.classList.toggle('collapsed');
-        // Toggle icon rotation class on header itself or parent if preferred, 
-        // here we toggle on header to target the icon via CSS
         header.classList.toggle('collapsed');
       });
     });

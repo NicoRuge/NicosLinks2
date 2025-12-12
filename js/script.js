@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle.querySelector('.material-symbols-rounded');
-    const themeText = themeToggle.querySelector('.sidebar-text');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeText = document.getElementById('theme-text');
 
     const getPreferredTheme = () => {
         const savedTheme = localStorage.getItem('theme');
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (theme === 'dark') {
-            themeIcon.textContent = 'light_mode';
+            themeIcon.src = 'assets/icons/sun.svg';
             themeText.textContent = 'Light Mode';
             themeToggle.setAttribute('aria-label', 'Switch to Light Mode');
         } else {
-            themeIcon.textContent = 'dark_mode';
+            themeIcon.src = 'assets/icons/moon.svg';
             themeText.textContent = 'Dark Mode';
             themeToggle.setAttribute('aria-label', 'Switch to Dark Mode');
         }
@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuToggle.setAttribute('aria-expanded', isOpen);
 
         if (isOpen) {
-            mobileMenuToggle.innerHTML = '<span class="material-symbols-rounded">close</span>';
+            mobileMenuToggle.innerHTML = '<img src="assets/icons/x.svg" alt="" class="icon">';
         } else {
-            mobileMenuToggle.innerHTML = '<span class="material-symbols-rounded">menu</span>';
+            mobileMenuToggle.innerHTML = '<img src="assets/icons/menu.svg" alt="" class="icon">';
         }
     };
 
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.remove('open');
         sidebarOverlay.classList.remove('active');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
-        mobileMenuToggle.innerHTML = '<span class="material-symbols-rounded">menu</span>';
+        mobileMenuToggle.innerHTML = '<img src="assets/icons/menu.svg" alt="" class="icon">';
     };
 
     if (mobileMenuToggle) {
