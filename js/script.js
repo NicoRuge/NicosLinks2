@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
-    const themeText = document.getElementById('theme-text');
 
     const getPreferredTheme = () => {
         const savedTheme = localStorage.getItem('theme');
@@ -23,11 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (theme === 'dark') {
             themeIcon.src = 'assets/icons/sun.svg';
-            themeText.textContent = 'Light Mode';
             themeToggle.setAttribute('aria-label', 'Switch to Light Mode');
         } else {
             themeIcon.src = 'assets/icons/moon.svg';
-            themeText.textContent = 'Dark Mode';
             themeToggle.setAttribute('aria-label', 'Switch to Dark Mode');
         }
     };
