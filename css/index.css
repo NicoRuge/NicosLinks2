@@ -82,6 +82,21 @@
     flex-shrink: 0;
 }
 
+/* Custom crowbar cursor for buttons and interactive elements */
+button,
+[role="button"],
+.quick-link-btn,
+.link-card,
+.mobile-menu-toggle,
+.sidebar-close,
+.sidebar-link,
+.footer-theme-toggle,
+.home-btn,
+.panel h3 .section-title,
+.panel h3 .toggle-icon {
+    cursor: url("../assets/icons/crowbar.cur"), pointer;
+}
+
 /* Dark mode icon: invert to white */
 [data-theme="dark"] .icon {
     filter: invert(1);

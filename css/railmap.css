@@ -32,6 +32,16 @@ label {
     font-family: "bahnschrift", sans-serif;
 }
 
+/* Custom crowbar cursor for interactive map controls */
+.home-btn,
+[role="button"],
+.panel h3 .section-title,
+.panel h3 .toggle-icon,
+.group-checkbox-label,
+.row label {
+    cursor: url("../assets/icons/crowbar.cur"), pointer;
+}
+
 /* Base home button - theme-aware overrides later */
 .home-btn {
     position: absolute;
