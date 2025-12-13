@@ -36,12 +36,7 @@
                         <span class="sidebar-text">Home</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#equipment" class="sidebar-link" data-target="equipment-section">
-                        <img src="assets/icons/camera.svg" alt="" class="icon">
-                        <span class="sidebar-text">Camera Equipment</span>
-                    </a>
-                </li>
+                <li class="sidebar-section-label" aria-hidden="true"> Work </li>
                 <li>
                     <a href="#photography" class="sidebar-link" data-target="photography-section">
                         <img src="assets/icons/images.svg" alt="" class="icon">
@@ -49,9 +44,23 @@
                     </a>
                 </li>
                 <li>
+                    <a href="#equipment" class="sidebar-link" data-target="equipment-section">
+                        <img src="assets/icons/camera.svg" alt="" class="icon">
+                        <span class="sidebar-text">Camera Equipment</span>
+                    </a>
+                </li>
+                <li class="sidebar-section-label" aria-hidden="true"> Projects </li>
+                <li>
                     <a href="#railmap" class="sidebar-link" data-target="railmap-section">
                         <img src="assets/icons/train-front.svg" alt="" class="icon">
                         <span class="sidebar-text">Rail Map</span>
+                    </a>
+                </li>
+                <li class="sidebar-section-label" aria-hidden="true"> Other Stuff </li>
+                <li>
+                    <a href="#blog" class="sidebar-link" data-target="blog-section">
+                        <img src="assets/icons/book-open-text.svg" alt="" class="icon">
+                        <span class="sidebar-text">Blog</span>
                     </a>
                 </li>
             </ul>
@@ -73,9 +82,9 @@
                     <div class="links-container">
                         <!-- Quick Links -->
                         <div class="quick-links">
-                            <a href="https://linkedin.com/in/nicoruge" class="quick-link-btn" target="_blank"
+                            <a href="https://linkedin.com/in/nicoruge1" class="quick-link-btn" target="_blank"
                                 rel="noopener noreferrer" aria-label="LinkedIn">
-                                <img src="assets/icons/briefcase.svg" alt="" class="icon">
+                                <img src="assets/icons/linkedin.svg" alt="" class="icon">
                             </a>
                             <a href="mailto:mail@nico-ruge.de" class="quick-link-btn" aria-label="Email">
                                 <img src="assets/icons/mail.svg" alt="" class="icon">
@@ -110,7 +119,7 @@
 
                             <a href="https://x.com/Lord_NicolasX" class="link-card" target="_blank"
                                 rel="noopener noreferrer">
-                                <img src="assets/icons/at-sign.svg" alt="" class="icon link-icon">
+                                <img src="assets/icons/twitter.svg" alt="" class="icon link-icon">
                                 <span class="link-text">Twitter / X</span>
                                 <img src="assets/icons/arrow-right.svg" alt="" class="icon link-arrow">
                             </a>
@@ -243,7 +252,27 @@
             <section id="railmap-section" class="content-section full-height">
                 <iframe src="railmap.html" title="My Rail Map" class="section-iframe"></iframe>
             </section>
+            <section id="blog-section" class="content-section">
+                <div class="container">
+                    <h2>Blog</h2>
+                    <p>Welcome to my blog — latest posts from my Tumblr.</p>
 
+                    <div id="blog-controls-top" class="blog-controls" aria-hidden="false">
+                        <button id="blog-prev" class="link-card blog-nav" aria-label="Previous posts">▲</button>
+                        <div class="blog-page-indicator" id="blog-page-indicator">1</div>
+                        <button id="blog-next" class="link-card blog-nav" aria-label="Next posts">▼</button>
+                    </div>
+
+                    <div id="blog-list" class="blog-list"></div>
+
+                    <div id="blog-controls-bottom" class="blog-controls">
+                        <button id="blog-prev-bottom" class="link-card blog-nav" aria-label="Previous posts">▲</button>
+                        <div class="blog-page-indicator" id="blog-page-indicator-bottom">1</div>
+                        <button id="blog-next-bottom" class="link-card blog-nav" aria-label="Next posts">▼</button>
+                    </div>
+                </div>
+            </section>
+            
             <footer class="footer">
                 <div class="footer-content">
                     <div class="footer-text">
@@ -262,6 +291,7 @@
     </div>
 
     <script src="js/script.js"></script>
+    <script src="js/blog.js"></script>
     <script src="js/tw_widget.js"></script>
     <script src="js/spotify_widget.js"></script>
 </body>

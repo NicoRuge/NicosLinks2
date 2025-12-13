@@ -4,12 +4,12 @@
     }
 }
 
-/* --- Railmap UI Styles --- */
-/* Extracted from railmap.html and adapted to match site styles */
+/* --- travelmap UI Styles --- */
+/* Extracted from travelmap.html and adapted to match site styles */
 
 html,
 body,
-#map-container-railmap {
+#map-container-travelmap {
     /* Scope to prevent conflicts if needed, but the original was global */
     height: 100%;
     margin: 0;

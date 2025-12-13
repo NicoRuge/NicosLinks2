@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
 
-        // Notify Railmap iframe
+        // Notify railmap iframe
         const railmapFrame = document.querySelector('iframe[src="railmap.html"]');
         if (railmapFrame && railmapFrame.contentWindow) {
             railmapFrame.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
@@ -139,6 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    /* Blog logic moved to js/blog.js */
 
     handleHashChange();
 });
