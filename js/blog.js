@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     /* -------- Blog: fetch RSS and render posts as cards (moved to separate file) -------- */
-    /* -------- Blog: fetch Tumblr JS and render posts as cards -------- */
-    const TUMBLR_JS_URL = 'https://t.nico-ruge.de/js';
+    const REMOTE_BLOG_URL = 'https://t.nico-ruge.de';
+    // Use Netlify function proxy when running on a deployed (http/https) origin.
+    const PROXY_ENDPOINT = '/.netlify/functions/rss';
+    const FEED_ENDPOINT = (window.location.protocol === 'file:' || window.location.hostname === 'localhost') ? `${REMOTE_BLOG_URL}/rss` : PROXY_ENDPOINT;
     const POSTS_PER_PAGE = 5;
     let blogPosts = [];
     let blogPage = 0;
@@ -14,125 +16,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const $pageIndicator = document.getElementById('blog-page-indicator');
     const $pageIndicatorBottom = document.getElementById('blog-page-indicator-bottom');
 
-    /**
-     * Loads the Tumblr JS script by intercepting document.write.
-     * This allows us to capture the HTML it generates and parse it,
-     * so we can render it with our own "Card" design.
-     */
-    function loadTumblrJs() {
-        if (!$blogList) return;
-        $blogList.innerHTML = '<div class="sp-card">Loading posts…</div>';
+    function parseRSS(xmlText) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(xmlText, 'application/xml');
+        const items = Array.from(doc.querySelectorAll('item'));
+        return items.map(item => {
+            const title = item.querySelector('title')?.textContent || '';
+            const link = item.querySelector('link')?.textContent || item.querySelector('guid')?.textContent || '#';
+            const pubDate = item.querySelector('pubDate')?.textContent || '';
+            let content = '';
+            const contentEncoded = item.getElementsByTagName('content:encoded')[0];
+            if (contentEncoded) content = contentEncoded.textContent;
+            else if (item.querySelector('description')) content = item.querySelector('description').textContent;
 
-        // 1. Capture document.write
-        const oldWrite = document.write;
-        let capturedHTML = '';
+            // extract images and remove them from content so images don't appear twice
+            const tmp = document.createElement('div');
+            tmp.innerHTML = content || '';
+            const imgs = Array.from(tmp.querySelectorAll('img')).map(img => img.src);
+            // remove image nodes from content
+            tmp.querySelectorAll('img').forEach(n => n.remove());
+            // Keep the remaining HTML as the post content
+            const cleanedContent = tmp.innerHTML;
 
-        document.write = (content) => {
-            capturedHTML += content;
-        };
+            const tags = Array.from(item.querySelectorAll('category')).map(c => c.textContent).filter(Boolean);
 
-        // 2. Load the script
-        const script = document.createElement('script');
-        script.src = TUMBLR_JS_URL;
-        script.onload = () => {
-            // Restore document.write
-            document.write = oldWrite;
-            // Parse captured output
-            try {
-                blogPosts = parseTumblrHTML(capturedHTML);
-                blogPage = 0;
-                renderBlogPage(blogPage);
-            } catch (e) {
-                console.error('Error parsing Tumblr output:', e);
-                $blogList.innerHTML = '<div class="sp-card">Fehler beim Laden des Blogs.</div>';
-            }
-        };
-        script.onerror = (e) => {
-            document.write = oldWrite;
-            console.error('Error loading Tumblr script:', e);
-            $blogList.innerHTML = '<div class="sp-card">Fehler beim Laden des Blogs (Network).</div>';
-        };
-
-        document.body.appendChild(script);
+            return { title, link, pubDate, content: cleanedContent, imgs, tags };
+        });
     }
 
-    /**
-     * Parses the HTML string output by Tumblr's JS into a list of post objects.
-     */
-    function parseTumblrHTML(htmlString) {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-        // The script outputs an <ol class="tumblr_posts"> ... </ol>
-        const items = Array.from(doc.querySelectorAll('li.tumblr_post'));
-
-        return items.map(li => {
-            const titleEl = li.querySelector('.tumblr_title');
-            const bodyEl = li.querySelector('.tumblr_body');
-
-            let link = 'https://t.nico-ruge.de';
-            const firstAnchor = bodyEl ? bodyEl.querySelector('a') : null;
-            if (firstAnchor) link = firstAnchor.href;
-
-            const title = titleEl ? titleEl.textContent : (bodyEl ? bodyEl.textContent.substring(0, 50) + '...' : 'Post');
-
-            let imgs = [];
-            let content = '';
-            let tags = [];
-
-            if (bodyEl) {
-                // Clone body to manipulate it
-                const bodyClone = bodyEl.cloneNode(true);
-
-                // 1. Extract Images
-                const images = Array.from(bodyClone.querySelectorAll('img'));
-                imgs = images.map(img => img.src);
-
-                images.forEach(img => {
-                    const fig = img.closest('figure');
-                    if (fig) fig.remove();
-                    else img.remove();
-                });
-
-                // 2. Extract Tags (Hashtags)
-                // We'll look for text/links that are hashtags.
-                // Tumblr often links hashtags like <a href="...">#tag</a> or just text #tag
-                // Regex for #tag not surrounded by other letters
-                const tagRegex = /#\w+/g;
-
-                // Walker to find text nodes and extract tags
-                const walker = document.createTreeWalker(bodyClone, NodeFilter.SHOW_TEXT, null, false);
-                let node;
-                while (node = walker.nextNode()) {
-                    const text = node.nodeValue;
-                    const matches = text.match(tagRegex);
-                    if (matches) {
-                        matches.forEach(m => {
-                            // add to tags buffer (remove # for cleaner display if desired, or keep it)
-                            tags.push(m);
-                        });
-                        // Remove tag from text? 
-                        // Often nicer to remove them if we display them in footer.
-                        node.nodeValue = text.replace(tagRegex, '').trim();
-                    }
-                }
-
-                // 3. Cleanup empty containers (npf_row/col)
-                const structuralDivs = bodyClone.querySelectorAll('.npf_row, .npf_col, .tmblr-full');
-                structuralDivs.forEach(div => {
-                    if (!div.textContent.trim() && !div.querySelector('img, video, iframe')) {
-                        div.remove();
-                    }
-                });
-
-                // 4. Cleanup trailing breaks or empty paragraphs
-                // (Simple pass)
-                content = bodyClone.innerHTML;
-            }
-
-            const pubDate = '';
-
-            return { title, link, pubDate, content, imgs, tags };
-        });
+    async function fetchBlogPosts() {
+        if (!$blogList) return;
+        $blogList.innerHTML = '<div class="sp-card">Loading posts…</div>';
+        try {
+            const res = await fetch(FEED_ENDPOINT);
+            if (!res.ok) throw new Error('Network response was not ok');
+            const text = await res.text();
+            blogPosts = parseRSS(text);
+            blogPage = 0;
+            renderBlogPage(blogPage);
+        } catch (e) {
+            $blogList.innerHTML = `<div class="sp-card">Fehler beim Laden des Feeds: ${e.message}</div>`;
+            console.error('RSS fetch error', e);
+        }
     }
 
     function renderBlogPage(page) {
@@ -155,16 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const meta = document.createElement('div'); meta.className = 'meta-row';
             const title = document.createElement('a'); title.className = 'post-title';
             title.href = post.link; title.target = '_blank'; title.rel = 'noopener';
-            title.innerHTML = post.title || '(no title)'; // innerHTML to preserve partial HTML if any
-
-            // Only add date if we have one
-            if (post.pubDate) {
-                const date = document.createElement('div'); date.className = 'post-date';
-                date.innerText = new Date(post.pubDate).toLocaleString();
-                meta.appendChild(title); meta.appendChild(date);
-            } else {
-                meta.appendChild(title);
-            }
+            title.innerText = post.title || '(no title)';
+            const date = document.createElement('div'); date.className = 'post-date';
+            date.innerText = post.pubDate ? new Date(post.pubDate).toLocaleString() : '';
+            meta.appendChild(title); meta.appendChild(date);
             card.appendChild(meta);
 
             // images (displayed before content)
@@ -189,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // content
+            // content (cleaned HTML without the extracted images)
             const content = document.createElement('div');
             content.className = 'post-content';
             content.innerHTML = post.content || '';
@@ -225,6 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($blogPrevBottom) $blogPrevBottom.addEventListener('click', () => renderBlogPage(blogPage - 1));
     if ($blogNextBottom) $blogNextBottom.addEventListener('click', () => renderBlogPage(blogPage + 1));
 
-    // Fetch posts via captured JS
-    loadTumblrJs();
+    // Fetch posts immediately so the Blog is ready
+    fetchBlogPosts();
 });
