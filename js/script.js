@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
 
-        // Notify railmap iframe
-        const railmapFrame = document.querySelector('iframe[src="railmap.html"]');
-        if (railmapFrame && railmapFrame.contentWindow) {
-            railmapFrame.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
+        // Notify travelling iframe
+        const travellingFrame = document.querySelector('iframe[src="travelling.html"]');
+        if (travellingFrame && travellingFrame.contentWindow) {
+            travellingFrame.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
         }
 
         if (theme === 'dark') {
