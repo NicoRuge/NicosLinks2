@@ -185,6 +185,16 @@
           line.className = 'sight-line';
           map.getCanvasContainer().appendChild(line);
           m.lineElement = line;
+
+          // Interactions for line (prevents collapse when moving along spokes)
+          line.addEventListener('mouseenter', () => {
+            clearTimeout(spiderfyTimeout);
+          });
+          line.addEventListener('mouseleave', () => {
+            spiderfyTimeout = setTimeout(() => {
+              collapseMarkers();
+            }, 300);
+          });
         }
 
         // Position line:
