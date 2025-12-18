@@ -121,15 +121,107 @@
     map.addControl(new mapboxgl.FullscreenControl(), "top-left");
     map.addControl(new mapboxgl.ScaleControl({ unit: "metric" }), "bottom-left");
 
-    // Globaler Speicher für die GeoJSON-Daten
+    // Globaler Speicher
     let tripsData = null;
+    let sightsData = null;
+    let sightMarkers = []; // Array of { marker, element, feature, originalLngLat, currentLngLat, lineElement }
+
+    // --- SPIDERFY LOGIC ---
+    // Constants
+    const SPIDER_R = 50; // Radius in pixels to spread out
+    const MARKER_SIZE = 20;
+
+    // Helper to get screen pixel distance between two LngLats
+    function getPixelDistance(p1, p2) {
+      if (!p1 || !p2) return Infinity;
+      const dx = p1.x - p2.x;
+      const dy = p1.y - p2.y;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    // Function to check and spread overlapping markers
+    function checkOverlapAndSpread(hoveredMarkerObj) {
+      if (!map.getLayer('trips-lines')) return; // Ensure map is ready basically
+
+      // Find close markers (in screen pixels)
+      const mousePoint = map.project(hoveredMarkerObj.marker.getLngLat());
+
+      // Filter visible markers
+      const visibleMarkers = sightMarkers.filter(m => {
+        const el = m.element;
+        return el.style.display !== 'none';
+      });
+
+      // Find neighbors close to the hovered one
+      const neighbors = visibleMarkers.filter(m => {
+        if (m === hoveredMarkerObj) return true; // Include itself
+        const p = map.project(m.marker.getLngLat());
+        return getPixelDistance(mousePoint, p) < 40; // Detection threshold (2x size roughly)
+      });
+
+      if (neighbors.length <= 1) return; // No overlap or just itself
+
+      // Calculate positions in a circle
+      const angleStep = (2 * Math.PI) / neighbors.length;
+
+      neighbors.forEach((m, index) => {
+        const angle = index * angleStep;
+        const offsetX = Math.cos(angle) * SPIDER_R;
+        const offsetY = Math.sin(angle) * SPIDER_R;
+
+        // Current screen position
+        const originStr = map.project(m.originalLngLat);
+
+        // Calculate new CSS transform translation
+        // Note: Mapbox markers are positioned absolutely. We use transform for the spider effect.
+        // But Mapbox ALREADY uses transform: translate(...) to position the marker.
+        // So we need to modify the element's transform style carefully or use a child element for the icon?
+        // Actually, mapboxgl.Marker handles position. Better to use offsets?
+        // No, using CSS transform on the element works if we append to existing transform (hard to track)
+        // OR we can just use setOffset on the mapbox marker! using setOffset is safer.
+
+        m.marker.setOffset([offsetX, offsetY]);
+
+        // Draw line
+        if (!m.lineElement) {
+          const line = document.createElement('div');
+          line.className = 'sight-line';
+          map.getCanvasContainer().appendChild(line);
+          m.lineElement = line;
+        }
+
+        // Position line: starts at original marker Position (center) and goes to new offset
+        // We need to place the line div at the screen coordinate of the original position
+        // But wait, the marker DOM element MOVES. The line needs to connect the "Map anchor" to the "Marker visual".
+        // Actually simpler: The Marker anchor is fixed at LngLat. The Visual is offset.
+        // We can place the line absolutely at the anchor point relative to the marker element? 
+        // Marker element is in a mapbox-gl-marker wrapper.
+        // Let's position the line globally in the container.
+
+        const anchorPix = map.project(m.originalLngLat);
+        m.lineElement.style.left = anchorPix.x + 'px';
+        m.lineElement.style.top = anchorPix.y + 'px';
+        m.lineElement.style.width = SPIDER_R + 'px';
+        m.lineElement.style.transform = `rotate(${angle * (180 / Math.PI)}deg)`;
+        m.lineElement.style.opacity = 1;
+      });
+    }
+
+    function collapseMarkers(markersToCollapse = sightMarkers) {
+      markersToCollapse.forEach(m => {
+        m.marker.setOffset([0, 0]);
+        if (m.lineElement) {
+          m.lineElement.style.opacity = 0;
+          // Remove from DOM after transition to avoid clutter? Keeping for now for perf.
+        }
+      });
+    }
+
+    // --- LAYER & DATA HANDLING ---
 
     // Funktion zum Hinzufügen der Custom Layers (wird beim Start und nach Style-Wechsel aufgerufen)
     function addCustomLayers() {
-      // Safety check: Style must be loaded to add layers
       if (!map.getStyle()) return;
-
-
 
       // 2. Trips GeoJSON Source & Layer
       if (tripsData) {
@@ -163,71 +255,12 @@
         }
       }
 
-      // 3. Sights Source & Layer
-      if (!map.getSource("sights")) {
-        map.addSource("sights", {
-          type: "geojson",
-          data: "assets/geojson/sights.geojson"
-        });
-      }
-
-      // Load custom emoji icons if not already loaded
-      const iconConfigs = [
-        { name: 'icon-monument', emoji: '⭐' },
-        { name: 'icon-airport', emoji: '✈️' },
-        { name: 'icon-station', emoji: '🚆' },
-        { name: 'icon-other', emoji: '📍' }
-      ];
-
-      const loadIconsAndAddLayer = async () => {
-        for (const config of iconConfigs) {
-          if (!map.hasImage(config.name)) {
-            const size = 40;
-            const canvas = document.createElement('canvas');
-            canvas.width = size;
-            canvas.height = size;
-            const ctx = canvas.getContext('2d');
-            ctx.font = `${size - 8}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(config.emoji, size / 2, size / 2);
-
-            const imageData = ctx.getImageData(0, 0, size, size);
-            map.addImage(config.name, imageData);
-          }
-        }
-
-        if (!map.getLayer("sights-layer")) {
-          map.addLayer({
-            id: "sights-layer",
-            type: "symbol",
-            source: "sights",
-            layout: {
-              "icon-image": [
-                "match",
-                ["get", "type"],
-                "Monument", "icon-monument",
-                "Airport", "icon-airport",
-                "Station", "icon-station",
-                "icon-other"
-              ],
-              "icon-size": 1,
-              "icon-allow-overlap": true
-            }
-          });
-
-          // Ensure toggle state matches layer visibility
-          const toggle = document.querySelector('.layer-toggle[data-layer="sights"]');
-          if (toggle) {
-            const isVisible = toggle.checked;
-            map.setLayoutProperty("sights-layer", "visibility", isVisible ? "visible" : "none");
-          }
-          updateSightsFilter();
-        }
-      };
-
-      loadIconsAndAddLayer();
+      // 3. Sights (Markers) - logic runs once when data is loaded, but markers persist?
+      // Markers are DOM elements, independent of Style. 
+      // EXCEPT: If the map style changes, we don't lose markers, BUT we might want to re-check something?
+      // Actually, markers are independent of the webgl style. So we just add them once.
     }
+
     const configureMapLayers = () => {
       const style = map.getStyle();
       if (!style || !style.layers) return;
@@ -275,22 +308,15 @@
         }
       }
     };
+
     map.on("style.load", () => {
       configureMapLayers();
       addCustomLayers();
     });
-    map.on("load", () => {
-      addCustomLayers();
-    });
-    map.on("load", () => {
-      addCustomLayers();
-    });
+    // Removed duplicate load listener
 
-    //GEOjson daten kombinieren in https://geojson.io
-    //GEOjson daten generieren in https://brouter.de/brouter-web
-    //GEOjson daten strippen in https://mapshaper.org/ command: -filter-fields
-    //GPX Editor https://gpx.studio
-
+    // LOAD DATA
+    // 1. Trips
     const sources = [
       ["nationalExpress", "assets/geojson/nationalExpress_Simplified.geojson"],
       ["national", "assets/geojson/national.geojson"],
@@ -313,22 +339,95 @@
     }))
       .then(all => {
         tripsData = { type: "FeatureCollection", features: all.flat() };
-
-        // Try to add layers immediately if style is ready
         addCustomLayers();
-
-        // auf Bounds zoomen (deaktiviert, damit Startansicht bleibt)
-        /*
-        const bounds = new mapboxgl.LngLatBounds();
-        tripsData.features.forEach(f => {
-          if (f.geometry?.type === "LineString") {
-            f.geometry.coordinates.forEach(c => bounds.extend(c));
-          }
-        });
-        if (!bounds.isEmpty()) map.fitBounds(bounds, { padding: 24, maxZoom: 7 });
-        */
       })
-      .catch(e => console.warn("Fehler beim Laden der externen GeoJSONs:", e));
+      .catch(e => console.warn("Fehler beim Laden der Trips:", e));
+
+    // 2. Sights (Fetch manually for JS control)
+    fetch("assets/geojson/sights.geojson")
+      .then(r => r.json())
+      .then(data => {
+        sightsData = data;
+        initSightMarkers();
+      })
+      .catch(e => console.error("Could not load sights:", e));
+
+
+    function initSightMarkers() {
+      if (!sightsData) return;
+
+      // Icon mapping
+      const icons = {
+        "Monument": "⭐",
+        "Airport": "✈️",
+        "Station": "🚆",
+        "Other": "📍"
+      };
+      const defaultIcon = "📍";
+
+      sightsData.features.forEach(f => {
+        const type = f.properties.type;
+        let iconChar = icons[type];
+        if (!iconChar) iconChar = defaultIcon; // Fallback
+
+        const el = document.createElement('div');
+        el.className = 'sight-marker';
+        el.innerText = iconChar;
+
+        // Create Marker
+        const marker = new mapboxgl.Marker({
+          element: el,
+          anchor: 'center'
+        })
+          .setLngLat(f.geometry.coordinates)
+          .addTo(map);
+
+        // Store ref
+        const mObj = {
+          marker: marker,
+          element: el,
+          feature: f,
+          originalLngLat: f.geometry.coordinates,
+          type: f.properties.type,
+          lineElement: null
+        };
+        sightMarkers.push(mObj);
+
+        // Interactions
+        // Hover: Spread logic
+        let hoverTimeout;
+
+        el.addEventListener('mouseenter', () => {
+          clearTimeout(hoverTimeout); // Cancel any pending collapse
+          checkOverlapAndSpread(mObj);
+        });
+
+        el.addEventListener('mouseleave', () => {
+          // Delay collapse slightly to allow moving to spread icons
+          hoverTimeout = setTimeout(() => {
+            collapseMarkers();
+          }, 300);
+        });
+
+        // Click: Popup
+        el.addEventListener('click', (e) => {
+          e.stopPropagation(); // Prevent map click?
+
+          const props = f.properties;
+          const name = props.name || "Unknown";
+          const when = props.when || "";
+
+          // Close other popups? Mapbox handles simple popups well but we are manual here
+          new mapboxgl.Popup({ offset: 25 }) // Offset to appear above marker
+            .setLngLat(marker.getLngLat()) // Use CURRENT marker pos (if spread)
+            .setHTML(`<strong>${name}</strong><br>${when}`)
+            .addTo(map);
+        });
+      });
+
+      // Initial filter application
+      updateSightsFilter();
+    }
 
     // Filter Logic
     function updateTripFilter() {
@@ -336,12 +435,11 @@
 
       const selectedCategories = [];
       document.querySelectorAll('.filter-cb:checked').forEach(cb => {
-        const vals = cb.value.split(','); // Split the value by comma to get multiple categories 
-        selectedCategories.push(...vals); // Add all values to the array              
+        const vals = cb.value.split(',');
+        selectedCategories.push(...vals);
       });
 
       if (selectedCategories.length === 0) {
-        // Hide all if nothing selected
         map.setFilter("trips-lines", ["in", "category", ""]);
       } else {
         map.setFilter("trips-lines", ["in", "category", ...selectedCategories]);
@@ -349,59 +447,36 @@
     }
 
     // UI Event Listeners
-
-
     // 2. Category Filter
     document.querySelectorAll('.filter-cb').forEach(cb => {
       cb.addEventListener('change', updateTripFilter);
     });
 
-    // 2.1 Layer Toggles
-    document.querySelectorAll('.layer-toggle').forEach(toggle => {
-      toggle.addEventListener('change', (e) => {
-        const layerName = e.target.dataset.layer + '-layer';
-        const isVisible = e.target.checked;
-        if (map.getLayer(layerName)) {
-          map.setLayoutProperty(layerName, 'visibility', isVisible ? 'visible' : 'none');
-        }
-      });
-    });
+    // 2.1 Layer Toggles replaced by direct filter updates
 
-    // 2.2 Sights Type Filter
+    // 2.2 Sights Type Filter (Updated for Markers)
     function updateSightsFilter() {
-      if (!map.getLayer("sights-layer")) return;
-
       const selectedTypes = [];
       document.querySelectorAll('.sight-filter-cb:checked').forEach(cb => {
         selectedTypes.push(cb.value);
       });
 
-      // "Other" captures anything not in the main categories
       const mainTypes = ["Monument", "Airport", "Station"];
-      const filter = ["any"];
 
-      selectedTypes.forEach(type => {
-        if (type === 'Other') {
-          // If "Other" is selected, match anything NOT in the main list
-          // Construct: ["!", ["in", ["get", "type"], "Monument", "Airport", "Station"]]
-          const inExpr = ["in", ["get", "type"]].concat(mainTypes);
-          filter.push(["!", inExpr]);
-        } else {
-          filter.push(["==", ["get", "type"], type]);
+      sightMarkers.forEach(m => {
+        const type = m.type;
+        let isVisible = false;
+
+        if (selectedTypes.includes(type)) {
+          isVisible = true;
+        } else if (selectedTypes.includes('Other')) {
+          if (!mainTypes.includes(type)) isVisible = true;
         }
+
+        m.element.style.display = isVisible ? 'flex' : 'none';
+        // Also hide line if hidden
+        if (!isVisible && m.lineElement) m.lineElement.style.opacity = 0;
       });
-
-      console.log("Applying Sights Filter:", JSON.stringify(filter));
-
-      if (selectedTypes.length === 0) {
-        map.setFilter("sights-layer", ["in", "type", ""]); // Hide all
-      } else if (selectedTypes.includes('Other') && selectedTypes.length === 1) {
-        // Only other
-        const inExpr = ["in", ["get", "type"]].concat(mainTypes);
-        map.setFilter("sights-layer", ["!", inExpr]);
-      } else {
-        map.setFilter("sights-layer", filter);
-      }
     }
 
     document.querySelectorAll('.sight-filter-cb').forEach(cb => {
@@ -432,41 +507,20 @@
         }
       });
 
-      // Stop propagation so clicking the checkbox doesn't collapse the section
       toggle.addEventListener('click', (e) => {
         e.stopPropagation();
       });
     });
 
-    // 4. Sights Layer Interactions (Popups & Cursor)
-    map.on('click', 'sights-layer', (e) => {
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const props = e.features[0].properties;
-      const name = props.name || "Unknown";
-      const when = props.when || "";
-
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
-
-      new mapboxgl.Popup()
-        .setLngLat(coordinates)
-        .setHTML(`<strong>${name}</strong><br>${when}`)
-        .addTo(map);
+    // Map Move Listener to update lines?
+    // If we pan/zoom, map.project changes. If spiderfy is active, lines need update.
+    // Simplest: Collapse markers on map move (standard spiderfy behavior often does this)
+    map.on('move', () => {
+      collapseMarkers();
     });
+    // Also if zooming, markers move relative to each other, so strict spider state might be invalid.
 
-    map.on('mouseenter', 'sights-layer', () => {
-      map.getCanvas().style.cursor = 'pointer';
-    });
-
-    map.on('mouseleave', 'sights-layer', () => {
-      map.getCanvas().style.cursor = '';
-    });
-
-    // 3. Collapsible Menus - only trigger on title/icon, not checkbox
+    // 3. Collapsible Menus
     document.querySelectorAll('.panel h3 .section-title, .panel h3 .toggle-icon').forEach(element => {
       element.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -476,6 +530,7 @@
         header.classList.toggle('collapsed');
       });
     });
+
   </script>
 </body>
 
