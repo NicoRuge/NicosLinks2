@@ -258,8 +258,108 @@ label {
     background-color: rgba(255, 255, 255, 0.82);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    color: #111;
+}
+
+:root {
+    /* Colors & Theming (Matched to index.css) */
+    --md-sys-color-surface: #FFFFFF;
+    --md-sys-color-on-surface: #1C1B1F;
+    --md-sys-color-on-surface-variant: #49454F;
+    --md-sys-color-primary: #6750A4;
+
+    /* Glassmorphism Variables */
+    --card-bg: rgba(255, 255, 255, 0.85);
+    /* Slightly more opaque for map readability */
+    --card-border: rgba(255, 255, 255, 0.5);
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --card-hover-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --panel-bg: rgba(255, 255, 255, 0.9);
+    --panel-border: #ccc;
+}
+
+[data-theme="dark"] {
+    --md-sys-color-surface: #1C1B1F;
+    --md-sys-color-on-surface: #E6E1E5;
+    --md-sys-color-on-surface-variant: #CAC4D0;
+    --md-sys-color-primary: #D0BCFF;
+
+    --card-bg: rgba(28, 27, 31, 0.85);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --card-hover-shadow: 0 10px 15px rgba(0, 0, 0, 0.6);
+
+    --bg-color: #1a1a1a;
+    --text-color: #ddd;
+    --panel-bg: rgba(30, 30, 30, 0.9);
+    --panel-border: #444;
+}
+
+/* --- Popup & Tooltip Styles --- */
+
+/* Translucent Pill Popup */
+.translucent-popup .mapboxgl-popup-content {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    color: var(--md-sys-color-on-surface);
+    font-family: "bahnschrift", sans-serif;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+}
+
+.translucent-popup .mapboxgl-popup-tip {
+    /* Hard to make glass tip, usually better to hide or color match */
+    border-top-color: var(--card-bg);
+    /* Approximate */
+    opacity: 0.9;
+}
+
+.translucent-popup .mapboxgl-popup-close-button {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 16px;
+    right: 8px;
+    top: 6px;
+}
+
+.translucent-popup .mapboxgl-popup-close-button:hover {
+    background: transparent;
+    color: var(--md-sys-color-primary);
+}
+
+/* Hover Tooltip (Pill) */
+.map-tooltip {
+    position: absolute;
+    pointer-events: none;
+    /* Let clicks pass through */
+    background-color: var(--card-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    /* Pill shape */
+    box-shadow: var(--card-shadow);
+    color: var(--md-sys-color-on-surface);
+    font-family: "bahnschrift", sans-serif;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    transform: translate(-50%, -150%) scale(0.9);
+    /* Center above cursor/icon */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.map-tooltip.visible {
+    opacity: 1;
+    transform: translate(-50%, -150%) scale(1);
 }
 
 [data-theme="dark"] .home-btn {

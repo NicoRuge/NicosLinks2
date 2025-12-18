@@ -356,6 +356,15 @@
       .catch(e => console.error("Could not load sights:", e));
 
 
+    // Tooltip Element (created once)
+    let mapTooltip = document.getElementById('map-tooltip');
+    if (!mapTooltip) {
+      mapTooltip = document.createElement('div');
+      mapTooltip.id = 'map-tooltip';
+      mapTooltip.className = 'map-tooltip';
+      document.body.appendChild(mapTooltip); // Append to body to sit above everything
+    }
+
     function initSightMarkers() {
       if (!sightsData) return;
 
@@ -417,7 +426,29 @@
           }, 300);
         });
 
-        // Click: Popup
+        // Tooltip (Name only) on Icon Hover
+        icon.addEventListener('mouseenter', (e) => {
+          const name = f.properties.name || "Unknown";
+          mapTooltip.innerText = name;
+          mapTooltip.classList.add('visible');
+
+          // Position Tooltip
+          // We use getBoundingClientRect because icon might be moved by spiderfy transform
+          // inside a absolute wrapper.
+          const rect = icon.getBoundingClientRect();
+          // Center horizontally above icon
+          const left = rect.left + rect.width / 2;
+          const top = rect.top; // Above top edge
+
+          mapTooltip.style.left = `${left}px`;
+          mapTooltip.style.top = `${top}px`;
+        });
+
+        icon.addEventListener('mouseleave', () => {
+          mapTooltip.classList.remove('visible');
+        });
+
+        // Click: Popup (Detailed info)
         icon.addEventListener('click', (e) => {
           e.stopPropagation();
 
@@ -425,10 +456,17 @@
           const name = props.name || "Unknown";
           const when = props.when || "";
 
-          new mapboxgl.Popup({ offset: 25 })
+          // Use custom translucent class
+          new mapboxgl.Popup({
+            offset: 25,
+            className: 'translucent-popup'
+          })
             .setLngLat(marker.getLngLat())
             .setHTML(`<strong>${name}</strong><br>${when}`)
             .addTo(map);
+
+          // Hide tooltip on click to avoid double info
+          mapTooltip.classList.remove('visible');
         });
       });
 
