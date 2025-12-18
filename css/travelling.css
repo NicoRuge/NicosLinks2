@@ -169,6 +169,17 @@ label {
 /* --- New Sights Marker Styles --- */
 
 .sight-marker {
+    /* Wrapper positioned by Mapbox. NO transition here to avoid lag! */
+    width: 0;
+    height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow: visible; important */
+    z-index: 10;
+}
+
+.sight-icon {
     width: 20px;
     height: 20px;
     font-size: 16px;
@@ -177,17 +188,30 @@ label {
     align-items: center;
     cursor: pointer;
     transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    z-index: 10;
+    /* Center the icon in the 0x0 wrapper */
+    position: absolute;
     /* Optional: Add a subtle text shadow or filter to make emoji pop */
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    user-select: none;
 }
 
 .sight-marker:hover {
     z-index: 20;
     /* Bring hovered marker to front */
-    transform: scale(1.2);
-    /* Slight zoom on direct hover */
 }
+
+.sight-icon:hover {
+    transform: scale(1.3);
+    /* Slight zoom on direct hover (multiplies with translate if applied) */
+}
+
+/* When active/spread, we might set styles directly via JS, 
+   but hover zoom should still work. 
+   Note: JS will set transform: translate(...). 
+   CSS hover scale needs to compose or we handle scale in JS too. 
+   Actually, combining CSS hover transform with JS inline transform is tricky.
+   Easier: Put the hover scale in a wrapper OR just accept JS handles transform.
+*/
 
 .sight-line {
     position: absolute;

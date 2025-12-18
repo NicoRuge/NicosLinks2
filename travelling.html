@@ -124,7 +124,8 @@
     // Globaler Speicher
     let tripsData = null;
     let sightsData = null;
-    let sightMarkers = []; // Array of { marker, element, feature, originalLngLat, currentLngLat, lineElement }
+    let sightMarkers = []; // Array of { marker, element, iconElement, feature, originalLngLat, type, lineElement }
+    let spiderfyTimeout; // Shared timeout for stability
 
     // --- SPIDERFY LOGIC ---
     // Constants
@@ -143,12 +144,17 @@
     function checkOverlapAndSpread(hoveredMarkerObj) {
       if (!map.getLayer('trips-lines')) return; // Ensure map is ready basically
 
+      // Ensure we don't collapse immediately if we just entered
+      clearTimeout(spiderfyTimeout);
+
       // Find close markers (in screen pixels)
       const mousePoint = map.project(hoveredMarkerObj.marker.getLngLat());
 
       // Filter visible markers
       const visibleMarkers = sightMarkers.filter(m => {
         const el = m.element;
+        // Mapbox hides markers by display:none on the wrapper if out of view, 
+        // but our manual filtering toggles display on the wrapper too.
         return el.style.display !== 'none';
       });
 
@@ -169,18 +175,9 @@
         const offsetX = Math.cos(angle) * SPIDER_R;
         const offsetY = Math.sin(angle) * SPIDER_R;
 
-        // Current screen position
-        const originStr = map.project(m.originalLngLat);
-
-        // Calculate new CSS transform translation
-        // Note: Mapbox markers are positioned absolutely. We use transform for the spider effect.
-        // But Mapbox ALREADY uses transform: translate(...) to position the marker.
-        // So we need to modify the element's transform style carefully or use a child element for the icon?
-        // Actually, mapboxgl.Marker handles position. Better to use offsets?
-        // No, using CSS transform on the element works if we append to existing transform (hard to track)
-        // OR we can just use setOffset on the mapbox marker! using setOffset is safer.
-
-        m.marker.setOffset([offsetX, offsetY]);
+        // Animate the CHILD element (iconElement) using transform
+        // Mapbox controls the wrapper (element) position.
+        m.iconElement.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
 
         // Draw line
         if (!m.lineElement) {
@@ -190,14 +187,9 @@
           m.lineElement = line;
         }
 
-        // Position line: starts at original marker Position (center) and goes to new offset
-        // We need to place the line div at the screen coordinate of the original position
-        // But wait, the marker DOM element MOVES. The line needs to connect the "Map anchor" to the "Marker visual".
-        // Actually simpler: The Marker anchor is fixed at LngLat. The Visual is offset.
-        // We can place the line absolutely at the anchor point relative to the marker element? 
-        // Marker element is in a mapbox-gl-marker wrapper.
-        // Let's position the line globally in the container.
-
+        // Position line:
+        // Since the wrapper is at the anchor (center), and we want the line to go from center to the new icon pos.
+        // We can position the line at the screen position of the wrapper.
         const anchorPix = map.project(m.originalLngLat);
         m.lineElement.style.left = anchorPix.x + 'px';
         m.lineElement.style.top = anchorPix.y + 'px';
@@ -209,10 +201,11 @@
 
     function collapseMarkers(markersToCollapse = sightMarkers) {
       markersToCollapse.forEach(m => {
-        m.marker.setOffset([0, 0]);
+        // Reset child transform
+        m.iconElement.style.transform = `translate(0px, 0px)`;
+
         if (m.lineElement) {
           m.lineElement.style.opacity = 0;
-          // Remove from DOM after transition to avoid clutter? Keeping for now for perf.
         }
       });
     }
@@ -370,13 +363,18 @@
         let iconChar = icons[type];
         if (!iconChar) iconChar = defaultIcon; // Fallback
 
-        const el = document.createElement('div');
-        el.className = 'sight-marker';
-        el.innerText = iconChar;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'sight-marker';
+
+        const icon = document.createElement('div');
+        icon.className = 'sight-icon';
+        icon.innerText = iconChar;
+        wrapper.appendChild(icon);
 
         // Create Marker
+        // element is wrapper
         const marker = new mapboxgl.Marker({
-          element: el,
+          element: wrapper,
           anchor: 'center'
         })
           .setLngLat(f.geometry.coordinates)
@@ -385,7 +383,8 @@
         // Store ref
         const mObj = {
           marker: marker,
-          element: el,
+          element: wrapper,
+          iconElement: icon,
           feature: f,
           originalLngLat: f.geometry.coordinates,
           type: f.properties.type,
@@ -394,32 +393,30 @@
         sightMarkers.push(mObj);
 
         // Interactions
-        // Hover: Spread logic
-        let hoverTimeout;
 
-        el.addEventListener('mouseenter', () => {
-          clearTimeout(hoverTimeout); // Cancel any pending collapse
+        // Mouse Enter on Wrapper
+        wrapper.addEventListener('mouseenter', () => {
           checkOverlapAndSpread(mObj);
         });
 
-        el.addEventListener('mouseleave', () => {
-          // Delay collapse slightly to allow moving to spread icons
-          hoverTimeout = setTimeout(() => {
+        // Mouse Leave on Wrapper
+        wrapper.addEventListener('mouseleave', () => {
+          // Delay collapse globally
+          spiderfyTimeout = setTimeout(() => {
             collapseMarkers();
           }, 300);
         });
 
         // Click: Popup
-        el.addEventListener('click', (e) => {
-          e.stopPropagation(); // Prevent map click?
+        icon.addEventListener('click', (e) => {
+          e.stopPropagation();
 
           const props = f.properties;
           const name = props.name || "Unknown";
           const when = props.when || "";
 
-          // Close other popups? Mapbox handles simple popups well but we are manual here
-          new mapboxgl.Popup({ offset: 25 }) // Offset to appear above marker
-            .setLngLat(marker.getLngLat()) // Use CURRENT marker pos (if spread)
+          new mapboxgl.Popup({ offset: 25 })
+            .setLngLat(marker.getLngLat())
             .setHTML(`<strong>${name}</strong><br>${when}`)
             .addTo(map);
         });
