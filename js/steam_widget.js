@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const widget = document.getElementById("steam-widget");
     if (!widget) return;
 
-    // Use local function URL for development if needed, otherwise relative path works on Netlify
-    const API_URL = "/.netlify/functions/steam";
+    // Use absolute URL because frontend (GitHub Pages) and backend (Netlify) are on different domains
+    const API_URL = "https://nico-ruge.netlify.app/.netlify/functions/steam";
 
     async function fetchSteamStatus() {
         try {
