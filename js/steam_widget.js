@@ -43,20 +43,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Steam persona states: 0: Offline, 1: Online, 2: Busy, 3: Away, 4: Snooze, 5: Looking to trade, 6: Looking to play
         const isPlaying = !!gameextrainfo;
+        const isOnline = personastate !== 0;
 
-        // Default to "Steam Status" header
+        // Default to "Offline" state
         let headerText = "Steam Status";
-        let statusIconClass = "st-icon-stopped";
-        let statusTextClass = "st-status-stopped";
-
+        let statusIconClass = "st-icon-offline";
+        let statusTextClass = "st-status-offline";
         let coverUrl = "assets/icons/gamepad-2.svg";
         let mainText = "Offline";
         let subText = "";
 
         const states = ["Offline", "Online", "Busy", "Away", "Snooze", "Looking to trade", "Looking to play"];
-        // status colors could be mapped if desired.
 
         if (isPlaying) {
+            // === PLAYING STATE ===
             headerText = "Currently Playing";
             statusIconClass = "st-icon-playing";
             statusTextClass = "st-status-playing";
@@ -69,22 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
             if (gameid) {
                 coverUrl = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${gameid}/capsule_184x69.jpg`;
             }
-            // "top green text with pulsating circle is... and then game icon and beside title"
-
-            // If just online, let's keep it subtle like Spotify "Last listened to"
-            statusIconClass = "st-status-online"; // We might need to define this if we want green without pulse
-
-            // Re-reading user request: "Grüner Text mit pulsierendem kreis ist, wie bei den anderen Widgets auch"
-            // Usually that implies Active state.
-
-            if (personastate === 1) { // Online
-                statusIconClass = "st-icon-playing"; // Reuse Green dot (pulsing? maybe not if not playing)
-                // Let's stick to standard: Playing = Green Pulse. Online = Green Static?
-                // Spotify widget uses "sp-icon-stopped" (gray) when not playing.
-                statusIconClass = "st-icon-stopped";
-            }
+        } else if (isOnline) {
+            // === ONLINE STATE ===
+            headerText = "Steam Status";
+            statusIconClass = "st-icon-online"; // Green static
+            statusTextClass = "st-status-online"; // Green text or Gray? User wanted Green text/pulse for playing.
 
             mainText = states[personastate] || "Online";
+        } else {
+            // === OFFLINE STATE (Already defaults) ===
+            mainText = "Offline";
         }
 
         // Adjust for styling consistency:

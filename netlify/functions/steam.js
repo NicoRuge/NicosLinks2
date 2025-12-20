@@ -54,17 +54,21 @@ exports.handler = async function (event, context) {
         // If playing, try to get playtime details
         if (player.gameid) {
             try {
-                const RECENTLY_PLAYED_ENDPOINT = `https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${api_key}&steamid=${steam_id}&count=10`;
-                const recentRes = await fetch(RECENTLY_PLAYED_ENDPOINT);
-                if (recentRes.ok) {
-                    const recentData = await recentRes.json();
-                    const playingGame = recentData.response.games?.find(g => g.appid == player.gameid);
+                // Use GetOwnedGames as it reliably contains playtime_forever for ALL games, not just recent ones.
+                // We don't need include_appinfo (makes response huge), just the list of IDs and playtimes.
+                // We include free games to be safe.
+                const OWNED_GAMES_ENDPOINT = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${api_key}&steamid=${steam_id}&include_played_free_games=1`;
+
+                const ownedRes = await fetch(OWNED_GAMES_ENDPOINT);
+                if (ownedRes.ok) {
+                    const ownedData = await ownedRes.json();
+                    const playingGame = ownedData.response.games?.find(g => g.appid == player.gameid);
                     if (playingGame) {
                         playtime_hours = Math.round(playingGame.playtime_forever / 60);
                     }
                 }
             } catch (err) {
-                console.error("Failed to fetch recently played:", err);
+                console.error("Failed to fetch owned games:", err);
             }
         }
 
