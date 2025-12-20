@@ -10,6 +10,8 @@
   - STEAM_ID
 */
 
+const fetch = require('node-fetch'); // Ensure fetch is available using project dependency
+
 exports.handler = async function (event, context) {
     const api_key = process.env.STEAM_API_KEY;
     const steam_id = process.env.STEAM_ID;
@@ -25,7 +27,7 @@ exports.handler = async function (event, context) {
         };
     }
 
-    const STEAM_ENDPOINT = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${api_key}&steamids=${steam_id}`;
+    const STEAM_ENDPOINT = `https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${api_key}&steamids=${steam_id}`;
 
     try {
         const response = await fetch(STEAM_ENDPOINT);
@@ -52,7 +54,7 @@ exports.handler = async function (event, context) {
         // If playing, try to get playtime details
         if (player.gameid) {
             try {
-                const RECENTLY_PLAYED_ENDPOINT = `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${api_key}&steamid=${steam_id}&count=10`;
+                const RECENTLY_PLAYED_ENDPOINT = `https://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${api_key}&steamid=${steam_id}&count=10`;
                 const recentRes = await fetch(RECENTLY_PLAYED_ENDPOINT);
                 if (recentRes.ok) {
                     const recentData = await recentRes.json();
