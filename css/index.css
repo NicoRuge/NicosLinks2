@@ -789,7 +789,8 @@ body {
 
 /* Widget Headers */
 .sp-header,
-.tw-header {
+.tw-header,
+.st-header {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -797,20 +798,100 @@ body {
     font-size: 0.9rem;
 }
 
-/* Widget Icons/Status shared */
+/* Steam Widget Specifics */
+.st-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 16px;
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    color: var(--md-sys-color-on-surface);
+    box-shadow: var(--card-shadow);
+    transition: all var(--transition-speed) var(--transition-ease);
+    margin-bottom: 8px;
+    text-decoration: none;
+}
+
+.st-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.st-cover {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.st-info {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.st-game {
+    font-family: "bahnschrift", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--md-sys-color-on-surface);
+    text-decoration: none;
+    display: block;
+    transition: color var(--transition-speed);
+}
+
+.st-game:hover {
+    color: var(--md-sys-color-primary);
+    text-decoration: underline;
+}
+
+.st-playtime {
+    display: block;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.85rem;
+    font-style: italic;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+.st-status {
+    font-size: 0.95rem;
+    color: var(--md-sys-color-on-surface-variant);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.st-status strong {
+    color: var(--md-sys-color-primary);
+    font-weight: 600;
+}
+
 .sp-status-playing,
-.tw-status-travelling {
+.tw-status-travelling,
+.st-status-playing {
     color: #1DB954;
 }
 
 .sp-status-stopped,
-.tw-status-stopped {
+.tw-status-stopped,
+.st-status-stopped,
+.st-status-offline {
     color: var(--md-sys-color-on-surface-variant);
     opacity: 0.8;
 }
 
 .sp-icon,
-.tw-icon {
+.tw-icon,
+.st-icon {
     width: 10px;
     height: 10px;
     border-radius: 50%;
@@ -819,14 +900,16 @@ body {
 }
 
 .sp-icon-playing,
-.tw-icon-travelling {
+.tw-icon-travelling,
+.st-icon-playing {
     background-color: #1DB954;
     position: relative;
     z-index: 1;
 }
 
 .sp-icon-playing::after,
-.tw-icon-travelling::after {
+.tw-icon-travelling::after,
+.st-icon-playing::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -853,13 +936,16 @@ body {
 }
 
 .sp-icon-stopped,
-.tw-icon-stopped {
+.tw-icon-stopped,
+.st-icon-stopped,
+.st-icon-offline {
     background-color: var(--md-sys-color-on-surface-variant);
     opacity: 0.7;
 }
 
 .sp-icon-loading,
-.tw-icon-loading {
+.tw-icon-loading,
+.st-icon-loading {
     width: 10px;
     height: 10px;
     border: 2px solid var(--md-sys-color-surface-variant);
