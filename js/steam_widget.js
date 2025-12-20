@@ -24,27 +24,17 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>`;
 
             const response = await fetch(API_URL);
-            if (!response.ok) throw new Error("Failed to load Steam status");
+            if (!response.ok) {
+                const text = await response.text();
+                throw new Error(`Failed to load Steam status: ${response.status} ${text}`);
+            }
 
             const data = await response.json();
+            console.log("Steam Data Received:", data); // DEBUG LOG
             renderSteamWidget(data);
         } catch (error) {
-            console.warn("Steam Widget Error (likely local):", error);
-            // Fallback for local testing/styling if API fails
-            if (window.location.hostname === 'localhost' || window.location.protocol === 'file:') {
-                console.log("Rendering mock Steam data for local testing");
-                // MOCK DATA
-                renderSteamWidget({
-                    gameextrainfo: "Half-Life 3 (Local Debug)",
-                    personastate: 1, // Online
-                    profileurl: "#",
-                    // Use a placeholder image or a known steam APP ID image if possible, but generic is fine
-                    gameid: "540",
-                    playtime_hours: 3333
-                });
-            } else {
-                widget.innerHTML = ""; // Hide on production if real error
-            }
+            console.error("Steam Widget Live Error:", error);
+            widget.innerHTML = ""; // Hide on production if real error
         }
     }
 
@@ -52,39 +42,33 @@ document.addEventListener("DOMContentLoaded", () => {
         const { gameextrainfo, personastate, profileurl, gameid, playtime_hours } = data;
 
         // Steam persona states: 0: Offline, 1: Online, 2: Busy, 3: Away, 4: Snooze, 5: Looking to trade, 6: Looking to play
-        const isOnline = personastate !== 0;
         const isPlaying = !!gameextrainfo;
 
+        // Default to "Steam Status" header
         let headerText = "Steam Status";
-        let statusIconClass = "st-icon-stopped"; // Default gray dot
-        let statusTextClass = "st-status-stopped"; // Default gray text
+        let statusIconClass = "st-icon-stopped";
+        let statusTextClass = "st-status-stopped";
 
-        let coverUrl = "assets/icons/gamepad-2.svg"; // Fallback icon
+        let coverUrl = "assets/icons/gamepad-2.svg";
         let mainText = "Offline";
-        let subText = ""; // Playtime or other info
+        let subText = "";
+
+        const states = ["Offline", "Online", "Busy", "Away", "Snooze", "Looking to trade", "Looking to play"];
+        // status colors could be mapped if desired.
 
         if (isPlaying) {
             headerText = "Currently Playing";
-            statusIconClass = "st-icon-playing"; // Green pulsating dot
-            statusTextClass = "st-status-playing"; // Green text
+            statusIconClass = "st-icon-playing";
+            statusTextClass = "st-status-playing";
 
             mainText = gameextrainfo;
             if (playtime_hours) {
                 subText = `${playtime_hours} hours total`;
             }
 
-            // Steam Game Header Image: https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/{gameid}/header.jpg 
-            // Or capsule: https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/{gameid}/capsule_184x69.jpg
-            // Or library generic: https://steamcdn-a.akamaihd.net/steam/apps/{gameid}/library_600x900.jpg
             if (gameid) {
                 coverUrl = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${gameid}/capsule_184x69.jpg`;
             }
-
-        } else if (isOnline) {
-            const states = ["Offline", "Online", "Busy", "Away", "Snooze", "Looking to trade", "Looking to play"];
-            headerText = "Steam Status";
-            statusIconClass = "st-icon-stopped"; // Online matches "stopped" in style (just a dot, maybe color green?)
-            // Actually user wanted "Green text with pulsating circle" ONLY for playing usually? 
             // "top green text with pulsating circle is... and then game icon and beside title"
 
             // If just online, let's keep it subtle like Spotify "Last listened to"
