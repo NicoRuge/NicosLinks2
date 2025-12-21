@@ -1348,6 +1348,7 @@ body {
 
     /* 8. Unified Card Widths */
     .sp-card,
+    .st-card,
     .tw-card,
     .equipment-group {
         width: 100%;

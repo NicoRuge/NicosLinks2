@@ -29,7 +29,7 @@
 
   let widgetState = {
     loadingStartTime: Date.now(),
-    minLoadingTime: 1000
+    minLoadingTime: 4000
   };
 
   function safe(txt) {
@@ -43,25 +43,12 @@
         <span class="${CONFIG.classPrefix}icon ${CONFIG.classPrefix}icon-loading"></span>
         <span class="${CONFIG.classPrefix}status">Loading...</span>
       </div>
-      <div class="${CONFIG.classPrefix}tablewrap">
-        <table class="${CONFIG.classPrefix}wide" aria-label="Loading">
-          <tr>
-            <td class="${CONFIG.classPrefix}cell">
-              <div style="background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 1.1rem; width: 60%; margin: 0 auto;"></div>
-              <small style="display: block; background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 0.75rem; width: 80%; margin: 4px auto 0;"></small>
-            </td>
-            <td class="${CONFIG.classPrefix}cell center">
-              <div class="${CONFIG.classPrefix}linelabel" style="background-color: var(--md-sys-color-surface-variant); color: transparent;">...</div>
-            </td>
-            <td class="${CONFIG.classPrefix}cell">
-              <div style="background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 1.1rem; width: 60%; margin: 0 auto;"></div>
-              <small style="display: block; background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 0.75rem; width: 80%; margin: 4px auto 0;"></small>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <div class="${CONFIG.classPrefix}progress">
-        <div class="${CONFIG.classPrefix}progressbar" style="width:0%"></div>
+      <div class="${CONFIG.classPrefix}content" style="align-items: center; display: flex;">
+           <div style="width: 48px; height: 48px; background: var(--md-sys-color-surface-variant); border-radius: 8px; margin-right: 12px;"></div>
+           <div class="${CONFIG.classPrefix}info" style="flex: 1;">
+               <div style="height: 1rem; width: 60%; background: var(--md-sys-color-surface-variant); border-radius: 4px; margin-bottom: 6px;"></div>
+               <div style="height: 0.8rem; width: 40%; background: var(--md-sys-color-surface-variant); border-radius: 4px;"></div>
+           </div>
       </div>
     </div>`;
   }

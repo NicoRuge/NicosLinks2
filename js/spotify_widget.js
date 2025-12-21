@@ -4,7 +4,7 @@
     targetId: "spotify-widget",
     fetchIntervalMs: 10000,
     updateIntervalMs: 1000,
-    minLoadingTime: 5000,
+    minLoadingTime: 4000,
     classPrefix: "sp-"
   };
 
@@ -47,12 +47,12 @@
             <span class="${CONFIG.classPrefix}icon ${CONFIG.classPrefix}icon-loading"></span>
             <span class="${CONFIG.classPrefix}status">Loading...</span>
           </div>
-          <div class="${CONFIG.classPrefix}content">
-            <div class="${CONFIG.classPrefix}cover" style="background-color: var(--md-sys-color-surface-variant);"></div>
-            <div class="${CONFIG.classPrefix}info">
-              <div class="${CONFIG.classPrefix}track" style="background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 1rem; width: 70%;"></div>
-              <div class="${CONFIG.classPrefix}artist" style="background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 0.85rem; width: 50%; margin-top: 4px;"></div>
-            </div>
+          <div class="${CONFIG.classPrefix}content" style="align-items: center; display: flex;">
+               <div style="width: 48px; height: 48px; background: var(--md-sys-color-surface-variant); border-radius: 8px; margin-right: 12px;"></div>
+               <div class="${CONFIG.classPrefix}info" style="flex: 1;">
+                   <div style="height: 1rem; width: 60%; background: var(--md-sys-color-surface-variant); border-radius: 4px; margin-bottom: 6px;"></div>
+                   <div style="height: 0.8rem; width: 40%; background: var(--md-sys-color-surface-variant); border-radius: 4px;"></div>
+               </div>
           </div>
         </div>`;
   }

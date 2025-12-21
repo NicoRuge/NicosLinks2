@@ -5,23 +5,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Use absolute URL because frontend (GitHub Pages) and backend (Netlify) are on different domains
     const API_URL = "https://nico-ruge.netlify.app/.netlify/functions/steam";
+    let loadingStartTime = null;
+    const MIN_LOADING_TIME = 4000;
 
     async function fetchSteamStatus() {
         try {
             // Loading State
-            widget.innerHTML = `
-            <div class="st-card">
-              <div class="st-header">
-                <span class="st-icon st-icon-loading"></span>
-                <span class="st-status st-status-stopped">Loading Steam...</span>
-              </div>
-              <div class="st-content">
-                  <div class="st-cover" style="background-color: var(--md-sys-color-surface-variant);"></div>
-                  <div class="st-info">
-                      <div style="background-color: var(--md-sys-color-surface-variant); border-radius: 4px; height: 1rem; width: 70%;"></div>
-                  </div>
-              </div>
-            </div>`;
+            if (!loadingStartTime) {
+                loadingStartTime = Date.now();
+                widget.innerHTML = `
+                <div class="st-card">
+                    <div class="st-header">
+                        <span class="st-icon st-icon-loading"></span>
+                        <span class="st-status st-status-stopped">Loading...</span>
+                    </div>
+                    <div class="st-content" style="align-items: center; display: flex;">
+                        <div style="width: 48px; height: 48px; background: var(--md-sys-color-surface-variant); border-radius: 8px; margin-right: 12px;"></div>
+                        <div class="st-info" style="flex: 1;">
+                            <div style="height: 1rem; width: 60%; background: var(--md-sys-color-surface-variant); border-radius: 4px; margin-bottom: 6px;"></div>
+                            <div style="height: 0.8rem; width: 40%; background: var(--md-sys-color-surface-variant); border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                </div>`;
+            }
 
             const response = await fetch(API_URL);
             if (!response.ok) {
@@ -31,10 +37,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data = await response.json();
             console.log("Steam Data Received:", data); // DEBUG LOG
-            renderSteamWidget(data);
+
+            const elapsed = Date.now() - loadingStartTime;
+            const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
+
+            setTimeout(() => {
+                renderSteamWidget(data);
+            }, remaining);
+
         } catch (error) {
             console.error("Steam Widget Live Error:", error);
-            widget.innerHTML = ""; // Hide on production if real error
+            // Don't clear innerHTML immediately on error if we want to show something, 
+            // but original behavior was to hide.
+            const elapsed = Date.now() - loadingStartTime;
+            const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
+            setTimeout(() => {
+                widget.innerHTML = "";
+            }, remaining);
         }
     }
 
@@ -58,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isPlaying) {
             // === PLAYING STATE ===
-            headerText = "Steam - Currently Playing:";
+            headerText = "Steam - Currently playing:";
             statusIconClass = "st-icon-playing";
             statusTextClass = "st-status-playing";
             mainText = gameextrainfo;
@@ -74,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } else if (isOnline) {
             // === ONLINE STATE ===
-            headerText = "Steam - Currently Idle";
+            headerText = "Steam - Currently idle";
             statusIconClass = "st-icon-online";
             statusTextClass = "st-status-online";
             mainText = states[personastate] || "Online";
