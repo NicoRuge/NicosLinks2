@@ -73,6 +73,16 @@
     text-transform: none;
 }
 
+h2 {
+    color: #D0BCFF !important;
+    font-family: "bahnschrift", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 32px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* Lucide Icon Styles */
 .icon {
     width: 24px;
@@ -625,7 +635,7 @@ body {
 }
 
 .footer a {
-    color: #FFFFFF;
+    color: var(--md-sys-color-primary);
     text-decoration: underline;
     position: relative;
     transition: all var(--transition-speed) var(--transition-ease);
@@ -822,9 +832,20 @@ body {
     gap: 12px;
 }
 
-.st-cover {
+/* Default Icon Style (Square) */
+.st-cover-icon {
     width: 48px;
     height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Game Banner Style (Wide) */
+.st-cover-game {
+    width: 110px;
+    height: auto;
+    aspect-ratio: 460 / 215;
     border-radius: 8px;
     object-fit: cover;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -890,7 +911,7 @@ body {
 }
 
 .st-status-online {
-    color: #4CAF50;
+    color: #64C7F0;
     /* Green but distinct from Playing if needed, or same */
 }
 
@@ -949,7 +970,7 @@ body {
 }
 
 .st-icon-online {
-    background-color: #4CAF50;
+    background-color: #64C7F0;
     /* No pulse */
 }
 
@@ -1046,6 +1067,29 @@ body {
     transition: width 1s linear;
 }
 
+/* Travelling Widget Layout */
+.tw-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tw-cover-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.tw-info {
+    flex-grow: 1;
+    overflow: hidden;
+    width: 100%;
+    /* Ensure it takes available space */
+}
+
 /* Travel Widget Extras */
 .tw-tablewrap {
     overflow-x: auto;
@@ -1107,7 +1151,10 @@ body {
     background-color: var(--md-sys-color-surface-variant);
     border-radius: 999px;
     overflow: hidden;
-    margin-top: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 4px;
+    /* Reduced from 8px */
 }
 
 .tw-progressbar {
@@ -1128,7 +1175,6 @@ body {
     font-size: 0.9rem;
     color: var(--md-sys-color-error, #B3261E);
 }
-
 
 /* ========== MOBILE RESPONSIVE STYLES ========== */
 @media (max-width: 768px) {

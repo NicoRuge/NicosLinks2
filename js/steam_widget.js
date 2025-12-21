@@ -46,46 +46,44 @@ document.addEventListener("DOMContentLoaded", () => {
         const isOnline = personastate !== 0;
 
         // Default to "Offline" state
-        let headerText = "Steam Status";
+        let headerText = "Steam - Currently offline";
         let statusIconClass = "st-icon-offline";
         let statusTextClass = "st-status-offline";
-        let coverUrl = "assets/icons/gamepad-2.svg";
+        let coverUrl = "assets/icons/moon.svg";
         let mainText = "Offline";
         let subText = "";
+        let imgClass = "st-cover-icon";
 
         const states = ["Offline", "Online", "Busy", "Away", "Snooze", "Looking to trade", "Looking to play"];
 
         if (isPlaying) {
             // === PLAYING STATE ===
-            headerText = "Currently Playing";
+            headerText = "Steam - Currently Playing:";
             statusIconClass = "st-icon-playing";
             statusTextClass = "st-status-playing";
-
             mainText = gameextrainfo;
+
             if (playtime_hours) {
                 subText = `${playtime_hours} hours total`;
             }
 
             if (gameid) {
-                coverUrl = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${gameid}/capsule_184x69.jpg`;
+                // Use high-quality header image for games
+                coverUrl = `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${gameid}/header.jpg`;
+                imgClass = "st-cover-game";
             }
         } else if (isOnline) {
             // === ONLINE STATE ===
-            headerText = "Steam Status";
-            statusIconClass = "st-icon-online"; // Green static
-            statusTextClass = "st-status-online"; // Green text or Gray? User wanted Green text/pulse for playing.
-
+            headerText = "Steam - Currently Idle";
+            statusIconClass = "st-icon-online";
+            statusTextClass = "st-status-online";
             mainText = states[personastate] || "Online";
-        } else {
-            // === OFFLINE STATE (Already defaults) ===
-            mainText = "Offline";
+            coverUrl = "assets/icons/coffee.svg";
         }
 
-        // Adjust for styling consistency:
-        // Use a generic gamepad icon if no game cover
-        let imageHtml = `<img src="${coverUrl}" alt="${mainText}" class="st-cover" style="${!gameid ? 'padding: 10px; background: var(--md-sys-color-surface-variant);' : ''}">`;
-
-        // Subtext HTML
+        // Generate HTML
+        const isIcon = !gameid || !isPlaying;
+        let imageHtml = `<img src="${coverUrl}" alt="${mainText}" class="${imgClass}" style="${isIcon ? 'padding: 10px; background: var(--md-sys-color-surface-variant);' : ''}">`;
         let subTextHtml = subText ? `<div class="st-playtime">${subText}</div>` : '';
 
         widget.innerHTML = `

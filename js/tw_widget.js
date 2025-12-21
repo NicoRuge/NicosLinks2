@@ -115,6 +115,10 @@
     const iconClass = nowTravelling ? "tw-icon-travelling" : "tw-icon-stopped";
     const statusClass = nowTravelling ? "tw-status-travelling" : "tw-status-stopped";
 
+    // Select Icon for the main display
+    const coverUrl = nowTravelling ? "assets/icons/train-front.svg" : "assets/icons/home.svg";
+    const coverAlt = nowTravelling ? "Train" : "Home";
+
     const html = `
       <a class="${CONFIG.classPrefix}card" target="_blank" rel="noopener" 
          href="https://traewelling.de/@${encodeURIComponent(CONFIG.user)}"
@@ -123,23 +127,32 @@
           <span class="${CONFIG.classPrefix}icon ${iconClass}"></span>
           <span class="${CONFIG.classPrefix}status ${statusClass}">${statusText}</span>
         </div>
-        <div class="${CONFIG.classPrefix}tablewrap">
-          <table class="${CONFIG.classPrefix}wide" aria-label="Letzte Fahrt">
-            <tr>
-              <td class="${CONFIG.classPrefix}cell">
-                ${rilSpan(t.origin?.rilIdentifier)}<small>${safe(t.origin?.name)}</small>
-              </td>
-              <td class="${CONFIG.classPrefix}cell center">
-                <div class="${CONFIG.classPrefix}linelabel">${safe(line)}</div>
-              </td>
-              <td class="${CONFIG.classPrefix}cell">
-                ${rilSpan(t.destination?.rilIdentifier)}<small>${safe(t.destination?.name)}</small>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="${CONFIG.classPrefix}progress">
-          <div class="${CONFIG.classPrefix}progressbar" style="width:${pct}%"></div>
+        
+        <div class="${CONFIG.classPrefix}content">
+            <!-- Main Icon -->
+            <img src="${coverUrl}" alt="${coverAlt}" class="${CONFIG.classPrefix}cover-icon" style="padding: 10px; background: var(--md-sys-color-surface-variant);">
+            
+            <!-- Info Area containing Table and Progress -->
+            <div class="${CONFIG.classPrefix}info">
+                <div class="${CONFIG.classPrefix}tablewrap">
+                  <table class="${CONFIG.classPrefix}wide" aria-label="Letzte Fahrt">
+                    <tr>
+                      <td class="${CONFIG.classPrefix}cell">
+                        ${rilSpan(t.origin?.rilIdentifier)}<small>${safe(t.origin?.name)}</small>
+                      </td>
+                      <td class="${CONFIG.classPrefix}cell center">
+                        <div class="${CONFIG.classPrefix}linelabel">${safe(line)}</div>
+                      </td>
+                      <td class="${CONFIG.classPrefix}cell">
+                        ${rilSpan(t.destination?.rilIdentifier)}<small>${safe(t.destination?.name)}</small>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="${CONFIG.classPrefix}progress">
+                  <div class="${CONFIG.classPrefix}progressbar" style="width:${pct}%"></div>
+                </div>
+            </div>
         </div>
       </a>
     `;
