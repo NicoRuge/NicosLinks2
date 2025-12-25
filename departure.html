@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departure Monitor</title>
+    <link rel="stylesheet" href="https://use.typekit.net/mht4nmk.css">
+    <link rel="stylesheet" href="css/index.css"> <!-- Base styles if needed, though clean separation is better -->
+    <link rel="stylesheet" href="css/departure.css">
+</head>
+
+<body>
+    <div class="departure-container" id="main-container">
+        <div class="header-row">
+            <h2 id="station-title">Departures Monitor</h2>
+            <div id="clock" class="digital-clock hidden">00:00:00</div>
+        </div>
+
+        <button id="fullscreen-btn" class="fullscreen-btn" title="Fullscreen">
+            ⛶
+        </button>
+
+        <div class="search-section">
+            <div class="input-wrapper">
+                <input type="text" id="station-input" placeholder="Search Station (e.g. Berlin Hbf)..."
+                    autocomplete="off">
+                <div id="search-results" class="search-results hidden"></div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-group">
+                <label class="toggle-pill">
+                    <input type="checkbox" checked value="nationalExpress" id="filter-ice">
+                    <span>ICE/IC</span>
+                </label>
+                <label class="toggle-pill">
+                    <input type="checkbox" checked value="regional" id="filter-regio">
+                    <span>Regional</span>
+                </label>
+                <label class="toggle-pill">
+                    <input type="checkbox" checked value="suburban" id="filter-s">
+                    <span>S-Bahn</span>
+                </label>
+                <label class="toggle-pill">
+                    <input type="checkbox" value="bus" id="filter-bus">
+                    <span>Bus</span>
+                </label>
+                <label class="toggle-pill">
+                    <input type="checkbox" value="subway" id="filter-u">
+                    <span>U-Bahn</span>
+                </label>
+                <label class="toggle-pill">
+                    <input type="checkbox" value="tram" id="filter-tram">
+                    <span>Tram</span>
+                </label>
+            </div>
+        </div>
+
+        <div id="status-message" class="status-message"></div>
+
+        <div class="departures-board">
+            <div class="board-header">
+                <span class="col-time">Time</span>
+                <span class="col-line">Line</span>
+                <span class="col-dest">Destination</span>
+                <span class="col-plat">Platform</span>
+            </div>
+            <div id="departures-list" class="board-rows">
+                <div class="empty-state">Please search for a station.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/departure.js"></script>
+</body>
+
+</html>
