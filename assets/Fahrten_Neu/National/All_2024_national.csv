@@ -1,0 +1,12 @@
+Status-ID,Category,Departure station name,Departure station coordinates,Destination station name,Destination station coordinates
+2178696,national,Berlin Hbf,"52.3928,13.036498",Rostock Hbf,"54.078197,12.131257"
+2253603,national,Rostock Hbf,"54.078197,12.131257",Ostkreuz,"52.503037,13.469105"
+2576180,national,Frankfurt(Main)Hbf,"50.106817,8.663003",Darmstadt Hbf,"49.872549,8.629707"
+2780334,national,Rostock Hbf,"54.078197,12.131257",Berlin Hbf,"52.3928,13.036498"
+3173805,national,Berlin Hbf,"52.3928,13.036498",Rostock Hbf,"54.078197,12.131257"
+3201953,national,Rostock Hbf,"54.078197,12.131257",Berlin Hbf,"52.3928,13.036498"
+3545218,national,Berlin Hbf,"52.3928,13.036498",Rostock Hbf,"54.078197,12.131257"
+3565391,national,Rostock Hbf,"54.078197,12.131257",Berlin Hbf,"52.3928,13.036498"
+3577796,national,Berlin Hbf,"52.3928,13.036498",Rostock Hbf,"54.078197,12.131257"
+3730497,national,Rostock Hbf,"54.078197,12.131257",Berlin Hbf,"52.3928,13.036498"
+3736603,national,Berlin Hbf,"52.3928,13.036498",Rostock Hbf,"54.078197,12.131257"

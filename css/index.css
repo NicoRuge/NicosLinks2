@@ -799,13 +799,52 @@ body {
 
 /* Widget Headers */
 .sp-header,
+.st-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Contents */
+.sp-content,
+.st-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Covers / Avatars */
+.sp-cover,
+.st-cover-game,
+.st-cover-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Info Text */
+.sp-info,
+.st-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.sp-header,
 .tw-header,
 .st-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-weight: 500;
+    gap: 12px;
+    margin-bottom: 8px;
     font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--md-sys-color-primary);
 }
 
 /* Steam Widget Specifics */

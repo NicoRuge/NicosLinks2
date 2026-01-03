@@ -1,0 +1,9 @@
+Status-ID,Category,Departure station name,Departure station coordinates,Destination station name,Destination station coordinates
+884861,regional,Milano Porta Garibaldi,"45.484438,9.187299",Milano Centrale,"45.487143,9.204828"
+886975,regional,Milano Centrale,"45.487143,9.204828",Malpensa Aeroporto T1,"45.627132,8.711275"
+900745,regional,Flughafen BER,"52.364808,13.511947",Ostkreuz,"52.503037,13.469105"
+1169156,regional,Rostock Hbf,"54.078197,12.131257",Berlin Hbf,"52.3928,13.036498"
+1249661,regional,Berlin Hbf,"52.3928,13.036498",Rostock Hbf,"54.078197,12.131257"
+1294557,regional,Rostock Hbf,"54.078197,12.131257",Hamburg Hbf,"53.553533,10.00636"
+1297551,regional,Hamburg Hbf,"53.553533,10.00636",Rostock Hbf,"54.078197,12.131257"
+1471470,regional,Strasbourg Gare Centrale,"48.584861,7.73525",Offenburg,"48.476506,7.94677"

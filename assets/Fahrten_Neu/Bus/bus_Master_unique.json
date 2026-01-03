@@ -1,0 +1,362 @@
+[
+  {
+    "Status-ID": 2057944,
+    "Category": "bus",
+    "Departure station name": "Willy-Brandt-Platz, Darmstadt",
+    "Departure station coordinates": "49.876019,8.650266",
+    "Destination station name": "Bessunger Forsthaus Jugendhof, Darmstadt",
+    "Destination station coordinates": "49.864836,8.725577"
+  },
+  {
+    "Status-ID": 2058523,
+    "Category": "bus",
+    "Departure station name": "Hofgut Oberfeld, Darmstadt",
+    "Departure station coordinates": "49.873115,8.682079",
+    "Destination station name": "Kasinostraße, Darmstadt",
+    "Destination station coordinates": "49.875066,8.643398"
+  },
+  {
+    "Status-ID": 2058552,
+    "Category": "bus",
+    "Departure station name": "Kasinostraße, Darmstadt",
+    "Departure station coordinates": "49.875066,8.643398",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 2059827,
+    "Category": "bus",
+    "Departure station name": "Zentrum Marktplatz/Frankf. Straße, Offenbach am Ma",
+    "Departure station coordinates": "50.104884,8.764519",
+    "Destination station name": "Bürgel Alicestraße, Offenbach am Main",
+    "Destination station coordinates": "50.115195,8.783594"
+  },
+  {
+    "Status-ID": 2060808,
+    "Category": "bus",
+    "Departure station name": "Bürgel Alicestraße, Offenbach am Main",
+    "Departure station coordinates": "50.115195,8.783594",
+    "Destination station name": "Zentrum Marktplatz/Berliner Str., Offenbach am Mai",
+    "Destination station coordinates": "50.105612,8.764555"
+  },
+  {
+    "Status-ID": 2251602,
+    "Category": "bus",
+    "Departure station name": "Brinckmanshöhe, Rostock",
+    "Departure station coordinates": "54.087204,12.188555",
+    "Destination station name": "Hauptbahnhof Nord, Rostock",
+    "Destination station coordinates": "54.078386,12.134619"
+  },
+  {
+    "Status-ID": 2295370,
+    "Category": "bus",
+    "Departure station name": "Steintor IHK, Rostock",
+    "Departure station coordinates": "54.086045,12.142045",
+    "Destination station name": "Brinckmanshöhe, Rostock",
+    "Destination station coordinates": "54.088166,12.188609"
+  },
+  {
+    "Status-ID": 2452710,
+    "Category": "bus",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Kopernikusplatz, Darmstadt",
+    "Destination station coordinates": "49.878194,8.661844"
+  },
+  {
+    "Status-ID": 2584133,
+    "Category": "bus",
+    "Departure station name": "Südbahnhof, Darmstadt",
+    "Departure station coordinates": "49.854966,8.637699",
+    "Destination station name": "Rhein-/Neckarstraße, Darmstadt",
+    "Destination station coordinates": "49.871542,8.644701"
+  },
+  {
+    "Status-ID": 2675990,
+    "Category": "bus",
+    "Departure station name": "Steintor IHK, Rostock",
+    "Departure station coordinates": "54.085811,12.142602",
+    "Destination station name": "Damm(b Rostock), Dummerstorf",
+    "Destination station coordinates": "54.010068,12.153551"
+  },
+  {
+    "Status-ID": 2782963,
+    "Category": "bus",
+    "Departure station name": "Sewanstr./Volkradstr., Berlin",
+    "Departure station coordinates": "52.49704,13.506544",
+    "Destination station name": "Sonnenallee/Pannierstr., Berlin",
+    "Destination station coordinates": "52.486109,13.430325"
+  },
+  {
+    "Status-ID": 2784216,
+    "Category": "bus",
+    "Departure station name": "Erkstr., Berlin",
+    "Departure station coordinates": "52.481686,13.440123",
+    "Destination station name": "Ostkreuz",
+    "Destination station coordinates": "52.503037,13.469105"
+  },
+  {
+    "Status-ID": 2786328,
+    "Category": "bus",
+    "Departure station name": "Mellenseestr., Berlin",
+    "Departure station coordinates": "52.493291,13.508135",
+    "Destination station name": "Wönnichstr., Berlin",
+    "Destination station coordinates": "52.500267,13.495946"
+  },
+  {
+    "Status-ID": 2794732,
+    "Category": "bus",
+    "Departure station name": "Schwarzmeerstr., Berlin",
+    "Departure station coordinates": "52.5013,13.509034",
+    "Destination station name": "Friedrichsfelde Ost (S), Berlin",
+    "Destination station coordinates": "52.513463,13.519066"
+  },
+  {
+    "Status-ID": 2797009,
+    "Category": "bus",
+    "Departure station name": "Friedrichsfelde (U), Berlin",
+    "Departure station coordinates": "52.505912,13.512783",
+    "Destination station name": "Sewanstr./Dolgenseestr., Berlin",
+    "Destination station coordinates": "52.49632,13.509574"
+  },
+  {
+    "Status-ID": 2804096,
+    "Category": "bus",
+    "Departure station name": "Hochschule, Darmstadt",
+    "Departure station coordinates": "49.866625,8.635038",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 3073204,
+    "Category": "bus",
+    "Departure station name": "Friedrichsfelde (U), Berlin",
+    "Departure station coordinates": "52.505912,13.512783",
+    "Destination station name": "Mellenseestr., Berlin",
+    "Destination station coordinates": "52.493291,13.508135"
+  },
+  {
+    "Status-ID": 3259635,
+    "Category": "bus",
+    "Departure station name": "Galileistraße, Rostock",
+    "Departure station coordinates": "54.067464,12.117873",
+    "Destination station name": "Hauptbahnhof Süd, Rostock",
+    "Destination station coordinates": "54.07755,12.128767"
+  },
+  {
+    "Status-ID": 3519915,
+    "Category": "bus",
+    "Departure station name": "Wiesbaden Hbf",
+    "Departure station coordinates": "50.070788,8.243728",
+    "Destination station name": "Dernsches Gelände, Wiesbaden",
+    "Destination station coordinates": "50.080559,8.242875"
+  },
+  {
+    "Status-ID": 3714027,
+    "Category": "bus",
+    "Departure station name": "Hauptbahnhof, Stralsund",
+    "Departure station coordinates": "54.309256,13.078442",
+    "Destination station name": "Knieperdamm, Stralsund",
+    "Destination station coordinates": "54.320798,13.079844"
+  },
+  {
+    "Status-ID": 3941258,
+    "Category": "bus",
+    "Departure station name": "Kasinostraße, Darmstadt",
+    "Departure station coordinates": "49.875066,8.643398",
+    "Destination station name": "Am Karlshof, Darmstadt",
+    "Destination station coordinates": "49.882104,8.665799"
+  },
+  {
+    "Status-ID": 4069657,
+    "Category": "bus",
+    "Departure station name": "Kasinostraße, Darmstadt",
+    "Departure station coordinates": "49.875066,8.643398",
+    "Destination station name": "Luisenplatz, Darmstadt",
+    "Destination station coordinates": "49.872882,8.651254"
+  },
+  {
+    "Status-ID": 4358383,
+    "Category": "bus",
+    "Departure station name": "Flughafen Terminal 1, Frankfurt a.M.",
+    "Departure station coordinates": "50.05085,8.570585",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 4378663,
+    "Category": "bus",
+    "Departure station name": "Ostbahnhof, Darmstadt",
+    "Departure station coordinates": "49.874706,8.673224",
+    "Destination station name": "Kasinostraße, Darmstadt",
+    "Destination station coordinates": "49.875066,8.643398"
+  },
+  {
+    "Status-ID": 4380795,
+    "Category": "bus",
+    "Departure station name": "Bahnhof, Bad Homburg v.d. Höhe",
+    "Departure station coordinates": "50.220692,8.620727",
+    "Destination station name": "Seedammbad, Bad Homburg v.d. Höhe",
+    "Destination station coordinates": "50.224234,8.632674"
+  },
+  {
+    "Status-ID": 4841801,
+    "Category": "bus",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Darmstadt Kasinostraße",
+    "Destination station coordinates": "49.874973,8.642866"
+  },
+  {
+    "Status-ID": 5030501,
+    "Category": "bus",
+    "Departure station name": "Basel, Bruderholzstrasse",
+    "Departure station coordinates": "47.540504,7.591804",
+    "Destination station name": "Basel, St. Jakob",
+    "Destination station coordinates": "47.54099,7.618439"
+  },
+  {
+    "Status-ID": 5043819,
+    "Category": "bus",
+    "Departure station name": "Dornach, Bahnhof",
+    "Departure station coordinates": "47.490105,7.610967",
+    "Destination station name": "Gempen, Dorf",
+    "Destination station coordinates": "47.476151,7.65889"
+  },
+  {
+    "Status-ID": 5089932,
+    "Category": "bus",
+    "Departure station name": "Rostock, Steintor / IHK",
+    "Departure station coordinates": "54.085865,12.142689",
+    "Destination station name": "Rostock, Albert-Schulz-Str.",
+    "Destination station coordinates": "54.08988,12.187012"
+  },
+  {
+    "Status-ID": 5135414,
+    "Category": "bus",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Darmstadt Luisenplatz",
+    "Destination station coordinates": "49.872883,8.650254"
+  },
+  {
+    "Status-ID": 5137617,
+    "Category": "bus",
+    "Departure station name": "Darmstadt Am Karlshof",
+    "Departure station coordinates": "49.882107,8.665799",
+    "Destination station name": "Darmstadt Rhein-/Neckarstraße",
+    "Destination station coordinates": "49.871532,8.644714"
+  },
+  {
+    "Status-ID": 5147834,
+    "Category": "bus",
+    "Departure station name": "Darmstadt Luisenplatz",
+    "Departure station coordinates": "49.872883,8.650254",
+    "Destination station name": "Darmstadt Am Karlshof",
+    "Destination station coordinates": "49.882107,8.665799"
+  },
+  {
+    "Status-ID": 5210586,
+    "Category": "bus",
+    "Departure station name": "Stralsund Hbf",
+    "Departure station coordinates": "54.308626,13.077318",
+    "Destination station name": "Samtens",
+    "Destination station coordinates": "54.354031,13.290282"
+  },
+  {
+    "Status-ID": 5212651,
+    "Category": "bus",
+    "Departure station name": "Stralsund Rügendamm",
+    "Departure station coordinates": "54.305283,13.107468",
+    "Destination station name": "Stralsund Hbf",
+    "Destination station coordinates": "54.308626,13.077318"
+  },
+  {
+    "Status-ID": 5445105,
+    "Category": "bus",
+    "Departure station name": "Beethovenstraße",
+    "Departure station coordinates": "53.574574,10.021812",
+    "Destination station name": "Hamburg HBF/Kirchenallee",
+    "Destination station coordinates": "53.553246,10.008697"
+  },
+  {
+    "Status-ID": 5450219,
+    "Category": "bus",
+    "Departure station name": "Bremen Universität-Süd",
+    "Departure station coordinates": "53.105026,8.851518",
+    "Destination station name": "Bremen Hauptbahnhof-Nord/Messe",
+    "Destination station coordinates": "53.084587,8.816799"
+  },
+  {
+    "Status-ID": 5546089,
+    "Category": "bus",
+    "Departure station name": "Rathaus Schöneberg, Berlin",
+    "Departure station coordinates": "52.485291,13.345071",
+    "Destination station name": "S Südkreuz Bhf (Berlin)",
+    "Destination station coordinates": "52.47588,13.365602"
+  },
+  {
+    "Status-ID": 5824487,
+    "Category": "bus",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Frankfurt (Main) Flughafen Terminal 1",
+    "Destination station coordinates": "50.051414,8.571453"
+  },
+  {
+    "Status-ID": 5832185,
+    "Category": "bus",
+    "Departure station name": "Darmstadt Ost",
+    "Departure station coordinates": "49.874904,8.673772",
+    "Destination station name": "Darmstadt Kasinostraße",
+    "Destination station coordinates": "49.874973,8.642866"
+  },
+  {
+    "Status-ID": 6022928,
+    "Category": "bus",
+    "Departure station name": "Bad Schandau Elbbrücke",
+    "Departure station coordinates": "50.921186,14.14085",
+    "Destination station name": "Kirnitzschtal Beuthenfall",
+    "Destination station coordinates": "50.926506,14.237893"
+  },
+  {
+    "Status-ID": 6029683,
+    "Category": "bus",
+    "Departure station name": "Hřensko,střed",
+    "Departure station coordinates": "50.87404,14.242667",
+    "Destination station name": "Děčín,hl.nádr.",
+    "Destination station coordinates": "50.773994,14.200767"
+  },
+  {
+    "Status-ID": 6034811,
+    "Category": "bus",
+    "Departure station name": "Hřensko,střed",
+    "Departure station coordinates": "50.87404,14.242667",
+    "Destination station name": "Hřensko,přívoz",
+    "Destination station coordinates": "50.87761,14.236995"
+  },
+  {
+    "Status-ID": 6036579,
+    "Category": "bus",
+    "Departure station name": "Postelwitz Abzweig Ostrau",
+    "Departure station coordinates": "50.910576,14.184937",
+    "Destination station name": "Bad Schandau Marktplatz",
+    "Destination station coordinates": "50.917656,14.153146"
+  },
+  {
+    "Status-ID": 6073944,
+    "Category": "bus",
+    "Departure station name": "Obertshausen(Kr Of)",
+    "Departure station coordinates": "50.072011,8.853737",
+    "Destination station name": "Obertshausen-Hausen Robert-Koch-Straße",
+    "Destination station coordinates": "50.075386,8.86026"
+  },
+  {
+    "Status-ID": 6332563,
+    "Category": "bus",
+    "Departure station name": "Darmstadt Kasinostraße",
+    "Departure station coordinates": "49.874973,8.642866",
+    "Destination station name": "Darmstadt Luisenplatz",
+    "Destination station coordinates": "49.872883,8.650254"
+  }
+]

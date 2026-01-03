@@ -1,0 +1,106 @@
+[
+  {
+    "Status-ID": 577373,
+    "Category": "national",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Bremen Hbf",
+    "Destination station coordinates": "53.08328,8.813681"
+  },
+  {
+    "Status-ID": 633744,
+    "Category": "national",
+    "Departure station name": "Düsseldorf Hbf",
+    "Departure station coordinates": "51.219708,6.794011",
+    "Destination station name": "Hamburg-Harburg",
+    "Destination station coordinates": "53.456198,9.991591"
+  },
+  {
+    "Status-ID": 880455,
+    "Category": "national",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Berlin Hbf",
+    "Destination station coordinates": "52.3928,13.036498"
+  },
+  {
+    "Status-ID": 882376,
+    "Category": "national",
+    "Departure station name": "München Hbf",
+    "Departure station coordinates": "48.140232,11.558335",
+    "Destination station name": "Bologna Centrale",
+    "Destination station coordinates": "44.506142,11.343407"
+  },
+  {
+    "Status-ID": 884641,
+    "Category": "national",
+    "Departure station name": "Napoli Centrale",
+    "Departure station coordinates": "40.852827,14.273072",
+    "Destination station name": "Milano Porta Garibaldi",
+    "Destination station coordinates": "45.484438,9.187299"
+  },
+  {
+    "Status-ID": 932358,
+    "Category": "national",
+    "Departure station name": "Berlin Gesundbrunnen",
+    "Departure station coordinates": "52.548656,13.39106",
+    "Destination station name": "Praha-Holesovice",
+    "Destination station coordinates": "50.110215,14.440011"
+  },
+  {
+    "Status-ID": 935997,
+    "Category": "national",
+    "Departure station name": "Praha hl.n.",
+    "Departure station coordinates": "50.083058,14.436038",
+    "Destination station name": "Berlin Gesundbrunnen",
+    "Destination station coordinates": "52.548656,13.39106"
+  },
+  {
+    "Status-ID": 936424,
+    "Category": "national",
+    "Departure station name": "Berlin Gesundbrunnen",
+    "Departure station coordinates": "52.548656,13.39106",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 1038145,
+    "Category": "national",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Hamburg Hbf",
+    "Destination station coordinates": "53.553533,10.00636"
+  },
+  {
+    "Status-ID": 2253603,
+    "Category": "national",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Ostkreuz",
+    "Destination station coordinates": "52.503037,13.469105"
+  },
+  {
+    "Status-ID": 2576180,
+    "Category": "national",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 4435615,
+    "Category": "national",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Ludwigslust",
+    "Destination station coordinates": "53.335122,11.493751"
+  },
+  {
+    "Status-ID": 4839232,
+    "Category": "national",
+    "Departure station name": "Hamburg Hbf",
+    "Departure station coordinates": "53.553533,10.00636",
+    "Destination station name": "Hamburg-Harburg",
+    "Destination station coordinates": "53.456198,9.991591"
+  }
+]

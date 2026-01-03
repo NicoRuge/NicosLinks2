@@ -1,0 +1,530 @@
+[
+  {
+    "Status-ID": 577355,
+    "Category": "tram",
+    "Departure station name": "Lomonossowstraße, Rostock",
+    "Departure station coordinates": "54.065307,12.117342",
+    "Destination station name": "Hauptbahnhof (U), Rostock",
+    "Destination station coordinates": "54.078359,12.130907"
+  },
+  {
+    "Status-ID": 1523897,
+    "Category": "tram",
+    "Departure station name": "Lomonossowstraße, Rostock",
+    "Departure station coordinates": "54.065307,12.117342",
+    "Destination station name": "Lange Straße, Rostock",
+    "Destination station coordinates": "54.089964,12.135069"
+  },
+  {
+    "Status-ID": 1889366,
+    "Category": "tram",
+    "Departure station name": "Majakowskistraße, Rostock",
+    "Departure station coordinates": "54.069711,12.116246",
+    "Destination station name": "Hauptbahnhof (U), Rostock",
+    "Destination station coordinates": "54.078359,12.130907"
+  },
+  {
+    "Status-ID": 1983617,
+    "Category": "tram",
+    "Departure station name": "Hannover Hbf",
+    "Departure station coordinates": "52.377079,9.741763",
+    "Destination station name": "Hannover Dragonerstraße",
+    "Destination station coordinates": "52.39423,9.735372"
+  },
+  {
+    "Status-ID": 2057463,
+    "Category": "tram",
+    "Departure station name": "Kasinostraße, Darmstadt",
+    "Departure station coordinates": "49.875066,8.643398",
+    "Destination station name": "Luisenplatz, Darmstadt",
+    "Destination station coordinates": "49.872882,8.651254"
+  },
+  {
+    "Status-ID": 2062865,
+    "Category": "tram",
+    "Departure station name": "Südbahnhof, Frankfurt a.M.",
+    "Departure station coordinates": "50.099913,8.685719",
+    "Destination station name": "Otto-Hahn-Platz, Frankfurt a.M.",
+    "Destination station coordinates": "50.101864,8.675678"
+  },
+  {
+    "Status-ID": 2106376,
+    "Category": "tram",
+    "Departure station name": "Lomonossowstraße, Rostock",
+    "Departure station coordinates": "54.065307,12.117342",
+    "Destination station name": "Kröpeliner Tor, Rostock",
+    "Destination station coordinates": "54.089847,12.129729"
+  },
+  {
+    "Status-ID": 2107230,
+    "Category": "tram",
+    "Departure station name": "Kröpeliner Tor, Rostock",
+    "Departure station coordinates": "54.089811,12.129738",
+    "Destination station name": "Südstadt-Center, Rostock",
+    "Destination station coordinates": "54.072111,12.117198"
+  },
+  {
+    "Status-ID": 2132036,
+    "Category": "tram",
+    "Departure station name": "Lomonossowstraße, Rostock",
+    "Departure station coordinates": "54.065307,12.117342",
+    "Destination station name": "Neuer Markt, Rostock",
+    "Destination station coordinates": "54.088912,12.140525"
+  },
+  {
+    "Status-ID": 2152662,
+    "Category": "tram",
+    "Departure station name": "Mülheim Von-Sparr-Str., Köln",
+    "Departure station coordinates": "50.970446,7.011379",
+    "Destination station name": "Bahnhof Deutz/Messe LANXESS arena, Köln",
+    "Destination station coordinates": "50.939595,6.978802"
+  },
+  {
+    "Status-ID": 2295282,
+    "Category": "tram",
+    "Departure station name": "Lomonossowstraße, Rostock",
+    "Departure station coordinates": "54.065307,12.117342",
+    "Destination station name": "Steintor IHK, Rostock",
+    "Destination station coordinates": "54.086566,12.141065"
+  },
+  {
+    "Status-ID": 2378567,
+    "Category": "tram",
+    "Departure station name": "Lomonossowstraße, Rostock",
+    "Departure station coordinates": "54.065289,12.117243",
+    "Destination station name": "Rostock Südblick, Papendorf b Rostock",
+    "Destination station coordinates": "54.057648,12.11709"
+  },
+  {
+    "Status-ID": 2454457,
+    "Category": "tram",
+    "Departure station name": "Kasinostraße, Darmstadt",
+    "Departure station coordinates": "49.875066,8.643398",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 2460984,
+    "Category": "tram",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Schweizer-/Gartenstraße, Frankfurt a.M.",
+    "Destination station coordinates": "50.103338,8.679553"
+  },
+  {
+    "Status-ID": 2531408,
+    "Category": "tram",
+    "Departure station name": "Hauptbahnhof (U), Rostock",
+    "Departure station coordinates": "54.078359,12.130907",
+    "Destination station name": "Südstadt-Center, Rostock",
+    "Destination station coordinates": "54.072111,12.117198"
+  },
+  {
+    "Status-ID": 2576406,
+    "Category": "tram",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Rhein-/Neckarstraße, Darmstadt",
+    "Destination station coordinates": "49.871542,8.644701"
+  },
+  {
+    "Status-ID": 2721688,
+    "Category": "tram",
+    "Departure station name": "Kröpeliner Tor, Rostock",
+    "Departure station coordinates": "54.089847,12.129729",
+    "Destination station name": "Doberaner Platz, Rostock",
+    "Destination station coordinates": "54.088436,12.123176"
+  },
+  {
+    "Status-ID": 2721912,
+    "Category": "tram",
+    "Departure station name": "Doberaner Platz, Rostock",
+    "Departure station coordinates": "54.088328,12.123239",
+    "Destination station name": "Lomonossowstraße, Rostock",
+    "Destination station coordinates": "54.065289,12.117243"
+  },
+  {
+    "Status-ID": 2781934,
+    "Category": "tram",
+    "Departure station name": "Tierpark (U), Berlin",
+    "Departure station coordinates": "52.497552,13.523471",
+    "Destination station name": "Landsberger Allee/Rhinstr., Berlin",
+    "Destination station coordinates": "52.535477,13.517151"
+  },
+  {
+    "Status-ID": 2790549,
+    "Category": "tram",
+    "Departure station name": "Landsberger Allee/Petersburger Str., Berlin",
+    "Departure station coordinates": "52.526021,13.446361",
+    "Destination station name": "Landsberger Allee (S), Berlin",
+    "Destination station coordinates": "52.528637,13.456285"
+  },
+  {
+    "Status-ID": 3074749,
+    "Category": "tram",
+    "Departure station name": "Simplonstr., Berlin",
+    "Departure station coordinates": "52.509714,13.45722",
+    "Destination station name": "Warschauer Str. (S), Berlin",
+    "Destination station coordinates": "52.507961,13.450514"
+  },
+  {
+    "Status-ID": 3206477,
+    "Category": "tram",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Luisenplatz, Darmstadt",
+    "Destination station coordinates": "49.872882,8.651254"
+  },
+  {
+    "Status-ID": 3302761,
+    "Category": "tram",
+    "Departure station name": "Neuer Markt, Rostock",
+    "Departure station coordinates": "54.088849,12.140426",
+    "Destination station name": "Hauptbahnhof (U), Rostock",
+    "Destination station coordinates": "54.078359,12.130907"
+  },
+  {
+    "Status-ID": 3348208,
+    "Category": "tram",
+    "Departure station name": "Kröpeliner Tor, Rostock",
+    "Departure station coordinates": "54.089811,12.129738",
+    "Destination station name": "Hauptbahnhof (U), Rostock",
+    "Destination station coordinates": "54.078359,12.130907"
+  },
+  {
+    "Status-ID": 3521938,
+    "Category": "tram",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Klinikum, Darmstadt",
+    "Destination station coordinates": "49.875803,8.64774"
+  },
+  {
+    "Status-ID": 3532846,
+    "Category": "tram",
+    "Departure station name": "Kurpfalzbrücke, Mannheim",
+    "Departure station coordinates": "49.493051,8.47209",
+    "Destination station name": "Paradeplatz, Mannheim",
+    "Destination station coordinates": "49.487442,8.467066"
+  },
+  {
+    "Status-ID": 3532946,
+    "Category": "tram",
+    "Departure station name": "Paradeplatz, Mannheim",
+    "Departure station coordinates": "49.487442,8.467066",
+    "Destination station name": "Hauptbahnhof, Ludwigshafen am Rhein",
+    "Destination station coordinates": "49.479253,8.434579"
+  },
+  {
+    "Status-ID": 3578841,
+    "Category": "tram",
+    "Departure station name": "Hauptbahnhof (U), Rostock",
+    "Departure station coordinates": "54.078359,12.130907",
+    "Destination station name": "Lange Straße, Rostock",
+    "Destination station coordinates": "54.089964,12.135069"
+  },
+  {
+    "Status-ID": 3910122,
+    "Category": "tram",
+    "Departure station name": "Majakowskistraße, Rostock",
+    "Departure station coordinates": "54.069711,12.116246",
+    "Destination station name": "Kröpeliner Tor, Rostock",
+    "Destination station coordinates": "54.089847,12.129729"
+  },
+  {
+    "Status-ID": 3937644,
+    "Category": "tram",
+    "Departure station name": "Darmstadt Nord",
+    "Departure station coordinates": "49.892118,8.653753",
+    "Destination station name": "Willy-Brandt-Platz, Darmstadt",
+    "Destination station coordinates": "49.876019,8.650266"
+  },
+  {
+    "Status-ID": 3937656,
+    "Category": "tram",
+    "Departure station name": "Willy-Brandt-Platz, Darmstadt",
+    "Departure station coordinates": "49.876019,8.650266",
+    "Destination station name": "Kasinostraße, Darmstadt",
+    "Destination station coordinates": "49.875066,8.643398"
+  },
+  {
+    "Status-ID": 4329605,
+    "Category": "tram",
+    "Departure station name": "Südblick, Rostock",
+    "Departure station coordinates": "54.058115,12.116362",
+    "Destination station name": "Lomonossowstraße, Rostock",
+    "Destination station coordinates": "54.065307,12.117342"
+  },
+  {
+    "Status-ID": 5026823,
+    "Category": "tram",
+    "Departure station name": "Basel, Tellplatz",
+    "Departure station coordinates": "47.54286,7.594186",
+    "Destination station name": "Basel, Heuwaage",
+    "Destination station coordinates": "47.551273,7.588046"
+  },
+  {
+    "Status-ID": 5035285,
+    "Category": "tram",
+    "Departure station name": "Basel, Tellplatz",
+    "Departure station coordinates": "47.54286,7.594186",
+    "Destination station name": "Basel, Theater",
+    "Destination station coordinates": "47.553125,7.589781"
+  },
+  {
+    "Status-ID": 5035293,
+    "Category": "tram",
+    "Departure station name": "Basel, Bankverein",
+    "Departure station coordinates": "47.553611,7.592253",
+    "Destination station name": "Basel, Kunstmuseum",
+    "Destination station coordinates": "47.554456,7.594078"
+  },
+  {
+    "Status-ID": 5036760,
+    "Category": "tram",
+    "Departure station name": "Basel, Schifflände",
+    "Departure station coordinates": "47.559202,7.587156",
+    "Destination station name": "Basel, Peter-Merian",
+    "Destination station coordinates": "47.545323,7.596164"
+  },
+  {
+    "Status-ID": 5038013,
+    "Category": "tram",
+    "Departure station name": "Basel, Tellplatz",
+    "Departure station coordinates": "47.54286,7.594186",
+    "Destination station name": "Basel, Messeplatz",
+    "Destination station coordinates": "47.563454,7.599615"
+  },
+  {
+    "Status-ID": 5043481,
+    "Category": "tram",
+    "Departure station name": "Basel, Tellplatz",
+    "Departure station coordinates": "47.54286,7.594186",
+    "Destination station name": "Basel, Bhfeingang Gundeldingen",
+    "Destination station coordinates": "47.545616,7.587342"
+  },
+  {
+    "Status-ID": 5050443,
+    "Category": "tram",
+    "Departure station name": "Basel, Tellplatz",
+    "Departure station coordinates": "47.54286,7.594186",
+    "Destination station name": "Basel, Bankverein",
+    "Destination station coordinates": "47.553611,7.592253"
+  },
+  {
+    "Status-ID": 5051267,
+    "Category": "tram",
+    "Departure station name": "Basel, Theater",
+    "Departure station coordinates": "47.553125,7.589781",
+    "Destination station name": "Basel, Messeplatz",
+    "Destination station coordinates": "47.563454,7.599615"
+  },
+  {
+    "Status-ID": 5054197,
+    "Category": "tram",
+    "Departure station name": "Basel, Messeplatz",
+    "Departure station coordinates": "47.563454,7.599615",
+    "Destination station name": "Basel, Grosspeterstrasse",
+    "Destination station coordinates": "47.545871,7.598564"
+  },
+  {
+    "Status-ID": 5089928,
+    "Category": "tram",
+    "Departure station name": "Rostock, Lomonossowstraße",
+    "Departure station coordinates": "54.065098,12.117213",
+    "Destination station name": "Rostock, Steintor / IHK",
+    "Destination station coordinates": "54.085865,12.142689"
+  },
+  {
+    "Status-ID": 5131887,
+    "Category": "tram",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Darmstadt Kasinostraße",
+    "Destination station coordinates": "49.874973,8.642866"
+  },
+  {
+    "Status-ID": 5135459,
+    "Category": "tram",
+    "Departure station name": "Darmstadt Luisenplatz",
+    "Departure station coordinates": "49.872883,8.650254",
+    "Destination station name": "Darmstadt-Kranichstein",
+    "Destination station coordinates": "49.906816,8.679319"
+  },
+  {
+    "Status-ID": 5136766,
+    "Category": "tram",
+    "Departure station name": "Darmstadt-Kranichstein",
+    "Departure station coordinates": "49.906816,8.679319",
+    "Destination station name": "Darmstadt-Kranichstein Siemensstraße",
+    "Destination station coordinates": "49.89639,8.680036"
+  },
+  {
+    "Status-ID": 5137635,
+    "Category": "tram",
+    "Departure station name": "Darmstadt Luisenplatz",
+    "Departure station coordinates": "49.872883,8.650254",
+    "Destination station name": "Darmstadt Kasinostraße",
+    "Destination station coordinates": "49.874973,8.642866"
+  },
+  {
+    "Status-ID": 5141939,
+    "Category": "tram",
+    "Departure station name": "Karlsruhe Hauptbahnhof (Vorplatz)",
+    "Departure station coordinates": "48.99442,8.399458",
+    "Destination station name": "Karlsruhe ZKM",
+    "Destination station coordinates": "48.999795,8.386109"
+  },
+  {
+    "Status-ID": 5155646,
+    "Category": "tram",
+    "Departure station name": "Frankfurt (Main) Platz der Republik",
+    "Departure station coordinates": "50.109116,8.659346",
+    "Destination station name": "Frankfurt (Main) Otto-Hahn-Platz",
+    "Destination station coordinates": "50.101006,8.674513"
+  },
+  {
+    "Status-ID": 5385169,
+    "Category": "tram",
+    "Departure station name": "Rostock, Lomonossowstraße",
+    "Departure station coordinates": "54.065098,12.117213",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 5394056,
+    "Category": "tram",
+    "Departure station name": "Frankfurter Tor (U), Berlin",
+    "Departure station coordinates": "52.515845,13.453948",
+    "Destination station name": "Gustav-Holzmann-Str., Berlin",
+    "Destination station coordinates": "52.493354,13.490409"
+  },
+  {
+    "Status-ID": 5395585,
+    "Category": "tram",
+    "Departure station name": "Gustav-Holzmann-Str., Berlin",
+    "Departure station coordinates": "52.493354,13.490409",
+    "Destination station name": "Neue Bahnhofstr., Berlin",
+    "Destination station coordinates": "52.506424,13.469769"
+  },
+  {
+    "Status-ID": 5440474,
+    "Category": "tram",
+    "Departure station name": "Rostock, Stadthalle",
+    "Departure station coordinates": "54.078255,12.127095",
+    "Destination station name": "Rostock, Lomonossowstraße",
+    "Destination station coordinates": "54.065098,12.117213"
+  },
+  {
+    "Status-ID": 5445664,
+    "Category": "tram",
+    "Departure station name": "Bremen Herdentor",
+    "Departure station coordinates": "53.079735,8.81024",
+    "Destination station name": "Bremen Am Brill (Hutfilter-/Obernstraße)",
+    "Destination station coordinates": "53.078705,8.801619"
+  },
+  {
+    "Status-ID": 5445738,
+    "Category": "tram",
+    "Departure station name": "Bremen Am Brill (Hutfilter-/Obernstraße)",
+    "Departure station coordinates": "53.078705,8.801619",
+    "Destination station name": "Bremen Konsul-Smidt-Straße",
+    "Destination station coordinates": "53.086697,8.782151"
+  },
+  {
+    "Status-ID": 5448903,
+    "Category": "tram",
+    "Departure station name": "Bremen Wartburgstraße",
+    "Departure station coordinates": "53.09372,8.78883",
+    "Destination station name": "Bremen Hauptbahnhof",
+    "Destination station coordinates": "53.081413,8.81365"
+  },
+  {
+    "Status-ID": 5449027,
+    "Category": "tram",
+    "Departure station name": "Bremen Hauptbahnhof",
+    "Departure station coordinates": "53.081413,8.81365",
+    "Destination station name": "Bremen Universität-Süd",
+    "Destination station coordinates": "53.105026,8.851518"
+  },
+  {
+    "Status-ID": 5489241,
+    "Category": "tram",
+    "Departure station name": "Rostock, Majakowskistraße",
+    "Departure station coordinates": "54.069443,12.116225",
+    "Destination station name": "Rostock Neuer Markt",
+    "Destination station coordinates": "54.08899,12.140408"
+  },
+  {
+    "Status-ID": 5492074,
+    "Category": "tram",
+    "Departure station name": "Rostock, Kröpeliner Tor",
+    "Departure station coordinates": "54.089817,12.129987",
+    "Destination station name": "Rostock, Lomonossowstraße",
+    "Destination station coordinates": "54.065098,12.117213"
+  },
+  {
+    "Status-ID": 6065632,
+    "Category": "tram",
+    "Departure station name": "Rostock, Südstadt-Center",
+    "Departure station coordinates": "54.07215,12.117195",
+    "Destination station name": "Rostock, Kröpeliner Tor",
+    "Destination station coordinates": "54.089817,12.129987"
+  },
+  {
+    "Status-ID": 6081273,
+    "Category": "tram",
+    "Departure station name": "Darmstadt Kasinostraße",
+    "Departure station coordinates": "49.874973,8.642866",
+    "Destination station name": "Darmstadt Schulstraße",
+    "Destination station coordinates": "49.870167,8.656562"
+  },
+  {
+    "Status-ID": 6081925,
+    "Category": "tram",
+    "Departure station name": "Darmstadt Luisenplatz",
+    "Departure station coordinates": "49.872883,8.650254",
+    "Destination station name": "Darmstadt Rhein-/Neckarstraße",
+    "Destination station coordinates": "49.871532,8.644714"
+  },
+  {
+    "Status-ID": 6150752,
+    "Category": "tram",
+    "Departure station name": "Rosenthaler Platz (U), Berlin",
+    "Departure station coordinates": "52.529787,13.401406",
+    "Destination station name": "Mollstr./Otto-Braun-Str., Berlin",
+    "Destination station coordinates": "52.525203,13.419888"
+  },
+  {
+    "Status-ID": 6152439,
+    "Category": "tram",
+    "Departure station name": "Mollstr./Otto-Braun-Str., Berlin",
+    "Departure station coordinates": "52.525203,13.419888",
+    "Destination station name": "S+U Alexanderplatz Bhf/Gontardstr. (Berlin)",
+    "Destination station coordinates": "52.521027,13.411285"
+  },
+  {
+    "Status-ID": 6156394,
+    "Category": "tram",
+    "Departure station name": "Mollstr./Otto-Braun-Str., Berlin",
+    "Departure station coordinates": "52.525203,13.419888",
+    "Destination station name": "S+U Berlin Hauptbahnhof",
+    "Destination station coordinates": "52.526585,13.369713"
+  },
+  {
+    "Status-ID": 6232141,
+    "Category": "tram",
+    "Departure station name": "Rostock, Lomonossowstraße",
+    "Departure station coordinates": "54.065098,12.117213",
+    "Destination station name": "Rostock Neuer Markt",
+    "Destination station coordinates": "54.08899,12.140408"
+  },
+  {
+    "Status-ID": 6545389,
+    "Category": "tram",
+    "Departure station name": "Rostock, Lomonossowstraße",
+    "Departure station coordinates": "54.065098,12.117213",
+    "Destination station name": "Rostock, Lange Straße",
+    "Destination station coordinates": "54.0899,12.134057"
+  }
+]

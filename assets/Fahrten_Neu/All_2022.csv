@@ -1,0 +1,10 @@
+Status-ID,Category,"Departure station name","Departure station coordinates","Destination station name","Destination station coordinates"
+577355,tram,"Lomonossowstraße, Rostock","54.065307,12.117342","Hauptbahnhof (U), Rostock","54.078359,12.130907"
+577373,national,"Rostock Hbf","54.078197,12.131257","Bremen Hbf","53.08328,8.813681"
+580673,national,"Bremen Hbf","53.08328,8.813681","Rostock Hbf","54.078197,12.131257"
+627742,nationalExpress,"Rostock Hbf","54.078197,12.131257","Hamburg Hbf","53.553533,10.00636"
+628273,nationalExpress,"Hamburg Hbf","53.553533,10.00636","Düsseldorf Hbf","51.219708,6.794011"
+633744,national,"Düsseldorf Hbf","51.219708,6.794011",Hamburg-Harburg,"53.456198,9.991591"
+673616,regional,"Rostock Hbf","54.078197,12.131257","Hamburg Hbf","53.553533,10.00636"
+674917,regional,"Hamburg Hbf","53.553533,10.00636","Rostock Hbf","54.078197,12.131257"
+0,0,0

@@ -1,0 +1,26 @@
+[
+  {
+    "Status-ID": 6022840,
+    "Category": "ferry",
+    "Departure station name": "Bad Schandau Nationalparkbahnhof",
+    "Departure station coordinates": "50.91956,14.140246",
+    "Destination station name": "Bad Schandau Elbbrücke",
+    "Destination station coordinates": "50.921186,14.14085"
+  },
+  {
+    "Status-ID": 6033333,
+    "Category": "ferry",
+    "Departure station name": "Schöna Fährstelle",
+    "Departure station coordinates": "50.87526,14.234929",
+    "Destination station name": "Hrensko Fährstelle",
+    "Destination station coordinates": "50.8749,14.236195"
+  },
+  {
+    "Status-ID": 6036662,
+    "Category": "ferry",
+    "Departure station name": "Bad Schandau Elbkai",
+    "Departure station coordinates": "50.91663,14.152077",
+    "Destination station name": "Bad Schandau Nationalparkbahnhof",
+    "Destination station coordinates": "50.91956,14.140246"
+  }
+]

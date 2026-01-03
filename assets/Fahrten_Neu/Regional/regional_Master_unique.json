@@ -1,0 +1,474 @@
+[
+  {
+    "Status-ID": 673616,
+    "Category": "regional",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Hamburg Hbf",
+    "Destination station coordinates": "53.553533,10.00636"
+  },
+  {
+    "Status-ID": 884861,
+    "Category": "regional",
+    "Departure station name": "Milano Porta Garibaldi",
+    "Departure station coordinates": "45.484438,9.187299",
+    "Destination station name": "Milano Centrale",
+    "Destination station coordinates": "45.487143,9.204828"
+  },
+  {
+    "Status-ID": 886975,
+    "Category": "regional",
+    "Departure station name": "Milano Centrale",
+    "Departure station coordinates": "45.487143,9.204828",
+    "Destination station name": "Malpensa Aeroporto T1",
+    "Destination station coordinates": "45.627132,8.711275"
+  },
+  {
+    "Status-ID": 900745,
+    "Category": "regional",
+    "Departure station name": "Flughafen BER",
+    "Departure station coordinates": "52.364808,13.511947",
+    "Destination station name": "Ostkreuz",
+    "Destination station coordinates": "52.503037,13.469105"
+  },
+  {
+    "Status-ID": 1169156,
+    "Category": "regional",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Berlin Hbf",
+    "Destination station coordinates": "52.3928,13.036498"
+  },
+  {
+    "Status-ID": 1471470,
+    "Category": "regional",
+    "Departure station name": "Strasbourg Gare Centrale",
+    "Departure station coordinates": "48.584861,7.73525",
+    "Destination station name": "Offenburg",
+    "Destination station coordinates": "48.476506,7.94677"
+  },
+  {
+    "Status-ID": 1889735,
+    "Category": "regional",
+    "Departure station name": "Stralsund Hbf",
+    "Departure station coordinates": "54.308438,13.078028",
+    "Destination station name": "Prora",
+    "Destination station coordinates": "54.445002,13.564039"
+  },
+  {
+    "Status-ID": 2064673,
+    "Category": "regional",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 2154383,
+    "Category": "regional",
+    "Departure station name": "Köln Messe/Deutz",
+    "Departure station coordinates": "50.940874,6.975001",
+    "Destination station name": "Köln Hbf",
+    "Destination station coordinates": "50.942823,6.959197"
+  },
+  {
+    "Status-ID": 2459724,
+    "Category": "regional",
+    "Departure station name": "Mainz Römisches Theater",
+    "Departure station coordinates": "49.993517,8.277393",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 2543103,
+    "Category": "regional",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Sassnitz",
+    "Destination station coordinates": "54.516691,13.638964"
+  },
+  {
+    "Status-ID": 2548142,
+    "Category": "regional",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Bad Kleinen",
+    "Destination station coordinates": "53.766847,11.466496"
+  },
+  {
+    "Status-ID": 2548382,
+    "Category": "regional",
+    "Departure station name": "Bad Kleinen",
+    "Departure station coordinates": "53.766847,11.466496",
+    "Destination station name": "Lübeck Hbf",
+    "Destination station coordinates": "53.86767,10.669737"
+  },
+  {
+    "Status-ID": 2548662,
+    "Category": "regional",
+    "Departure station name": "Lübeck Hbf",
+    "Departure station coordinates": "53.86767,10.669737",
+    "Destination station name": "Lüneburg",
+    "Destination station coordinates": "53.249742,10.419873"
+  },
+  {
+    "Status-ID": 2549040,
+    "Category": "regional",
+    "Departure station name": "Lüneburg",
+    "Departure station coordinates": "53.249742,10.419873",
+    "Destination station name": "Uelzen",
+    "Destination station coordinates": "52.96998,10.553246"
+  },
+  {
+    "Status-ID": 2549262,
+    "Category": "regional",
+    "Departure station name": "Uelzen",
+    "Departure station coordinates": "52.96998,10.553246",
+    "Destination station name": "Eschede",
+    "Destination station coordinates": "52.741528,10.231226"
+  },
+  {
+    "Status-ID": 2582171,
+    "Category": "regional",
+    "Departure station name": "Mainz-Gustavsburg",
+    "Departure station coordinates": "49.994056,8.314222",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 2582920,
+    "Category": "regional",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Darmstadt Süd",
+    "Destination station coordinates": "49.854157,8.637132"
+  },
+  {
+    "Status-ID": 2819777,
+    "Category": "regional",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Mannheim Hbf",
+    "Destination station coordinates": "49.479181,8.469268"
+  },
+  {
+    "Status-ID": 3086133,
+    "Category": "regional",
+    "Departure station name": "Berlin Gesundbrunnen",
+    "Departure station coordinates": "52.548656,13.39106",
+    "Destination station name": "Neustrelitz Hbf",
+    "Destination station coordinates": "53.357936,13.07375"
+  },
+  {
+    "Status-ID": 3087161,
+    "Category": "regional",
+    "Departure station name": "Neustrelitz Hbf",
+    "Departure station coordinates": "53.357936,13.07375",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 3206272,
+    "Category": "regional",
+    "Departure station name": "Aschaffenburg Hbf",
+    "Departure station coordinates": "49.98059,9.143854",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 3218202,
+    "Category": "regional",
+    "Departure station name": "Oranienburg",
+    "Departure station coordinates": "52.75467,13.248886",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 3465754,
+    "Category": "regional",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Berlin Gesundbrunnen",
+    "Destination station coordinates": "52.548656,13.39106"
+  },
+  {
+    "Status-ID": 3519331,
+    "Category": "regional",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Mainz-Bischofsheim",
+    "Destination station coordinates": "49.992941,8.358062"
+  },
+  {
+    "Status-ID": 3521739,
+    "Category": "regional",
+    "Departure station name": "Wiesbaden Hbf",
+    "Departure station coordinates": "50.070788,8.243728",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 3528663,
+    "Category": "regional",
+    "Departure station name": "Niedernhausen(Taunus)",
+    "Departure station coordinates": "50.159988,8.312388",
+    "Destination station name": "Wiesbaden Hbf",
+    "Destination station coordinates": "50.070788,8.243728"
+  },
+  {
+    "Status-ID": 3539889,
+    "Category": "regional",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Bad Nauheim",
+    "Destination station coordinates": "50.367909,8.749093"
+  },
+  {
+    "Status-ID": 3541046,
+    "Category": "regional",
+    "Departure station name": "Bad Nauheim",
+    "Departure station coordinates": "50.367909,8.749093",
+    "Destination station name": "Friedberg (Hess)",
+    "Destination station coordinates": "50.332535,8.761588"
+  },
+  {
+    "Status-ID": 3713709,
+    "Category": "regional",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Stralsund Hbf",
+    "Destination station coordinates": "54.308438,13.078028"
+  },
+  {
+    "Status-ID": 3927862,
+    "Category": "regional",
+    "Departure station name": "Frankfurt(Main)Süd",
+    "Departure station coordinates": "50.099302,8.686187",
+    "Destination station name": "Hanau Hbf",
+    "Destination station coordinates": "50.120903,8.92921"
+  },
+  {
+    "Status-ID": 3936936,
+    "Category": "regional",
+    "Departure station name": "Hanau Hbf",
+    "Departure station coordinates": "50.120903,8.92921",
+    "Destination station name": "Darmstadt Ost",
+    "Destination station coordinates": "49.874904,8.673772"
+  },
+  {
+    "Status-ID": 4343340,
+    "Category": "regional",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Heidelberg Hbf",
+    "Destination station coordinates": "49.403582,8.67548"
+  },
+  {
+    "Status-ID": 4344276,
+    "Category": "regional",
+    "Departure station name": "Karlsruhe-Durlach",
+    "Departure station coordinates": "49.002025,8.462292",
+    "Destination station name": "Wilferdingen-Singen",
+    "Destination station coordinates": "48.953744,8.572797"
+  },
+  {
+    "Status-ID": 4357704,
+    "Category": "regional",
+    "Departure station name": "Wilferdingen-Singen",
+    "Departure station coordinates": "48.953744,8.572797",
+    "Destination station name": "Stuttgart Hbf",
+    "Destination station coordinates": "48.785052,9.182589"
+  },
+  {
+    "Status-ID": 4364047,
+    "Category": "regional",
+    "Departure station name": "Darmstadt Ost",
+    "Departure station coordinates": "49.874904,8.673772",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 4378560,
+    "Category": "regional",
+    "Departure station name": "Frankfurt-Höchst",
+    "Departure station coordinates": "50.102754,8.542449",
+    "Destination station name": "Frankfurt(Main)Hbf",
+    "Destination station coordinates": "50.106817,8.663003"
+  },
+  {
+    "Status-ID": 4378600,
+    "Category": "regional",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Darmstadt Ost",
+    "Destination station coordinates": "49.874904,8.673772"
+  },
+  {
+    "Status-ID": 4449192,
+    "Category": "regional",
+    "Departure station name": "Ostkreuz",
+    "Departure station coordinates": "52.503037,13.469105",
+    "Destination station name": "Berlin-Schöneweide",
+    "Destination station coordinates": "52.455204,13.508773"
+  },
+  {
+    "Status-ID": 4451031,
+    "Category": "regional",
+    "Departure station name": "Ludwigslust",
+    "Departure station coordinates": "53.335122,11.493751",
+    "Destination station name": "Schwerin Hbf",
+    "Destination station coordinates": "53.634723,11.407527"
+  },
+  {
+    "Status-ID": 4451111,
+    "Category": "regional",
+    "Departure station name": "Schwerin Hbf",
+    "Departure station coordinates": "53.634723,11.407527",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 4838461,
+    "Category": "regional",
+    "Departure station name": "Rostock, Hauptbahnhof",
+    "Departure station coordinates": "54.078297,12.130989",
+    "Destination station name": "Hamburg Hbf",
+    "Destination station coordinates": "53.553533,10.00636"
+  },
+  {
+    "Status-ID": 4841790,
+    "Category": "regional",
+    "Departure station name": "Kassel-Wilhelmshöhe",
+    "Departure station coordinates": "51.312998,9.446845",
+    "Destination station name": "Frankfurt(Main)Hbf",
+    "Destination station coordinates": "50.106817,8.663003"
+  },
+  {
+    "Status-ID": 5007224,
+    "Category": "regional",
+    "Departure station name": "S+U Potsdamer Platz Bhf (Berlin)",
+    "Departure station coordinates": "52.50831,13.377322",
+    "Destination station name": "S+U Berlin Hauptbahnhof",
+    "Destination station coordinates": "52.526585,13.369713"
+  },
+  {
+    "Status-ID": 5210767,
+    "Category": "regional",
+    "Departure station name": "Samtens",
+    "Departure station coordinates": "54.354031,13.290282",
+    "Destination station name": "Prora",
+    "Destination station coordinates": "54.445002,13.564039"
+  },
+  {
+    "Status-ID": 5212246,
+    "Category": "regional",
+    "Departure station name": "Prora",
+    "Departure station coordinates": "54.445002,13.564039",
+    "Destination station name": "Stralsund Rügendamm",
+    "Destination station coordinates": "54.305283,13.107468"
+  },
+  {
+    "Status-ID": 5395644,
+    "Category": "regional",
+    "Departure station name": "S Ostkreuz Bhf (Berlin)",
+    "Departure station coordinates": "52.503315,13.469607",
+    "Destination station name": "S+U Friedrichstr. Bhf (Berlin)",
+    "Destination station coordinates": "52.520424,13.38635"
+  },
+  {
+    "Status-ID": 5543056,
+    "Category": "regional",
+    "Departure station name": "S+U Potsdamer Platz Bhf (Berlin)",
+    "Departure station coordinates": "52.50831,13.377322",
+    "Destination station name": "S+U Jungfernheide Bhf (Berlin)",
+    "Destination station coordinates": "52.53036,13.299325"
+  },
+  {
+    "Status-ID": 5547365,
+    "Category": "regional",
+    "Departure station name": "S Südkreuz Bhf (Berlin)",
+    "Departure station coordinates": "52.47588,13.365602",
+    "Destination station name": "Berlin Hbf",
+    "Destination station coordinates": "52.524924,13.369629"
+  },
+  {
+    "Status-ID": 5591659,
+    "Category": "regional",
+    "Departure station name": "Neubrandenburg",
+    "Departure station coordinates": "53.561938,13.261768",
+    "Destination station name": "Neustrelitz Hbf",
+    "Destination station coordinates": "53.357936,13.07375"
+  },
+  {
+    "Status-ID": 5637735,
+    "Category": "regional",
+    "Departure station name": "Neu-Edingen/Friedrichsfeld",
+    "Departure station coordinates": "49.44842,8.579934",
+    "Destination station name": "Schwetzingen",
+    "Destination station coordinates": "49.383428,8.578712"
+  },
+  {
+    "Status-ID": 5638216,
+    "Category": "regional",
+    "Departure station name": "Karlsruhe Hbf",
+    "Departure station coordinates": "48.99353,8.401939",
+    "Destination station name": "Wilferdingen-Singen",
+    "Destination station coordinates": "48.953744,8.572797"
+  },
+  {
+    "Status-ID": 5779693,
+    "Category": "regional",
+    "Departure station name": "S+U Berlin Hauptbahnhof",
+    "Departure station coordinates": "52.524788,13.369667",
+    "Destination station name": "Güstrow",
+    "Destination station coordinates": "53.800754,12.172608"
+  },
+  {
+    "Status-ID": 6033216,
+    "Category": "regional",
+    "Departure station name": "Decin hl.n.",
+    "Departure station coordinates": "50.773987,14.201527",
+    "Destination station name": "Schöna",
+    "Destination station coordinates": "50.87588,14.234688"
+  },
+  {
+    "Status-ID": 6149280,
+    "Category": "regional",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "S+U Gesundbrunnen Bhf (Berlin)",
+    "Destination station coordinates": "52.54913,13.389907"
+  },
+  {
+    "Status-ID": 6153920,
+    "Category": "regional",
+    "Departure station name": "S Ostbahnhof (Berlin)",
+    "Departure station coordinates": "52.51006,13.433347",
+    "Destination station name": "S+U Alexanderplatz Bhf (Berlin)",
+    "Destination station coordinates": "52.52145,13.411009"
+  },
+  {
+    "Status-ID": 6179878,
+    "Category": "regional",
+    "Departure station name": "S Oranienburg Bhf",
+    "Departure station coordinates": "52.754093,13.249336",
+    "Destination station name": "S+U Gesundbrunnen Bhf (Berlin)",
+    "Destination station coordinates": "52.54913,13.389907"
+  },
+  {
+    "Status-ID": 6331361,
+    "Category": "regional",
+    "Departure station name": "Langen(Hess)",
+    "Departure station coordinates": "49.993535,8.656828",
+    "Destination station name": "Darmstadt Hbf",
+    "Destination station coordinates": "49.872549,8.629707"
+  },
+  {
+    "Status-ID": 6672947,
+    "Category": "regional",
+    "Departure station name": "Lübeck Hbf",
+    "Departure station coordinates": "53.86767,10.669737",
+    "Destination station name": "Hamburg Hbf",
+    "Destination station coordinates": "53.553533,10.00636"
+  }
+]

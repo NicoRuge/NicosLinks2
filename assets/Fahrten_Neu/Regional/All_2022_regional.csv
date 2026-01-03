@@ -1,0 +1,3 @@
+Status-ID,Category,Departure station name,Departure station coordinates,Destination station name,Destination station coordinates
+673616,regional,Rostock Hbf,"54.078197,12.131257",Hamburg Hbf,"53.553533,10.00636"
+674917,regional,Hamburg Hbf,"53.553533,10.00636",Rostock Hbf,"54.078197,12.131257"

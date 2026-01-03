@@ -1,0 +1,90 @@
+[
+  {
+    "Status-ID": 5063487,
+    "Category": "regionalExp",
+    "Departure station name": "Berlin Hbf",
+    "Departure station coordinates": "52.524924,13.369629",
+    "Destination station name": "Hamburg Hbf",
+    "Destination station coordinates": "53.553533,10.00636"
+  },
+  {
+    "Status-ID": 5072347,
+    "Category": "regionalExp",
+    "Departure station name": "Ludwigslust",
+    "Departure station coordinates": "53.335122,11.493751",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 5396748,
+    "Category": "regionalExp",
+    "Departure station name": "Berlin Hbf",
+    "Departure station coordinates": "52.524924,13.369629",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 5645926,
+    "Category": "regionalExp",
+    "Departure station name": "Berlin Gesundbrunnen",
+    "Departure station coordinates": "52.548656,13.39106",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 6020549,
+    "Category": "regionalExp",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Dresden Hbf",
+    "Destination station coordinates": "51.040221,13.731409"
+  },
+  {
+    "Status-ID": 6029909,
+    "Category": "regionalExp",
+    "Departure station name": "Děčín hl. n.",
+    "Departure station coordinates": "50.773476,14.201046",
+    "Destination station name": "Praha hl. n.",
+    "Destination station coordinates": "50.083058,14.436037"
+  },
+  {
+    "Status-ID": 6032364,
+    "Category": "regionalExp",
+    "Departure station name": "Praha hl.n.",
+    "Departure station coordinates": "50.083058,14.436038",
+    "Destination station name": "Decin hl.n.",
+    "Destination station coordinates": "50.773987,14.201527"
+  },
+  {
+    "Status-ID": 6083970,
+    "Category": "regionalExp",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Hamburg Hbf",
+    "Destination station coordinates": "53.553533,10.00636"
+  },
+  {
+    "Status-ID": 6086870,
+    "Category": "regionalExp",
+    "Departure station name": "Hamburg Hbf",
+    "Departure station coordinates": "53.553533,10.00636",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 6178991,
+    "Category": "regionalExp",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "S Oranienburg Bhf",
+    "Destination station coordinates": "52.754093,13.249336"
+  },
+  {
+    "Status-ID": 6261885,
+    "Category": "regionalExp",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Berlin Ostkreuz",
+    "Destination station coordinates": "52.503305,13.468861"
+  }
+]

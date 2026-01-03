@@ -1,0 +1,490 @@
+[
+  {
+    "Status-ID": 2058615,
+    "Category": "suburban",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Frankfurt(Main)Hbf",
+    "Destination station coordinates": "50.106817,8.663003"
+  },
+  {
+    "Status-ID": 2059740,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt-Hauptwache",
+    "Departure station coordinates": "50.114044,8.678285",
+    "Destination station name": "Offenbach(Main) Marktplatz",
+    "Destination station coordinates": "50.105846,8.76353"
+  },
+  {
+    "Status-ID": 2060823,
+    "Category": "suburban",
+    "Departure station name": "Offenbach(Main) Marktplatz",
+    "Departure station coordinates": "50.105846,8.76353",
+    "Destination station name": "Frankfurt(Main)Hbf",
+    "Destination station coordinates": "50.106817,8.663003"
+  },
+  {
+    "Status-ID": 2062610,
+    "Category": "suburban",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Frankfurt(Main)Süd",
+    "Destination station coordinates": "50.099302,8.686187"
+  },
+  {
+    "Status-ID": 2150283,
+    "Category": "suburban",
+    "Departure station name": "Köln Hbf",
+    "Departure station coordinates": "50.942823,6.959197",
+    "Destination station name": "Köln Messe/Deutz",
+    "Destination station coordinates": "50.940874,6.975001"
+  },
+  {
+    "Status-ID": 2171457,
+    "Category": "suburban",
+    "Departure station name": "Berlin Warschauer Straße",
+    "Departure station coordinates": "52.505948,13.45224",
+    "Destination station name": "Berlin Betriebsbf Rummelsburg",
+    "Destination station coordinates": "52.49392,13.497573"
+  },
+  {
+    "Status-ID": 2178364,
+    "Category": "suburban",
+    "Departure station name": "Berlin Betriebsbf Rummelsburg",
+    "Departure station coordinates": "52.49392,13.497573",
+    "Destination station name": "Berlin Hbf",
+    "Destination station coordinates": "52.524924,13.369629"
+  },
+  {
+    "Status-ID": 2183831,
+    "Category": "suburban",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Warnemünde",
+    "Destination station coordinates": "54.175685,12.091525"
+  },
+  {
+    "Status-ID": 2189000,
+    "Category": "suburban",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Rostock-Lichtenhagen",
+    "Destination station coordinates": "54.152385,12.070913"
+  },
+  {
+    "Status-ID": 2254450,
+    "Category": "suburban",
+    "Departure station name": "Berlin Ostkreuz",
+    "Departure station coordinates": "52.503305,13.468861",
+    "Destination station name": "Berlin Betriebsbf Rummelsburg",
+    "Destination station coordinates": "52.49392,13.497573"
+  },
+  {
+    "Status-ID": 2379873,
+    "Category": "suburban",
+    "Departure station name": "Papendorf",
+    "Departure station coordinates": "54.036604,12.137334",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 2455640,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Frankfurt(M)Konstablerwache",
+    "Destination station coordinates": "50.114637,8.686393"
+  },
+  {
+    "Status-ID": 2457255,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt(M)Ostendstraße",
+    "Departure station coordinates": "50.112309,8.697252",
+    "Destination station name": "Frankfurt(Main)Hbf",
+    "Destination station coordinates": "50.106817,8.663003"
+  },
+  {
+    "Status-ID": 2457474,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Wiesbaden-Mainz-Kast",
+    "Destination station coordinates": "50.006758,8.282966"
+  },
+  {
+    "Status-ID": 2459656,
+    "Category": "suburban",
+    "Departure station name": "Wiesbaden Ost",
+    "Departure station coordinates": "50.041438,8.256412",
+    "Destination station name": "Mainz Römisches Theater",
+    "Destination station coordinates": "49.993517,8.277393"
+  },
+  {
+    "Status-ID": 2536175,
+    "Category": "suburban",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Rostock-Bramow",
+    "Destination station coordinates": "54.103016,12.089179"
+  },
+  {
+    "Status-ID": 2784240,
+    "Category": "suburban",
+    "Departure station name": "Berlin Ostkreuz",
+    "Departure station coordinates": "52.503305,13.468861",
+    "Destination station name": "Berlin Nöldnerplatz",
+    "Destination station coordinates": "52.503817,13.485366"
+  },
+  {
+    "Status-ID": 2788848,
+    "Category": "suburban",
+    "Departure station name": "Berlin Ostkreuz",
+    "Departure station coordinates": "52.503305,13.468861",
+    "Destination station name": "Berlin Landsberger Allee",
+    "Destination station coordinates": "52.529572,13.454551"
+  },
+  {
+    "Status-ID": 2794901,
+    "Category": "suburban",
+    "Departure station name": "Berlin-Friedrichsfelde Ost",
+    "Departure station coordinates": "52.514128,13.520091",
+    "Destination station name": "Berlin Springpfuhl",
+    "Destination station coordinates": "52.526389,13.536883"
+  },
+  {
+    "Status-ID": 2796946,
+    "Category": "suburban",
+    "Departure station name": "Berlin Springpfuhl",
+    "Departure station coordinates": "52.526389,13.536883",
+    "Destination station name": "Berlin-Lichtenberg (S)",
+    "Destination station coordinates": "52.509921,13.497249"
+  },
+  {
+    "Status-ID": 2799784,
+    "Category": "suburban",
+    "Departure station name": "Berlin Ostkreuz",
+    "Departure station coordinates": "52.503305,13.468861",
+    "Destination station name": "Berlin Hbf",
+    "Destination station coordinates": "52.524924,13.369629"
+  },
+  {
+    "Status-ID": 3066291,
+    "Category": "suburban",
+    "Departure station name": "Rostock Hbf",
+    "Departure station coordinates": "54.078197,12.131257",
+    "Destination station name": "Rostock-Lütten Klein",
+    "Destination station coordinates": "54.138793,12.06507"
+  },
+  {
+    "Status-ID": 3217881,
+    "Category": "suburban",
+    "Departure station name": "Berlin Gesundbrunnen",
+    "Departure station coordinates": "52.548656,13.39106",
+    "Destination station name": "Oranienburg",
+    "Destination station coordinates": "52.75467,13.248886"
+  },
+  {
+    "Status-ID": 3342162,
+    "Category": "suburban",
+    "Departure station name": "Rostock-Evershagen",
+    "Departure station coordinates": "54.123575,12.068576",
+    "Destination station name": "Warnemünde",
+    "Destination station coordinates": "54.175685,12.091525"
+  },
+  {
+    "Status-ID": 3519711,
+    "Category": "suburban",
+    "Departure station name": "Mainz-Bischofsheim",
+    "Departure station coordinates": "49.992941,8.358062",
+    "Destination station name": "Wiesbaden Hbf",
+    "Destination station coordinates": "50.070788,8.243728"
+  },
+  {
+    "Status-ID": 3526959,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Niederjosbach",
+    "Destination station coordinates": "50.149282,8.352354"
+  },
+  {
+    "Status-ID": 3528613,
+    "Category": "suburban",
+    "Departure station name": "Niederjosbach",
+    "Departure station coordinates": "50.149282,8.352354",
+    "Destination station name": "Niedernhausen(Taunus)",
+    "Destination station coordinates": "50.159988,8.312388"
+  },
+  {
+    "Status-ID": 3533690,
+    "Category": "suburban",
+    "Departure station name": "Ludwigshafen(Rh)Hbf",
+    "Departure station coordinates": "49.477257,8.433769",
+    "Destination station name": "Mannheim Hbf",
+    "Destination station coordinates": "49.479181,8.469268"
+  },
+  {
+    "Status-ID": 3541099,
+    "Category": "suburban",
+    "Departure station name": "Friedberg (Hess)",
+    "Departure station coordinates": "50.332535,8.761588",
+    "Destination station name": "Frankfurt(Main)Hbf",
+    "Destination station coordinates": "50.106817,8.663003"
+  },
+  {
+    "Status-ID": 3567390,
+    "Category": "suburban",
+    "Departure station name": "Berlin Warschauer Straße",
+    "Departure station coordinates": "52.505948,13.45224",
+    "Destination station name": "Berlin Zoologischer Garten",
+    "Destination station coordinates": "52.507242,13.332414"
+  },
+  {
+    "Status-ID": 3572632,
+    "Category": "suburban",
+    "Departure station name": "Berlin Hermannstraße",
+    "Departure station coordinates": "52.467645,13.430945",
+    "Destination station name": "Berlin Südkreuz",
+    "Destination station coordinates": "52.47623,13.365863"
+  },
+  {
+    "Status-ID": 3573552,
+    "Category": "suburban",
+    "Departure station name": "Berlin Südkreuz",
+    "Departure station coordinates": "52.47623,13.365863",
+    "Destination station name": "Berlin Yorckstr.(S2)",
+    "Destination station coordinates": "52.491206,13.372048"
+  },
+  {
+    "Status-ID": 3575691,
+    "Category": "suburban",
+    "Departure station name": "Berlin Ostkreuz",
+    "Departure station coordinates": "52.503305,13.468861",
+    "Destination station name": "Berlin Jungfernheide (S)",
+    "Destination station coordinates": "52.530408,13.299424"
+  },
+  {
+    "Status-ID": 3577617,
+    "Category": "suburban",
+    "Departure station name": "Berlin-Tiergarten",
+    "Departure station coordinates": "52.514281,13.336414",
+    "Destination station name": "Berlin Hbf",
+    "Destination station coordinates": "52.524924,13.369629"
+  },
+  {
+    "Status-ID": 3924049,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Mühlheim(Main)",
+    "Destination station coordinates": "50.119258,8.838248"
+  },
+  {
+    "Status-ID": 4343952,
+    "Category": "suburban",
+    "Departure station name": "Heidelberg Hbf",
+    "Departure station coordinates": "49.403582,8.67548",
+    "Destination station name": "Karlsruhe-Durlach",
+    "Destination station coordinates": "49.002025,8.462292"
+  },
+  {
+    "Status-ID": 4377415,
+    "Category": "suburban",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Frankfurt(M)Konstablerwache",
+    "Destination station coordinates": "50.114637,8.686393"
+  },
+  {
+    "Status-ID": 4377717,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt(M)Konstablerwache",
+    "Departure station coordinates": "50.114637,8.686393",
+    "Destination station name": "Frankfurt-Höchst Farbwerke",
+    "Destination station coordinates": "50.098727,8.528678"
+  },
+  {
+    "Status-ID": 4380665,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Bad Homburg",
+    "Destination station coordinates": "50.220009,8.621356"
+  },
+  {
+    "Status-ID": 4442467,
+    "Category": "suburban",
+    "Departure station name": "Berlin Ostkreuz",
+    "Departure station coordinates": "52.503305,13.468861",
+    "Destination station name": "Berlin Bundesplatz",
+    "Destination station coordinates": "52.477695,13.329295"
+  },
+  {
+    "Status-ID": 4444973,
+    "Category": "suburban",
+    "Departure station name": "Berlin Südkreuz",
+    "Departure station coordinates": "52.47623,13.365863",
+    "Destination station name": "Berlin Ostkreuz",
+    "Destination station coordinates": "52.503305,13.468861"
+  },
+  {
+    "Status-ID": 4448013,
+    "Category": "suburban",
+    "Departure station name": "Berlin Betriebsbf Rummelsburg",
+    "Departure station coordinates": "52.49392,13.497573",
+    "Destination station name": "Berlin Alexanderplatz",
+    "Destination station coordinates": "52.521526,13.411088"
+  },
+  {
+    "Status-ID": 4449087,
+    "Category": "suburban",
+    "Departure station name": "Berlin Alexanderplatz",
+    "Departure station coordinates": "52.521526,13.411088",
+    "Destination station name": "Berlin Ostkreuz",
+    "Destination station coordinates": "52.503305,13.468861"
+  },
+  {
+    "Status-ID": 4450654,
+    "Category": "suburban",
+    "Departure station name": "Berlin-Schöneweide (S)",
+    "Departure station coordinates": "52.454979,13.509115",
+    "Destination station name": "Berlin Südkreuz",
+    "Destination station coordinates": "52.47623,13.365863"
+  },
+  {
+    "Status-ID": 4700072,
+    "Category": "suburban",
+    "Departure station name": "Berlin Betriebsbf Rummelsburg",
+    "Departure station coordinates": "52.49392,13.497573",
+    "Destination station name": "Berlin Jannowitzbrücke",
+    "Destination station coordinates": "52.514227,13.419681"
+  },
+  {
+    "Status-ID": 5043512,
+    "Category": "suburban",
+    "Departure station name": "Basel SBB",
+    "Departure station coordinates": "47.547408,7.589548",
+    "Destination station name": "Dornach(CH)-Arlesheim",
+    "Destination station coordinates": "47.489077,7.611212"
+  },
+  {
+    "Status-ID": 5063853,
+    "Category": "suburban",
+    "Departure station name": "Hamburg Hbf",
+    "Departure station coordinates": "53.553533,10.00636",
+    "Destination station name": "Hamburg Langenfelde",
+    "Destination station coordinates": "53.57934,9.931048"
+  },
+  {
+    "Status-ID": 5546101,
+    "Category": "suburban",
+    "Departure station name": "S Südkreuz Bhf (Berlin)",
+    "Departure station coordinates": "52.47588,13.365602",
+    "Destination station name": "S+U Tempelhof (Berlin)",
+    "Destination station coordinates": "52.471027,13.384476"
+  },
+  {
+    "Status-ID": 5637739,
+    "Category": "suburban",
+    "Departure station name": "Schwetzingen",
+    "Departure station coordinates": "49.383428,8.578712",
+    "Destination station name": "Karlsruhe Hbf",
+    "Destination station coordinates": "48.99353,8.401939"
+  },
+  {
+    "Status-ID": 5779695,
+    "Category": "suburban",
+    "Departure station name": "Güstrow",
+    "Departure station coordinates": "53.800754,12.172608",
+    "Destination station name": "Rostock Hbf",
+    "Destination station coordinates": "54.078197,12.131257"
+  },
+  {
+    "Status-ID": 6022459,
+    "Category": "suburban",
+    "Departure station name": "Dresden Hbf",
+    "Departure station coordinates": "51.040221,13.731409",
+    "Destination station name": "Bad Schandau Nationalparkbahnhof",
+    "Destination station coordinates": "50.91921,14.137704"
+  },
+  {
+    "Status-ID": 6073569,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt(Main)Süd",
+    "Departure station coordinates": "50.099302,8.686187",
+    "Destination station name": "Offenbach(Main) Ost",
+    "Destination station coordinates": "50.102762,8.784375"
+  },
+  {
+    "Status-ID": 6073689,
+    "Category": "suburban",
+    "Departure station name": "Offenbach(Main) Ost",
+    "Departure station coordinates": "50.102762,8.784375",
+    "Destination station name": "Obertshausen(Kr Of)",
+    "Destination station coordinates": "50.072011,8.853737"
+  },
+  {
+    "Status-ID": 6152444,
+    "Category": "suburban",
+    "Departure station name": "S+U Alexanderplatz Bhf (Berlin)",
+    "Departure station coordinates": "52.52145,13.411009",
+    "Destination station name": "Warschauer Str. (S+U), Berlin",
+    "Destination station coordinates": "52.505238,13.449112"
+  },
+  {
+    "Status-ID": 6180113,
+    "Category": "suburban",
+    "Departure station name": "S+U Gesundbrunnen Bhf (Berlin)",
+    "Departure station coordinates": "52.54913,13.389907",
+    "Destination station name": "S Ostkreuz Bhf (Berlin)",
+    "Destination station coordinates": "52.503315,13.469607"
+  },
+  {
+    "Status-ID": 6185101,
+    "Category": "suburban",
+    "Departure station name": "S+U Zoologischer Garten Bhf (Berlin)",
+    "Departure station coordinates": "52.50707,13.331736",
+    "Destination station name": "S Ostbahnhof (Berlin)",
+    "Destination station coordinates": "52.51006,13.433347"
+  },
+  {
+    "Status-ID": 6185140,
+    "Category": "suburban",
+    "Departure station name": "S Ostbahnhof (Berlin)",
+    "Departure station coordinates": "52.51006,13.433347",
+    "Destination station name": "S Betriebsbahnhof Rummelsburg (Berlin)",
+    "Destination station coordinates": "52.49397,13.497724"
+  },
+  {
+    "Status-ID": 6189090,
+    "Category": "suburban",
+    "Departure station name": "S Betriebsbahnhof Rummelsburg (Berlin)",
+    "Departure station coordinates": "52.49397,13.497724",
+    "Destination station name": "S Ostkreuz Bhf (Berlin)",
+    "Destination station coordinates": "52.503315,13.469607"
+  },
+  {
+    "Status-ID": 6330923,
+    "Category": "suburban",
+    "Departure station name": "Frankfurt(Main)Süd",
+    "Departure station coordinates": "50.099302,8.686187",
+    "Destination station name": "Langen(Hess)",
+    "Destination station coordinates": "49.993535,8.656828"
+  },
+  {
+    "Status-ID": 6345232,
+    "Category": "suburban",
+    "Departure station name": "Darmstadt Hbf",
+    "Departure station coordinates": "49.872549,8.629707",
+    "Destination station name": "Frankfurt (Main) West",
+    "Destination station coordinates": "50.118862,8.639334"
+  },
+  {
+    "Status-ID": 6673496,
+    "Category": "suburban",
+    "Departure station name": "Hamburg Hbf",
+    "Departure station coordinates": "53.553533,10.00636",
+    "Destination station name": "Hamburg Dammtor",
+    "Destination station coordinates": "53.560841,9.989533"
+  }
+]

@@ -1,0 +1,4 @@
+Status-ID,Category,Departure station name,Departure station coordinates,Destination station name,Destination station coordinates
+577373,national,Rostock Hbf,"54.078197,12.131257",Bremen Hbf,"53.08328,8.813681"
+580673,national,Bremen Hbf,"53.08328,8.813681",Rostock Hbf,"54.078197,12.131257"
+633744,national,Düsseldorf Hbf,"51.219708,6.794011",Hamburg-Harburg,"53.456198,9.991591"

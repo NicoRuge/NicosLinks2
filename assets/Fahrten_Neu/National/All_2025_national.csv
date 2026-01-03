@@ -1,0 +1,5 @@
+Status-ID,Category,Departure station name,Departure station coordinates,Destination station name,Destination station coordinates
+4435615,national,Rostock Hbf,"54.078197,12.131257",Ludwigslust,"53.335122,11.493751"
+4693813,national,Rostock Hbf,"54.078197,12.131257",Ostkreuz,"52.503037,13.469105"
+4839232,national,Hamburg Hbf,"53.553533,10.00636",Hamburg-Harburg,"53.456198,9.991591"
+4862228,national,Hamburg-Harburg,"53.456198,9.991591",Hamburg Hbf,"53.553533,10.00636"

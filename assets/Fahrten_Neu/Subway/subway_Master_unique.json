@@ -1,0 +1,338 @@
+[
+  {
+    "Status-ID": 1861245,
+    "Category": "subway",
+    "Departure station name": "Wandsbek Markt, Hamburg",
+    "Departure station coordinates": "53.571637,10.06675",
+    "Destination station name": "Stephansplatz (Oper/CCH), Hamburg",
+    "Destination station coordinates": "53.558549,9.989317"
+  },
+  {
+    "Status-ID": 1861518,
+    "Category": "subway",
+    "Departure station name": "Gänsemarkt (Oper), Hamburg",
+    "Departure station coordinates": "53.555609,9.986045",
+    "Destination station name": "Jungfernstieg, Hamburg",
+    "Destination station coordinates": "53.553209,9.994701"
+  },
+  {
+    "Status-ID": 1861542,
+    "Category": "subway",
+    "Departure station name": "Jungfernstieg, Hamburg",
+    "Departure station coordinates": "53.553209,9.994701",
+    "Destination station name": "Hamburg Hbf",
+    "Destination station coordinates": "53.553533,10.00636"
+  },
+  {
+    "Status-ID": 2170948,
+    "Category": "subway",
+    "Departure station name": "Nollendorfplatz (U), Berlin",
+    "Departure station coordinates": "52.499592,13.35415",
+    "Destination station name": "Warschauer Str. (S+U), Berlin",
+    "Destination station coordinates": "52.505238,13.449112"
+  },
+  {
+    "Status-ID": 2171366,
+    "Category": "subway",
+    "Departure station name": "Görlitzer Bahnhof (U), Berlin",
+    "Departure station coordinates": "52.499251,13.427745",
+    "Destination station name": "Warschauer Str. (S+U), Berlin",
+    "Destination station coordinates": "52.505238,13.449112"
+  },
+  {
+    "Status-ID": 2454723,
+    "Category": "subway",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Festhalle/Messe, Frankfurt a.M.",
+    "Destination station coordinates": "50.112183,8.654859"
+  },
+  {
+    "Status-ID": 2454761,
+    "Category": "subway",
+    "Departure station name": "Festhalle/Messe, Frankfurt a.M.",
+    "Departure station coordinates": "50.112183,8.654859",
+    "Destination station name": "Willy-Brandt-Platz, Frankfurt a.M.",
+    "Destination station coordinates": "50.108992,8.673898"
+  },
+  {
+    "Status-ID": 2461556,
+    "Category": "subway",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Höhenstraße, Frankfurt a.M.",
+    "Destination station coordinates": "50.123042,8.701495"
+  },
+  {
+    "Status-ID": 2796988,
+    "Category": "subway",
+    "Departure station name": "Lichtenberg Bahnhof (S+U), Berlin",
+    "Departure station coordinates": "52.510757,13.498229",
+    "Destination station name": "Friedrichsfelde (U), Berlin",
+    "Destination station coordinates": "52.505912,13.512783"
+  },
+  {
+    "Status-ID": 3072991,
+    "Category": "subway",
+    "Departure station name": "Berlin Hbf",
+    "Departure station coordinates": "52.524924,13.369629",
+    "Destination station name": "Friedrichsfelde (U), Berlin",
+    "Destination station coordinates": "52.505912,13.512783"
+  },
+  {
+    "Status-ID": 3077820,
+    "Category": "subway",
+    "Departure station name": "Friedrichsfelde (U), Berlin",
+    "Departure station coordinates": "52.505912,13.512783",
+    "Destination station name": "Berlin Alexanderplatz",
+    "Destination station coordinates": "52.521526,13.411088"
+  },
+  {
+    "Status-ID": 3077954,
+    "Category": "subway",
+    "Departure station name": "Berlin Alexanderplatz",
+    "Departure station coordinates": "52.521526,13.411088",
+    "Destination station name": "Stadtmitte (U), Berlin",
+    "Destination station coordinates": "52.511701,13.389684"
+  },
+  {
+    "Status-ID": 3084522,
+    "Category": "subway",
+    "Departure station name": "Warschauer Str. (S+U), Berlin",
+    "Departure station coordinates": "52.505238,13.449112",
+    "Destination station name": "Schlesisches Tor (U), Berlin",
+    "Destination station coordinates": "52.500869,13.441579"
+  },
+  {
+    "Status-ID": 3085800,
+    "Category": "subway",
+    "Departure station name": "Kottbusser Tor (U), Berlin",
+    "Departure station coordinates": "52.499071,13.418198",
+    "Destination station name": "Berlin Gesundbrunnen",
+    "Destination station coordinates": "52.548656,13.39106"
+  },
+  {
+    "Status-ID": 3165053,
+    "Category": "subway",
+    "Departure station name": "Frankfurt(Main)Hbf",
+    "Departure station coordinates": "50.106817,8.663003",
+    "Destination station name": "Willy-Brandt-Platz, Frankfurt a.M.",
+    "Destination station coordinates": "50.108992,8.673898"
+  },
+  {
+    "Status-ID": 3166524,
+    "Category": "subway",
+    "Departure station name": "Frankfurt(M)Konstablerwache",
+    "Departure station coordinates": "50.114637,8.686393",
+    "Destination station name": "Hessen-Center, Frankfurt a.M.",
+    "Destination station coordinates": "50.140454,8.748976"
+  },
+  {
+    "Status-ID": 3571888,
+    "Category": "subway",
+    "Departure station name": "Warschauer Str. (S+U), Berlin",
+    "Departure station coordinates": "52.505238,13.449112",
+    "Destination station name": "Kottbusser Tor (U), Berlin",
+    "Destination station coordinates": "52.499071,13.418198"
+  },
+  {
+    "Status-ID": 3572518,
+    "Category": "subway",
+    "Departure station name": "Moritzplatz (U), Berlin",
+    "Departure station coordinates": "52.503647,13.41062",
+    "Destination station name": "Hermannstr. (S+U), Berlin",
+    "Destination station coordinates": "52.467465,13.431349"
+  },
+  {
+    "Status-ID": 3573615,
+    "Category": "subway",
+    "Departure station name": "Yorckstr. (S+U), Berlin",
+    "Departure station coordinates": "52.492437,13.372075",
+    "Destination station name": "Möckernbrücke (U), Berlin",
+    "Destination station coordinates": "52.498936,13.38288"
+  },
+  {
+    "Status-ID": 3575815,
+    "Category": "subway",
+    "Departure station name": "Jungfernheide Bahnhof (S+U), Berlin",
+    "Departure station coordinates": "52.530866,13.300781",
+    "Destination station name": "Mierendorffplatz (U), Berlin",
+    "Destination station coordinates": "52.525994,13.305671"
+  },
+  {
+    "Status-ID": 4442638,
+    "Category": "subway",
+    "Departure station name": "Bundesplatz (S+U), Berlin",
+    "Departure station coordinates": "52.477713,13.328522",
+    "Destination station name": "Rathaus Steglitz [U9] (S+U), Berlin",
+    "Destination station coordinates": "52.456858,13.320773"
+  },
+  {
+    "Status-ID": 4700076,
+    "Category": "subway",
+    "Departure station name": "Jannowitzbrücke (S+U), Berlin",
+    "Departure station coordinates": "52.515503,13.418126",
+    "Destination station name": "Boddinstr. (U), Berlin",
+    "Destination station coordinates": "52.479798,13.425408"
+  },
+  {
+    "Status-ID": 5007220,
+    "Category": "subway",
+    "Departure station name": "Gleisdreieck (U), Berlin",
+    "Departure station coordinates": "52.49953,13.374178",
+    "Destination station name": "S+U Potsdamer Platz Bhf (Berlin)",
+    "Destination station coordinates": "52.50831,13.377322"
+  },
+  {
+    "Status-ID": 5069771,
+    "Category": "subway",
+    "Departure station name": "Hamburg Burgstraße",
+    "Departure station coordinates": "53.555775,10.041764",
+    "Destination station name": "Hamburg Hauptbahnhof Nord",
+    "Destination station coordinates": "53.554024,10.005202"
+  },
+  {
+    "Status-ID": 5393787,
+    "Category": "subway",
+    "Departure station name": "Berlin Hbf",
+    "Departure station coordinates": "52.524924,13.369629",
+    "Destination station name": "Frankfurter Tor (U), Berlin",
+    "Destination station coordinates": "52.515845,13.453948"
+  },
+  {
+    "Status-ID": 5443862,
+    "Category": "subway",
+    "Departure station name": "Hamburg Hauptbahnhof Nord",
+    "Departure station coordinates": "53.554024,10.005202",
+    "Destination station name": "Hamburg Rauhes Haus",
+    "Destination station coordinates": "53.55421,10.066485"
+  },
+  {
+    "Status-ID": 5534241,
+    "Category": "subway",
+    "Departure station name": "S+U Rathaus Spandau (Berlin)",
+    "Departure station coordinates": "52.535187,13.199712",
+    "Destination station name": "Siemensdamm (U), Berlin",
+    "Destination station coordinates": "52.536799,13.272483"
+  },
+  {
+    "Status-ID": 5534818,
+    "Category": "subway",
+    "Departure station name": "Siemensdamm (U), Berlin",
+    "Departure station coordinates": "52.536799,13.272483",
+    "Destination station name": "Bayerischer Platz (U), Berlin",
+    "Destination station coordinates": "52.488527,13.339938"
+  },
+  {
+    "Status-ID": 5538390,
+    "Category": "subway",
+    "Departure station name": "Siemensdamm (U), Berlin",
+    "Departure station coordinates": "52.536799,13.272483",
+    "Destination station name": "Bismarckstr. (U), Berlin",
+    "Destination station coordinates": "52.51153,13.305177"
+  },
+  {
+    "Status-ID": 5538395,
+    "Category": "subway",
+    "Departure station name": "Bismarckstr. (U), Berlin",
+    "Departure station coordinates": "52.51153,13.305177",
+    "Destination station name": "Stadtmitte (U), Berlin",
+    "Destination station coordinates": "52.511701,13.389684"
+  },
+  {
+    "Status-ID": 5543124,
+    "Category": "subway",
+    "Departure station name": "S+U Jungfernheide Bhf (Berlin)",
+    "Departure station coordinates": "52.53036,13.299325",
+    "Destination station name": "Siemensdamm (U), Berlin",
+    "Destination station coordinates": "52.536799,13.272483"
+  },
+  {
+    "Status-ID": 5543377,
+    "Category": "subway",
+    "Departure station name": "Siemensdamm (U), Berlin",
+    "Departure station coordinates": "52.536799,13.272483",
+    "Destination station name": "Zitadelle (U), Berlin",
+    "Destination station coordinates": "52.537635,13.217685"
+  },
+  {
+    "Status-ID": 5547001,
+    "Category": "subway",
+    "Departure station name": "Südstern (U), Berlin",
+    "Departure station coordinates": "52.489066,13.407879",
+    "Destination station name": "Bayerischer Platz (U), Berlin",
+    "Destination station coordinates": "52.488527,13.339938"
+  },
+  {
+    "Status-ID": 6031066,
+    "Category": "subway",
+    "Departure station name": "Muzeum",
+    "Departure station coordinates": "50.080048,14.430857",
+    "Destination station name": "Malostranská",
+    "Destination station coordinates": "50.091637,14.409068"
+  },
+  {
+    "Status-ID": 6031762,
+    "Category": "subway",
+    "Departure station name": "Malostranská",
+    "Departure station coordinates": "50.091637,14.409068",
+    "Destination station name": "Můstek",
+    "Destination station coordinates": "50.08359,14.424664"
+  },
+  {
+    "Status-ID": 6032159,
+    "Category": "subway",
+    "Departure station name": "Můstek",
+    "Departure station coordinates": "50.08359,14.424664",
+    "Destination station name": "Muzeum",
+    "Destination station coordinates": "50.080048,14.430857"
+  },
+  {
+    "Status-ID": 6150740,
+    "Category": "subway",
+    "Departure station name": "S+U Gesundbrunnen Bhf (Berlin)",
+    "Departure station coordinates": "52.54913,13.389907",
+    "Destination station name": "Rosenthaler Platz (U), Berlin",
+    "Destination station coordinates": "52.529787,13.401406"
+  },
+  {
+    "Status-ID": 6674150,
+    "Category": "subway",
+    "Departure station name": "U-Bahnhof Hauptbahnhof Süd",
+    "Departure station coordinates": "53.5523,10.0098",
+    "Destination station name": "Hamburg Berliner Tor",
+    "Destination station coordinates": "53.552605,10.02633"
+  },
+  {
+    "Status-ID": 6675185,
+    "Category": "subway",
+    "Departure station name": "Hamburg Berliner Tor",
+    "Departure station coordinates": "53.552605,10.02633",
+    "Destination station name": "Lutterothstraße",
+    "Destination station coordinates": "53.58207,9.947602"
+  },
+  {
+    "Status-ID": 6681739,
+    "Category": "subway",
+    "Departure station name": "Lutterothstraße",
+    "Departure station coordinates": "53.58207,9.947602",
+    "Destination station name": "Schlump",
+    "Destination station coordinates": "53.568012,9.96988"
+  },
+  {
+    "Status-ID": 6681772,
+    "Category": "subway",
+    "Departure station name": "Schlump",
+    "Departure station coordinates": "53.568012,9.96988",
+    "Destination station name": "Hamburg Landungsbrücken",
+    "Destination station coordinates": "53.546314,9.970619"
+  },
+  {
+    "Status-ID": 6682805,
+    "Category": "subway",
+    "Departure station name": "Baumwall (Elbphilharmonie)",
+    "Departure station coordinates": "53.544174,9.981325",
+    "Destination station name": "Schlump",
+    "Destination station coordinates": "53.568012,9.96988"
+  }
+]
