@@ -27,17 +27,13 @@
   const container = document.getElementById(CONFIG.targetId);
   if (!container) return;
 
-  let widgetState = {
-    loadingStartTime: Date.now(),
-    minLoadingTime: 4000
-  };
+  let widgetState = {};
 
   function safe(txt) {
     return String(txt == null ? "" : txt);
   }
 
   function renderLoading() {
-    widgetState.loadingStartTime = Date.now();
     container.innerHTML = `<div class="${CONFIG.classPrefix}card" style="text-decoration: none;">
       <div class="${CONFIG.classPrefix}header">
         <span class="${CONFIG.classPrefix}icon ${CONFIG.classPrefix}icon-loading"></span>
@@ -152,13 +148,7 @@
       const res = await fetch(url, { headers: { "Accept": "application/json" } });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
-
-      const elapsed = Date.now() - widgetState.loadingStartTime;
-      const remaining = Math.max(0, widgetState.minLoadingTime - elapsed);
-
-      setTimeout(() => {
-        render(json);
-      }, remaining);
+      render(json);
     } catch (e) {
       container.innerHTML = `<div class="${CONFIG.classPrefix}card">
         <div class="${CONFIG.classPrefix}title">Fehler beim Laden</div>

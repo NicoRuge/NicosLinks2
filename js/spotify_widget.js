@@ -4,7 +4,6 @@
     targetId: "spotify-widget",
     fetchIntervalMs: 10000,
     updateIntervalMs: 1000,
-    minLoadingTime: 4000,
     classPrefix: "sp-"
   };
 
@@ -15,8 +14,7 @@
   let currentState = {
     data: null,
     lastFetchTime: 0,
-    currentTrackSignature: null,
-    loadingStartTime: null
+    currentTrackSignature: null
   };
   function safe(txt) {
     return String(txt == null ? "" : txt);
@@ -41,7 +39,6 @@
   }
 
   function renderLoading() {
-    currentState.loadingStartTime = Date.now();
     container.innerHTML = `<div class="${CONFIG.classPrefix}card">
           <div class="${CONFIG.classPrefix}header">
             <span class="${CONFIG.classPrefix}icon ${CONFIG.classPrefix}icon-loading"></span>
@@ -163,12 +160,10 @@
       currentState.data = json;
       currentState.lastFetchTime = Date.now();
 
-      const elapsed = Date.now() - currentState.loadingStartTime;
-      const remaining = Math.max(0, CONFIG.minLoadingTime - elapsed);
-
-      setTimeout(() => {
-        render();
-      }, remaining);
+      console.log("Spotify Widget Response:", json);
+      currentState.data = json;
+      currentState.lastFetchTime = Date.now();
+      render();
     } catch (e) {
       console.error("Spotify Widget Error:", e);
     }

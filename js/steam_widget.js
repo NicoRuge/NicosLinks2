@@ -5,15 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Use absolute URL because frontend (GitHub Pages) and backend (Netlify) are on different domains
     const API_URL = "https://nico-ruge.netlify.app/.netlify/functions/steam";
-    let loadingStartTime = null;
-    const MIN_LOADING_TIME = 4000;
 
     async function fetchSteamStatus() {
         try {
             // Loading State
-            if (!loadingStartTime) {
-                loadingStartTime = Date.now();
-                widget.innerHTML = `
+            widget.innerHTML = `
                 <div class="st-card">
                     <div class="st-header">
                         <span class="st-icon st-icon-loading"></span>
@@ -27,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </div>
                 </div>`;
-            }
 
             const response = await fetch(API_URL);
             if (!response.ok) {
@@ -37,23 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data = await response.json();
             console.log("Steam Data Received:", data); // DEBUG LOG
-
-            const elapsed = Date.now() - loadingStartTime;
-            const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
-
-            setTimeout(() => {
-                renderSteamWidget(data);
-            }, remaining);
+            renderSteamWidget(data);
 
         } catch (error) {
             console.error("Steam Widget Live Error:", error);
-            // Don't clear innerHTML immediately on error if we want to show something, 
-            // but original behavior was to hide.
-            const elapsed = Date.now() - loadingStartTime;
-            const remaining = Math.max(0, MIN_LOADING_TIME - elapsed);
-            setTimeout(() => {
-                widget.innerHTML = "";
-            }, remaining);
+            widget.innerHTML = "";
         }
     }
 
