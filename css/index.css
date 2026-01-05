@@ -488,6 +488,29 @@ body {
     background-color: var(--md-sys-color-surface);
 }
 
+/* Inverted Card Style */
+.link-card.inverted {
+    background-color: var(--md-sys-color-on-surface);
+    color: var(--md-sys-color-surface);
+    border-color: transparent;
+}
+
+.link-card.inverted .icon {
+    filter: invert(1);
+}
+
+[data-theme="dark"] .link-card.inverted .icon {
+    filter: none;
+}
+
+.link-card.inverted:hover {
+    background-color: var(--md-sys-color-on-surface);
+    /* Keep dark on hover, maybe lighten slightly? or just scale */
+    opacity: 0.9;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--card-hover-shadow);
+}
+
 .link-icon {
     font-size: 24px;
     color: var(--md-sys-color-primary);
