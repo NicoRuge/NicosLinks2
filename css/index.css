@@ -108,7 +108,7 @@ button,
 .home-btn,
 .panel h3 .section-title,
 .panel h3 .toggle-icon {
-    cursor: url("../assets/icons/crowbar.cur"), pointer;
+    cursor: url("../assets/icons/crowbar_png.png"), pointer;
 }
 
 /* Dark mode icon: invert to white */
@@ -126,6 +126,7 @@ body {
     align-items: center;
     transition: background-color var(--transition-speed) var(--transition-ease), color var(--transition-speed) var(--transition-ease);
     overflow-x: hidden;
+    cursor: url("../assets/icons/crowbar_png.png"), auto;
 }
 
 /* Background Animation */
