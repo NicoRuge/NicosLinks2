@@ -1620,6 +1620,243 @@ body {
     opacity: 0.7;
 }
 
+/* Music Playlist */
+#music-playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* GitHub Widget */
+#github-section .container {
+    max-width: 800px;
+    /* Wider for commits */
+}
+
+#github-widget {
+    width: 100%;
+}
+
+.gh-card {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-shadow: var(--card-shadow);
+}
+
+.gh-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+}
+
+.gh-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.gh-repo-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--md-sys-color-on-surface);
+    text-decoration: none;
+}
+
+.gh-repo-name:hover {
+    text-decoration: underline;
+}
+
+.gh-desc {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.gh-stats {
+    display: none;
+    /* Hidden as per request */
+}
+
+/* Language Bar */
+.gh-languages {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.gh-section-subtitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 4px;
+}
+
+.gh-lang-bar {
+    display: flex;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.gh-lang-segment {
+    height: 100%;
+}
+
+.gh-lang-segment:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.gh-lang-segment:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.gh-lang-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+.gh-lang-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--md-sys-color-on-surface-variant);
+    font-weight: 500;
+}
+
+.gh-lang-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.gh-lang-pct {
+    color: var(--md-sys-color-outline);
+}
+
+.gh-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.gh-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--md-sys-color-on-surface);
+}
+
+.gh-commits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.gh-commit-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.gh-commit-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.gh-commit-msg {
+    font-family: 'JetBrains Mono', monospace;
+    /* Code font if available */
+    font-size: 0.95rem;
+    color: var(--md-sys-color-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+    /* Allow msg to take available space */
+}
+
+.gh-commit-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.gh-commit-stats {
+    display: flex;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.gh-stats-add {
+    color: #238636;
+    /* GitHub Green */
+}
+
+.gh-stats-del {
+    color: #da3633;
+    /* GitHub Red/Orange */
+}
+
+.gh-commit-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.gh-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 48px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.gh-spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--md-sys-color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* Playlist Styles */
 .playlist-container {
     display: flex;
