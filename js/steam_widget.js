@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="st-card">
                     <div class="st-header">
                         <span class="st-icon st-icon-loading"></span>
-                        <span class="st-status st-status-stopped">Loading...</span>
+                        <span class="st-status st-status-stopped">Getting Steam Data...</span>
                     </div>
                     <div class="st-content" style="align-items: center; display: flex;">
                         <div style="width: 48px; height: 48px; background: var(--md-sys-color-surface-variant); border-radius: 8px; margin-right: 12px;"></div>

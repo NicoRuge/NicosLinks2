@@ -70,6 +70,12 @@
                         <span class="sidebar-text">Blog</span>
                     </a>
                 </li>
+                <li>
+                    <a href="#music" class="sidebar-link" data-target="music-section">
+                        <img src="assets/icons/music.svg" alt="" class="icon">
+                        <span class="sidebar-text">Music</span>
+                    </a>
+                </li>
             </ul>
 
         </nav>
@@ -146,6 +152,8 @@
                         <div id="steam-widget"></div>
 
                         <!-- Travel Widget -->
+                        <div id="discord-widget"></div>
+
                         <div id="twlngwidget" class="travel-widget"></div>
                     </div>
                 </div>
@@ -287,6 +295,14 @@
                 <iframe src="https://t.nico-ruge.de" title="My Blog" class="section-iframe"></iframe>
             </section>
 
+            <!-- Music Section -->
+            <section id="music-section" class="content-section">
+                <div class="container">
+                    <h2>Music</h2>
+                    <div id="music-playlist" class="playlist-container"></div>
+                </div>
+            </section>
+
             <!-- Departure Section -->
             <section id="departure-section" class="content-section full-height">
                 <iframe src="departure.html" title="Departure Monitor" class="section-iframe"></iframe>
@@ -313,6 +329,8 @@
     <script src="js/tw_widget.js"></script>
     <script src="js/spotify_widget.js"></script>
     <script src="js/steam_widget.js"></script>
+    <script src="js/discord_widget.js"></script>
+    <script src="js/music_playlist.js"></script>
 </body>
 
 </html>

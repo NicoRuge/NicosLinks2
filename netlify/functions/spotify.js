@@ -53,7 +53,30 @@ exports.handler = async function (event, context) {
         }
         const access_token = tokenData.access_token;
 
-        // 2. Try to get "Currently Playing"
+        // 2. Check for Playlist Fetch Request
+        if (event.queryStringParameters && event.queryStringParameters.type === 'playlist' && event.queryStringParameters.id) {
+            const playlistId = event.queryStringParameters.id;
+            const playlistResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=20`, {
+                headers: { Authorization: `Bearer ${access_token}` }
+            });
+
+            if (!playlistResponse.ok) {
+                const err = await playlistResponse.text();
+                throw new Error(`Playlist Fetch Error: ${err}`);
+            }
+
+            const playlistData = await playlistResponse.json();
+            return {
+                statusCode: 200,
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(playlistData.items)
+            };
+        }
+
+        // 3. Normal "Currently Playing" Fetch
         const nowPlayingResponse = await fetch(`${NOW_PLAYING_ENDPOINT}?additional_types=track,episode`, {
             headers: { Authorization: `Bearer ${access_token}` }
         });

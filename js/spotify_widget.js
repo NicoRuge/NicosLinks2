@@ -42,7 +42,7 @@
     container.innerHTML = `<div class="${CONFIG.classPrefix}card">
           <div class="${CONFIG.classPrefix}header">
             <span class="${CONFIG.classPrefix}icon ${CONFIG.classPrefix}icon-loading"></span>
-            <span class="${CONFIG.classPrefix}status">Loading...</span>
+            <span class="${CONFIG.classPrefix}status">Getting Spotify Data...</span>
           </div>
           <div class="${CONFIG.classPrefix}content" style="align-items: center; display: flex;">
                <div style="width: 48px; height: 48px; background: var(--md-sys-color-surface-variant); border-radius: 8px; margin-right: 12px;"></div>
