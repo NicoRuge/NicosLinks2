@@ -98,18 +98,70 @@
         container.innerHTML = html;
     }
 
-    async function fetchStatus() {
-        try {
-            const res = await fetch(CONFIG.apiEndpoint);
-            const json = await res.json();
-            if (json.success) {
-                render(json.data);
+    // WebSocket for Real-time Updates
+    const LANYARD_WS = "wss://api.lanyard.rest/socket";
+    const DISCORD_ID = "269810872619237378";
+    let socket;
+    let heartbeatInterval;
+
+    function connectLanyard() {
+        socket = new WebSocket(LANYARD_WS);
+
+        socket.onopen = () => {
+            console.log("Connected to Lanyard WebSocket");
+        };
+
+        socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            const { op, d } = data;
+
+            switch (op) {
+                case 1: // Hello
+                    // Start Heartbeat
+                    heartbeatInterval = setInterval(() => {
+                        if (socket.readyState === WebSocket.OPEN) {
+                            socket.send(JSON.stringify({ op: 3 }));
+                        }
+                    }, d.heartbeat_interval);
+
+                    // Initialize
+                    socket.send(JSON.stringify({
+                        op: 2,
+                        d: { subscribe_to_id: DISCORD_ID }
+                    }));
+                    break;
+
+                case 0: // Event
+                    if (data.t === "INIT_STATE" || data.t === "PRESENCE_UPDATE") {
+                        render(d);
+
+                        // Pass Spotify data to Spotify Widget if function exists
+                        if (typeof window.updateSpotifyWidget === 'function') {
+                            window.updateSpotifyWidget(d.spotify);
+                        }
+                    }
+                    break;
             }
-        } catch (e) {
-            console.error("Discord Widget Error:", e);
-        }
+        };
+
+        socket.onclose = () => {
+            console.log("Lanyard WebSocket closed. Reconnecting...");
+
+            // Force Spotify Widget to fallback to polling
+            if (typeof window.updateSpotifyWidget === 'function') {
+                window.updateSpotifyWidget(null);
+            }
+
+            clearInterval(heartbeatInterval);
+            setTimeout(connectLanyard, 5000); // Reconnect after 5s
+        };
+
+        socket.onerror = (err) => {
+            console.error("Lanyard WebSocket Error:", err);
+            socket.close();
+        };
     }
 
-    fetchStatus();
-    setInterval(fetchStatus, 10000); // Update every 10 seconds
+    // Initial connection
+    connectLanyard();
 })();

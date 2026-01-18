@@ -952,6 +952,35 @@ body {
     margin-top: 2px;
 }
 
+.sp-status-stopped {
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.sp-connection-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-left: auto;
+    /* Push to the right */
+    background-color: var(--md-sys-color-on-surface-variant);
+    /* Default/Polling (Gray) */
+    opacity: 0.5;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.sp-connection-dot.live {
+    background-color: #3ba55c;
+    /* Discord Green */
+    opacity: 1;
+    box-shadow: 0 0 4px #3ba55c;
+}
+
+.sp-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
 .st-status {
     font-size: 0.95rem;
     color: var(--md-sys-color-on-surface-variant);

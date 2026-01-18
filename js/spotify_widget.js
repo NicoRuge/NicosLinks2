@@ -14,7 +14,10 @@
   let currentState = {
     data: null,
     lastFetchTime: 0,
-    currentTrackSignature: null
+    currentTrackSignature: null,
+    isRealtime: false,
+    lastRealtimeState: false,
+    lastIsPlaying: null
   };
   function safe(txt) {
     return String(txt == null ? "" : txt);
@@ -56,13 +59,19 @@
 
   function render() {
     const data = currentState.data;
+    const isRealtime = currentState.isRealtime;
+    const dotClass = isRealtime ? "sp-connection-dot live" : "sp-connection-dot";
 
     if (!data || !data.item) {
-      if (currentState.currentTrackSignature !== "no-track") {
+      if (currentState.currentTrackSignature !== "no-track" || currentState.lastRealtimeState !== isRealtime) {
         container.innerHTML = `<div class="${CONFIG.classPrefix}card">
-                  <div class="${CONFIG.classPrefix}title">Not Playing</div>
+                  <div class="${CONFIG.classPrefix}header">
+                      <div class="${CONFIG.classPrefix}title">Not Playing</div>
+                      <span class="${dotClass}" title="${isRealtime ? 'Real-time (WebSocket)' : 'Polling (20s)'}"></span>
+                  </div>
                 </div>`;
         currentState.currentTrackSignature = "no-track";
+        currentState.lastRealtimeState = isRealtime;
       }
       return;
     }
@@ -83,15 +92,14 @@
 
     const newSignature = getTrackSignature(data);
 
-    if (newSignature !== currentState.currentTrackSignature) {
-      const isEpisode = item.type === 'episode';
+    // Re-render if track changed OR if realtime state changed OR if playing state changed
+    if (newSignature !== currentState.currentTrackSignature ||
+      currentState.lastRealtimeState !== isRealtime ||
+      currentState.lastIsPlaying !== isPlaying) {
 
-      let coverUrl = '';
-      let title = item.name;
-      let artistName = '';
-      let contextName = '';
-      let trackUrl = '';
-      let artistUrl = '';
+      // ... (metadata extraction) ...
+      const isEpisode = item.type === 'episode';
+      let coverUrl = '', title = item.name, artistName = '', contextName = '', trackUrl = '', artistUrl = '';
 
       if (isEpisode) {
         coverUrl = item.images?.[0]?.url || item.show?.images?.[0]?.url || '';
@@ -116,6 +124,7 @@
               <div class="${CONFIG.classPrefix}header">
                 <span class="${CONFIG.classPrefix}icon ${iconClass}"></span>
                 <span class="${CONFIG.classPrefix}status ${statusClass}">${statusText}</span>
+                <span class="${dotClass}" title="${isRealtime ? 'Real-time (WebSocket)' : 'Polling (20s)'}"></span>
               </div>
               
               <div class="${CONFIG.classPrefix}content">
@@ -138,6 +147,8 @@
           `;
       container.innerHTML = html;
       currentState.currentTrackSignature = newSignature;
+      currentState.lastRealtimeState = isRealtime;
+      currentState.lastIsPlaying = isPlaying;
     } else if (isPlaying) {
       const timeEl = document.getElementById("sp-current-time");
       const fillEl = document.getElementById("sp-progress-fill");
@@ -169,9 +180,73 @@
     }
   }
 
-  renderLoading();
-  fetchStatus();
+  let fetchIntervalId = null;
 
-  setInterval(fetchStatus, CONFIG.fetchIntervalMs);
+  function startPolling() {
+    if (!fetchIntervalId) {
+      console.log("Spotify: Switching to Fallback Polling (20s)");
+      currentState.isRealtime = false;
+      render(); // Update dot immediately
+      fetchIntervalId = setInterval(fetchStatus, 20000);
+      fetchStatus();
+    }
+  }
+
+  function stopPolling() {
+    if (fetchIntervalId) {
+      console.log("Spotify: Switching to Real-time (WebSocket)");
+      clearInterval(fetchIntervalId);
+      fetchIntervalId = null;
+    }
+    // Always set to true when stopping polling (implied switch to WS)
+    if (!currentState.isRealtime) {
+      currentState.isRealtime = true;
+      render(); // Update dot immediately
+    }
+  }
+
+  // Exposed function for Lanyard WebSocket (Real-time updates)
+  window.updateSpotifyWidget = function (lanyardSpotify) {
+    if (!lanyardSpotify) {
+      // Lanyard says no Spotify. 
+      // Could be: Nothing playing OR Discord closed/offline.
+      // Switch to Fallback Polling to check directly with Spotify API.
+      startPolling();
+      return;
+    }
+
+    // We have valid data from WebSocket -> Stop polling
+    stopPolling();
+
+    // Map Lanyard data to our internal structure
+    const mappedData = {
+      isPlaying: true, // Lanyard only sends spotify if playing
+      progress_ms: Date.now() - lanyardSpotify.timestamps.start,
+      item: {
+        id: lanyardSpotify.track_id,
+        name: lanyardSpotify.song,
+        duration_ms: lanyardSpotify.timestamps.end - lanyardSpotify.timestamps.start,
+        type: 'track', // Lanyard usually sends tracks
+        artists: lanyardSpotify.artist.split('; ').map(name => ({ name })), // Lanyard separates artists with "; "
+        album: {
+          name: lanyardSpotify.album,
+          images: [{ url: lanyardSpotify.album_art_url }]
+        },
+        external_urls: {
+          spotify: `https://open.spotify.com/track/${lanyardSpotify.track_id}`
+        }
+      }
+    };
+
+    currentState.data = mappedData;
+    currentState.lastFetchTime = Date.now();
+    render();
+  };
+
+  renderLoading();
+  // Start with polling (Fallback mode default)
+  startPolling();
+
+  // Local progress bar update (always runs)
   setInterval(render, CONFIG.updateIntervalMs);
 })();
