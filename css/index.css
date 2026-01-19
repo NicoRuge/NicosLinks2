@@ -1448,6 +1448,7 @@ body {
     .sp-card,
     .st-card,
     .tw-card,
+    .dc-card,
     .equipment-group {
         width: 100%;
         max-width: 400px;
