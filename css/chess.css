@@ -1,0 +1,295 @@
+/* Chess page – uses index.css vars (--card-bg, --md-sys-color-*, etc.) */
+
+.chess-body {
+    margin: 0;
+    padding: 20px;
+    font-family: "bahnschrift", sans-serif;
+    background: transparent;
+    color: var(--md-sys-color-on-background);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.chess-container {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.chess-title {
+    color: var(--md-sys-color-primary) !important;
+    font-family: "bahnschrift", sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.card-glass {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+}
+
+.chess-controls {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.control-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface-variant);
+    min-width: 72px;
+}
+
+.mode-toggles,
+.difficulty-toggles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.toggle-pill {
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-pill input {
+    display: none;
+}
+
+.toggle-pill span {
+    display: block;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: var(--md-sys-color-surface-variant);
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 0.9rem;
+    transition: all var(--transition-speed, 0.3s) ease;
+    border: 1px solid transparent;
+}
+
+.toggle-pill input:checked + span {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    border-color: var(--md-sys-color-primary);
+    font-weight: 600;
+}
+
+.toggle-pill:hover span {
+    opacity: 0.9;
+}
+
+.difficulty-row.hidden {
+    display: none !important;
+}
+
+.btn-new-game {
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed, 0.3s) ease;
+}
+
+.btn-new-game:hover {
+    filter: brightness(1.1);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.chess-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.status-bar {
+    width: 100%;
+    max-width: 480px;
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--md-sys-color-on-surface);
+}
+
+.board-wrap {
+    padding: 12px;
+    display: inline-flex;
+    position: relative;
+}
+
+.chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: min( min(80vw, 64vh), 400px );
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--card-border);
+    position: relative;
+}
+
+/* Piece move animation overlay */
+.piece-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.anim-piece {
+    position: absolute;
+    width: 12.5%;
+    height: 12.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 4.5vw, 2rem);
+    transition: transform 0.28s cubic-bezier(0.34, 1.2, 0.64, 1);
+    will-change: transform;
+    transform: scale(1.06);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+}
+
+.square {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 4.5vw, 2rem);
+    user-select: none;
+    cursor: default;
+    transition: background 0.15s ease;
+}
+
+.square .piece {
+    position: relative;
+    z-index: 1;
+}
+
+.square.light {
+    background: var(--md-sys-color-surface-variant);
+}
+
+.square.dark {
+    background: var(--md-sys-color-secondary-container);
+}
+
+.square.highlight {
+    background: rgba(103, 80, 164, 0.4) !important;
+}
+
+.square.last-move {
+    background: rgba(103, 80, 164, 0.25) !important;
+}
+
+.square.selected {
+    background: var(--md-sys-color-primary) !important;
+    color: var(--md-sys-color-on-primary);
+}
+
+.square.valid-move::after,
+.square.valid-capture::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+}
+
+.square.valid-move::after {
+    width: 28%;
+    height: 28%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.square.valid-capture::after {
+    width: 85%;
+    height: 85%;
+    border: 3px solid rgba(0, 0, 0, 0.35);
+    background: rgba(180, 0, 0, 0.1);
+}
+
+.square.dragging {
+    opacity: 0.6;
+}
+
+[data-theme="dark"] .square.valid-move::after {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="dark"] .square.valid-capture::after {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(220, 80, 80, 0.15);
+}
+
+.square.valid-move,
+.square.valid-capture {
+    cursor: pointer;
+}
+
+.move-log {
+    width: 100%;
+    max-width: 480px;
+    padding: 12px 16px;
+    max-height: 140px;
+    overflow-y: auto;
+}
+
+.move-log-header {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--md-sys-color-primary);
+    margin-bottom: 8px;
+}
+
+.move-log-list {
+    font-size: 0.9rem;
+    color: var(--md-sys-color-on-surface-variant);
+    font-variant-numeric: tabular-nums;
+}
+
+.move-log-list:empty::before {
+    content: 'No moves yet';
+    color: var(--md-sys-color-outline);
+}
+
+@media (max-width: 600px) {
+    .chess-body {
+        padding: 12px;
+    }
+
+    .control-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .chess-board {
+        width: min(92vw, 320px);
+    }
+}

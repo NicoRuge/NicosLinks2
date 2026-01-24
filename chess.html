@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess</title>
+    <link rel="stylesheet" href="https://use.typekit.net/mht4nmk.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/chess.css">
+    <link rel="icon" type="image/jpeg" href="assets/images/profile.jpg">
+</head>
+
+<body class="chess-body">
+    <div class="chess-container">
+        <h2 class="chess-title">Chess</h2>
+
+        <div class="chess-controls card-glass">
+            <div class="control-row">
+                <span class="control-label">Mode</span>
+                <div class="mode-toggles">
+                    <label class="toggle-pill">
+                        <input type="radio" name="mode" value="pvc" checked>
+                        <span>vs PC</span>
+                    </label>
+                    <label class="toggle-pill">
+                        <input type="radio" name="mode" value="local">
+                        <span>2 Players</span>
+                    </label>
+                </div>
+            </div>
+            <div class="control-row difficulty-row" id="difficulty-row">
+                <span class="control-label">Difficulty</span>
+                <div class="difficulty-toggles">
+                    <label class="toggle-pill">
+                        <input type="radio" name="difficulty" value="easy" checked>
+                        <span>Easy</span>
+                    </label>
+                    <label class="toggle-pill">
+                        <input type="radio" name="difficulty" value="medium">
+                        <span>Medium</span>
+                    </label>
+                    <label class="toggle-pill">
+                        <input type="radio" name="difficulty" value="hard">
+                        <span>Hard</span>
+                    </label>
+                </div>
+            </div>
+            <div class="control-row">
+                <button type="button" class="btn-new-game" id="btn-new-game">New Game</button>
+            </div>
+        </div>
+
+        <div class="chess-main">
+            <div class="status-bar card-glass" id="status-bar">
+                <span id="status-text">White to move</span>
+            </div>
+            <div class="board-wrap card-glass">
+                <div class="chess-board" id="chess-board" role="grid" aria-label="Chess board"></div>
+            </div>
+            <div class="move-log card-glass" id="move-log">
+                <div class="move-log-header">Moves</div>
+                <div class="move-log-list" id="move-log-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/chess.js"></script>
+</body>
+
+</html>

@@ -14,10 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
 
-        // Notify travelling iframe
+        // Notify travelling and chess iframes
         const travellingFrame = document.querySelector('iframe[src="travelling.html"]');
         if (travellingFrame && travellingFrame.contentWindow) {
             travellingFrame.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
+        }
+        const chessFrame = document.querySelector('iframe[src="chess.html"]');
+        if (chessFrame && chessFrame.contentWindow) {
+            chessFrame.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
         }
 
         if (theme === 'dark') {
@@ -68,6 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
             history.pushState(null, null, ' ');
         } else {
             history.pushState(null, null, `#${hash}`);
+        }
+
+        if (targetId === 'chess-section') {
+            const chessFrame = document.querySelector('iframe[src="chess.html"]');
+            const theme = document.documentElement.getAttribute('data-theme') || 'light';
+            if (chessFrame && chessFrame.contentWindow) {
+                chessFrame.contentWindow.postMessage({ type: 'theme-change', theme }, '*');
+            }
         }
     };
 
