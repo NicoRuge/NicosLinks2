@@ -16,6 +16,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding-bottom: 100px;
+    /* Space for iframe footer */
 }
 
 .chess-title {
@@ -84,7 +86,7 @@
     border: 1px solid transparent;
 }
 
-.toggle-pill input:checked + span {
+.toggle-pill input:checked+span {
     background: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
     border-color: var(--md-sys-color-primary);
@@ -95,11 +97,15 @@
     opacity: 0.9;
 }
 
-.difficulty-row.hidden {
+.difficulty-row.hidden,
+.btn-start-game.hidden,
+.clock-container.hidden,
+.hidden {
     display: none !important;
 }
 
-.btn-new-game {
+.btn-new-game,
+.btn-start-game {
     padding: 10px 20px;
     border-radius: 12px;
     border: 1px solid var(--card-border);
@@ -112,7 +118,8 @@
     transition: all var(--transition-speed, 0.3s) ease;
 }
 
-.btn-new-game:hover {
+.btn-new-game:hover,
+.btn-start-game:hover {
     filter: brightness(1.1);
     box-shadow: var(--card-hover-shadow);
 }
@@ -126,7 +133,7 @@
 
 .status-bar {
     width: 100%;
-    max-width: 480px;
+    /* max-width removed to fill container */
     padding: 12px 20px;
     text-align: center;
     font-weight: 600;
@@ -137,19 +144,74 @@
 .board-wrap {
     padding: 12px;
     display: inline-flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
+    gap: 16px;
+}
+
+/* Clocks */
+.clock-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+}
+
+.clock-box {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.clock-box.active {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.02);
+}
+
+.white-clock {
+    border-left: 4px solid #EBECD0;
+}
+
+.black-clock {
+    border-left: 4px solid #779556;
+}
+
+.clock-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.clock-time {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.5px;
 }
 
 .chess-board {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
-    width: min( min(80vw, 64vh), 400px );
+    width: min(min(80vw, 64vh), 400px);
     aspect-ratio: 1;
     border-radius: 8px;
     overflow: hidden;
     border: 2px solid var(--card-border);
     position: relative;
+    color: #000000;
+    /* Ensure pieces don't invert in dark mode */
 }
 
 /* Piece move animation overlay */
@@ -191,11 +253,13 @@
 }
 
 .square.light {
-    background: var(--md-sys-color-surface-variant);
+    background: #EBECD0;
+    /* Cream squares */
 }
 
 .square.dark {
-    background: var(--md-sys-color-secondary-container);
+    background: #779556;
+    /* Green squares */
 }
 
 .square.highlight {
@@ -203,12 +267,15 @@
 }
 
 .square.last-move {
-    background: rgba(103, 80, 164, 0.25) !important;
+    background: #F5F682 !important;
+    /* Yellow highlight for last move */
+    opacity: 0.8;
 }
 
 .square.selected {
-    background: var(--md-sys-color-primary) !important;
-    color: var(--md-sys-color-on-primary);
+    background: #F5F682 !important;
+    /* Yellow highlight for selected square */
+    color: #000000 !important;
 }
 
 .square.valid-move::after,
@@ -239,13 +306,14 @@
     opacity: 0.6;
 }
 
-[data-theme="dark"] .square.valid-move::after {
-    background: rgba(255, 255, 255, 0.35);
+/* Square highlights should always be dark-mode independent since board is always light */
+.square.valid-move::after {
+    background: rgba(0, 0, 0, 0.25);
 }
 
-[data-theme="dark"] .square.valid-capture::after {
-    border-color: rgba(255, 255, 255, 0.45);
-    background: rgba(220, 80, 80, 0.15);
+.square.valid-capture::after {
+    border-color: rgba(0, 0, 0, 0.3);
+    background: rgba(180, 0, 0, 0.1);
 }
 
 .square.valid-move,
@@ -253,30 +321,140 @@
     cursor: pointer;
 }
 
+/* Coordinates */
+.square .coord {
+    position: absolute;
+    font-size: 0.65rem;
+    font-weight: 700;
+    pointer-events: none;
+    line-height: 1;
+    opacity: 0.8;
+}
+
+.square .coord.rank {
+    top: 3px;
+    left: 4px;
+}
+
+.square .coord.file {
+    bottom: 3px;
+    right: 4px;
+}
+
+/* Captured Pieces Box */
+.captured-pieces {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.captured-row {
+    min-height: 36px;
+    border-radius: 8px;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 1.25rem;
+    border: 1px solid var(--card-border);
+}
+
+.white-captures {
+    background: #EBECD0;
+    /* Cream background for pieces white took */
+    color: #000000;
+}
+
+.black-captures {
+    background: #779556;
+    /* Green background for pieces black took */
+    color: #000000;
+}
+
+.captured-row span {
+    line-height: 1;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.captured-row:empty::before {
+    content: '-';
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
 .move-log {
     width: 100%;
-    max-width: 480px;
+    /* max-width removed */
     padding: 12px 16px;
-    max-height: 140px;
-    overflow-y: auto;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
 }
 
 .move-log-header {
     font-weight: 600;
     font-size: 0.9rem;
     color: var(--md-sys-color-primary);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
-.move-log-list {
+.move-log-columns {
+    display: flex;
+    gap: 16px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.move-log-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.col-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--md-sys-color-outline);
+    margin-bottom: 6px;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 4px;
+}
+
+.move-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     font-size: 0.9rem;
     color: var(--md-sys-color-on-surface-variant);
     font-variant-numeric: tabular-nums;
+    scrollbar-width: thin;
 }
 
-.move-log-list:empty::before {
-    content: 'No moves yet';
+.move-item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.move-num {
     color: var(--md-sys-color-outline);
+    margin-right: 6px;
+    display: inline-block;
+    min-width: 1.4em;
+    font-weight: 500;
+}
+
+.move-list:empty::before {
+    content: '-';
+    color: var(--md-sys-color-outline);
+    opacity: 0.5;
 }
 
 @media (max-width: 600px) {

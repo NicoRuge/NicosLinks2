@@ -4,7 +4,7 @@
     const PIECES = { K: '♔', Q: '♕', R: '♖', B: '♗', N: '♘', P: '♙', k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟' };
     const FEN_START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
-    const DEPTH = { easy: 0, medium: 2, hard: 4 };
+    const DEPTH = { dumb: 0, easy: 1, medium: 2, hard: 4 };
     const PIECE_VAL = { P: 100, N: 320, B: 330, R: 500, Q: 900, K: 20000, p: -100, n: -320, b: -330, r: -500, q: -900, k: -20000 };
 
     let board = [];
@@ -16,15 +16,31 @@
     let lastMove = null;
     let selected = null;
     let validMoves = [];
-    let mode = 'pvc';
+    let mode = 'pvc'; // 'pvc' or 'local'
     let difficulty = 'easy';
     let gameOver = false;
+    let movesAllowed = false; // Controls if pieces can be moved
     let moveHistory = [];
+    let capturedWhite = []; // Pieces White has taken
+    let capturedBlack = []; // Pieces Black has taken
+
+    // Timer State
+    let timeWhite = 0;
+    let timeBlack = 0;
+    let timerInterval = null;
+    let lastTime = 0;
 
     const boardEl = document.getElementById('chess-board');
     const statusEl = document.getElementById('status-text');
-    const moveLogEl = document.getElementById('move-log-list');
+    const moveWhiteEl = document.getElementById('move-log-white');
+    const moveBlackEl = document.getElementById('move-log-black');
+    const capturesWhiteEl = document.getElementById('white-captures');
+    const capturesBlackEl = document.getElementById('black-captures');
+    const clockWhiteEl = document.getElementById('clock-white');
+    const clockBlackEl = document.getElementById('clock-black');
+    const clockContainer = document.querySelector('.clock-container');
     const btnNew = document.getElementById('btn-new-game');
+    const btnStart = document.getElementById('btn-start-game');
     const diffRow = document.getElementById('difficulty-row');
 
     const ANIM_DURATION_MS = 280;
@@ -203,6 +219,10 @@
         }
         halfmove = (isP || captured) ? 0 : halfmove + 1;
         if (turn === 'b') fullmove++;
+        if (captured && !opts.simulation) {
+            if (turn === 'w') capturedWhite.push(captured);
+            else capturedBlack.push(captured);
+        }
         turn = turn === 'w' ? 'b' : 'w';
         lastMove = { from, to };
     }
@@ -213,8 +233,9 @@
         const savedCastling = { ...castling };
         const savedEp = ep ? { ...ep } : null;
         const savedHalf = halfmove, savedFull = fullmove;
+        const savedCW = [...capturedWhite], savedCB = [...capturedBlack];
 
-        makeMove(m);
+        makeMove(m, { simulation: true });
         const inCheck = isInCheck(savedTurn);
         board = saved;
         turn = savedTurn;
@@ -222,6 +243,8 @@
         ep = savedEp;
         halfmove = savedHalf;
         fullmove = savedFull;
+        capturedWhite = savedCW;
+        capturedBlack = savedCB;
         lastMove = null;
         return inCheck;
     }
@@ -286,12 +309,15 @@
                 const savedTurn = turn;
                 const savedCastling = { ...castling };
                 const savedEp = ep ? { ...ep } : null;
-                makeMove(m);
+                const savedCW = [...capturedWhite], savedCB = [...capturedBlack];
+                makeMove(m, { simulation: true });
                 const v = minimax(depth - 1, alpha, beta, false);
                 board = saved;
                 turn = savedTurn;
                 castling = savedCastling;
                 ep = savedEp;
+                capturedWhite = savedCW;
+                capturedBlack = savedCB;
                 best = Math.max(best, v);
                 alpha = Math.max(alpha, v);
                 if (beta <= alpha) break;
@@ -304,12 +330,15 @@
                 const savedTurn = turn;
                 const savedCastling = { ...castling };
                 const savedEp = ep ? { ...ep } : null;
-                makeMove(m);
+                const savedCW = [...capturedWhite], savedCB = [...capturedBlack];
+                makeMove(m, { simulation: true });
                 const v = minimax(depth - 1, alpha, beta, true);
                 board = saved;
                 turn = savedTurn;
                 castling = savedCastling;
                 ep = savedEp;
+                capturedWhite = savedCW;
+                capturedBlack = savedCB;
                 best = Math.min(best, v);
                 beta = Math.min(beta, v);
                 if (beta <= alpha) break;
@@ -332,12 +361,15 @@
             const savedTurn = turn;
             const savedCastling = { ...castling };
             const savedEp = ep ? { ...ep } : null;
-            makeMove(m);
+            const savedCW = [...capturedWhite], savedCB = [...capturedBlack];
+            makeMove(m, { simulation: true });
             const score = -minimax(d - 1, -1e9, 1e9, true);
             board = saved;
             turn = savedTurn;
             castling = savedCastling;
             ep = savedEp;
+            capturedWhite = savedCW;
+            capturedBlack = savedCB;
             if (score > bestScore) {
                 bestScore = score;
                 best = m;
@@ -364,11 +396,30 @@
             : hidePieceAt ? [hidePieceAt] : [];
         const hide = (r, c) => hideSet.some(h => h.r === r && h.c === c);
 
-        moveLogEl.innerHTML = '';
+        moveWhiteEl.innerHTML = '';
+        moveBlackEl.innerHTML = '';
         moveHistory.forEach((m, i) => {
+            const container = i % 2 === 0 ? moveWhiteEl : moveBlackEl;
+            const item = document.createElement('div');
+            item.className = 'move-item';
+
+            const num = i % 2 === 0 ? `<span class="move-num">${(i / 2 + 1)}.</span> ` : '';
+            item.innerHTML = num + moveToNotation(m);
+            container.appendChild(item);
+        });
+
+        // Render Captured Pieces
+        capturesWhiteEl.innerHTML = '';
+        capturedWhite.forEach(p => {
             const span = document.createElement('span');
-            span.textContent = (i % 2 === 0 ? (i / 2 + 1) + '. ' : '') + moveToNotation(m) + ' ';
-            moveLogEl.appendChild(span);
+            span.textContent = PIECES[p];
+            capturesWhiteEl.appendChild(span);
+        });
+        capturesBlackEl.innerHTML = '';
+        capturedBlack.forEach(p => {
+            const span = document.createElement('span');
+            span.textContent = PIECES[p];
+            capturesBlackEl.appendChild(span);
         });
 
         boardEl.innerHTML = '';
@@ -397,6 +448,21 @@
                 if (valid) {
                     sq.classList.add(board[r][c] ? 'valid-capture' : 'valid-move');
                 }
+
+                // Add Coordinates
+                if (c === 0) {
+                    const label = document.createElement('span');
+                    label.className = 'coord rank';
+                    label.textContent = 8 - r;
+                    sq.appendChild(label);
+                }
+                if (r === 7) {
+                    const label = document.createElement('span');
+                    label.className = 'coord file';
+                    label.textContent = String.fromCharCode(97 + c);
+                    sq.appendChild(label);
+                }
+
                 boardEl.appendChild(sq);
             }
         }
@@ -408,18 +474,29 @@
             const winner = turn === 'w' ? 'Black' : 'White';
             statusEl.textContent = `Checkmate! ${winner} wins.`;
             gameOver = true;
+            stopTimer();
             return;
         }
         if (isStalemate()) {
             statusEl.textContent = 'Stalemate.';
             gameOver = true;
+            stopTimer();
             return;
         }
+        // 50 move rule check (simplified)
+        if (fullmove > 100) {
+            statusEl.textContent = 'Draw by 50-move rule.';
+            gameOver = true;
+            stopTimer();
+            return;
+        }
+
         if (isInCheck(turn)) {
             statusEl.textContent = (turn === 'w' ? 'White' : 'Black') + ' is in check.';
         } else {
             statusEl.textContent = (turn === 'w' ? 'White' : 'Black') + ' to move';
         }
+        updateClockFaces(); // Update clocks on status change
     }
 
     function applyMoveImmediate(m) {
@@ -495,6 +572,8 @@
 
     function onSquareClick(r, c) {
         if (animating || !isPlayerTurn()) return;
+        if (!movesAllowed) return; // Block moves if game hasn't started
+
         const p = board[r][c];
         if (selected) {
             const m = validMoves.find(v => v.to.r === r && v.to.c === c);
@@ -519,15 +598,96 @@
     }
 
     function newGame() {
-        parseFen(FEN_START);
+        parseFen(FEN_START); // Use existing parseFen to reset board and state
         lastMove = null;
         selected = null;
         validMoves = [];
         moveHistory = [];
+        capturedWhite = [];
+        capturedBlack = [];
         gameOver = false;
+
+        resetTimer();
         render();
         updateStatus();
+
+        if (mode === 'pvc') {
+            movesAllowed = true;
+            btnStart.classList.add('hidden');
+            clockContainer.classList.add('hidden');
+            stopTimer(); // Stop timer for PVC mode as clocks are hidden
+            statusEl.textContent = (turn === 'w' ? 'White' : 'Black') + ' to move';
+        } else { // Local 2 Players
+            movesAllowed = false; // Wait for start
+            btnStart.classList.remove('hidden');
+            clockContainer.classList.remove('hidden');
+            statusEl.textContent = "Press Start to begin";
+        }
     }
+
+    /* --- Timer Logic --- */
+
+    function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+        lastTime = Date.now();
+        timerInterval = setInterval(() => {
+            if (gameOver) {
+                stopTimer();
+                return;
+            }
+            const now = Date.now();
+            const delta = now - lastTime;
+            lastTime = now;
+
+            if (turn === 'w') {
+                timeWhite += delta;
+            } else {
+                timeBlack += delta;
+            }
+            updateClockFaces();
+        }, 33); // Update approx 30fps
+    }
+
+    function stopTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = null;
+    }
+
+    function resetTimer() {
+        stopTimer();
+        timeWhite = 0;
+        timeBlack = 0;
+        updateClockFaces();
+        clockWhiteEl.classList.add('active');
+        clockBlackEl.classList.remove('active');
+    }
+
+    function formatTime(ms) {
+        let minutes = Math.floor(ms / 60000);
+        let seconds = Math.floor((ms % 60000) / 1000);
+        let centis = Math.floor((ms % 1000) / 10); // Display 2 digits for ms equivalent part
+
+        return `${pad(minutes)}:${pad(seconds)}:${pad(centis)}`;
+    }
+
+    function pad(n) {
+        return n < 10 ? '0' + n : n;
+    }
+
+    function updateClockFaces() {
+        clockWhiteEl.querySelector('.clock-time').textContent = formatTime(timeWhite);
+        clockBlackEl.querySelector('.clock-time').textContent = formatTime(timeBlack);
+
+        // Highlight active clock
+        if (turn === 'w') {
+            clockWhiteEl.classList.add('active');
+            clockBlackEl.classList.remove('active');
+        } else {
+            clockWhiteEl.classList.remove('active');
+            clockBlackEl.classList.add('active');
+        }
+    }
+    /* ---------------- */
 
     function bindUi() {
         boardEl.addEventListener('click', (e) => {
@@ -540,6 +700,13 @@
 
         btnNew.addEventListener('click', () => {
             newGame();
+        });
+
+        btnStart.addEventListener('click', () => {
+            movesAllowed = true;
+            startTimer();
+            btnStart.classList.add('hidden'); // Hide start button after starting
+            updateStatus();
         });
 
         document.querySelectorAll('input[name="mode"]').forEach(radio => {
@@ -558,11 +725,14 @@
     }
 
     diffRow.classList.toggle('hidden', mode !== 'pvc');
-    parseFen(FEN_START);
+    newGame();
     bindUi();
-    render();
-    updateStatus();
 
+    // Explicitly enforce visibility state on load
+    if (mode === 'pvc') {
+        clockContainer.classList.add('hidden');
+        btnStart.classList.add('hidden');
+    }
     // Theme sync with parent (when embedded in iframe)
     function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme || 'light');
@@ -573,5 +743,5 @@
     try {
         const saved = localStorage.getItem('theme');
         if (saved) applyTheme(saved);
-    } catch (_) {}
+    } catch (_) { }
 })();

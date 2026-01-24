@@ -33,6 +33,10 @@
                 <span class="control-label">Difficulty</span>
                 <div class="difficulty-toggles">
                     <label class="toggle-pill">
+                        <input type="radio" name="difficulty" value="dumb">
+                        <span>Dumb</span>
+                    </label>
+                    <label class="toggle-pill">
                         <input type="radio" name="difficulty" value="easy" checked>
                         <span>Easy</span>
                     </label>
@@ -47,6 +51,7 @@
                 </div>
             </div>
             <div class="control-row">
+                <button type="button" class="btn-start-game hidden" id="btn-start-game">Start</button>
                 <button type="button" class="btn-new-game" id="btn-new-game">New Game</button>
             </div>
         </div>
@@ -56,11 +61,34 @@
                 <span id="status-text">White to move</span>
             </div>
             <div class="board-wrap card-glass">
+                <div class="clock-container">
+                    <div class="clock-box white-clock active" id="clock-white">
+                        <span class="clock-label">White</span>
+                        <span class="clock-time">00:00:00</span>
+                    </div>
+                    <div class="clock-box black-clock" id="clock-black">
+                        <span class="clock-label">Black</span>
+                        <span class="clock-time">00:00:00</span>
+                    </div>
+                </div>
                 <div class="chess-board" id="chess-board" role="grid" aria-label="Chess board"></div>
+                <div class="captured-pieces" id="captured-pieces">
+                    <div class="captured-row white-captures" id="white-captures"></div>
+                    <div class="captured-row black-captures" id="black-captures"></div>
+                </div>
             </div>
             <div class="move-log card-glass" id="move-log">
                 <div class="move-log-header">Moves</div>
-                <div class="move-log-list" id="move-log-list"></div>
+                <div class="move-log-columns">
+                    <div class="move-log-col white-col">
+                        <div class="col-header">White</div>
+                        <div class="move-list" id="move-log-white"></div>
+                    </div>
+                    <div class="move-log-col black-col">
+                        <div class="col-header">Black</div>
+                        <div class="move-list" id="move-log-black"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
