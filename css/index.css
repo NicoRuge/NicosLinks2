@@ -139,7 +139,6 @@ body {
     z-index: -1;
     background:
         var(--bg-gradient),
-        url('https://unsplash.com/photos/yTPd7pUBpRM/download?w=600');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
