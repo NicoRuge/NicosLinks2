@@ -1,4 +1,7 @@
 /* Chess page – uses index.css vars (--card-bg, --md-sys-color-*, etc.) */
+html {
+    font-size: 15px;
+}
 
 .chess-body {
     margin: 0;

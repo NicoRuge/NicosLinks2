@@ -1,4 +1,17 @@
 // JS Logic for Departure Monitor
+
+// Initialize theme
+const currentTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', currentTheme);
+
+window.addEventListener('message', (event) => {
+    if (event.data.type === 'theme-change') {
+        const theme = event.data.theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }
+});
+
 const stationInput = document.getElementById('station-input');
 const searchResults = document.getElementById('search-results');
 const departuresList = document.getElementById('departures-list');
@@ -6,6 +19,33 @@ const statusMessage = document.getElementById('status-message');
 const fullscreenBtn = document.getElementById('fullscreen-btn');
 const clockElement = document.getElementById('clock');
 const stationTitle = document.getElementById('station-title');
+
+// Modal Elements
+const remarkModal = document.getElementById('remark-modal');
+const remarkTitle = document.getElementById('remark-title');
+const remarkText = document.getElementById('remark-text');
+const remarkClose = document.getElementById('remark-close');
+
+function showRemark(text) {
+    remarkText.textContent = text;
+    remarkModal.classList.remove('hidden');
+}
+
+function closeRemark() {
+    remarkModal.classList.add('hidden');
+}
+
+if (remarkClose) {
+    remarkClose.addEventListener('click', closeRemark);
+}
+
+if (remarkModal) {
+    remarkModal.addEventListener('click', (e) => {
+        if (e.target === remarkModal) {
+            closeRemark();
+        }
+    });
+}
 
 let searchTimeout = null;
 let currentStationId = null;
@@ -172,22 +212,58 @@ function renderDepartures(departures) {
         let delayInfo = '';
         if (dep.delay && dep.delay > 60) { // delay in seconds
             const minutesDelay = Math.floor(dep.delay / 60);
-            delayInfo = ` <span style="color: #ff6b6b; font-size: 0.8em;">+${minutesDelay}</span>`;
+
+            // Check for remarks
+            let remarksText = '';
+            if (dep.remarks && dep.remarks.length > 0) {
+                const uniqueRemarks = [...new Set(dep.remarks
+                    .filter(r => r.type === 'status' || r.type === 'warning' || r.text) // simple filter
+                    .map(r => r.text || r.summary)
+                    .filter(Boolean))];
+
+                if (uniqueRemarks.length > 0) {
+                    remarksText = uniqueRemarks.join('\n\n');
+                }
+            }
+
+            if (remarksText) {
+                // Encode remarks safely for attribute? 
+                // Better approach: use data attribute on the row or element
+                delayInfo = ` <span class="delay-info has-info" style="color: #ff6b6b; font-size: 0.8em;" data-remark="${remarksText.replace(/"/g, '&quot;')}">+${minutesDelay}</span>`;
+            } else {
+                delayInfo = ` <span class="delay-info" style="color: #ff6b6b; font-size: 0.8em;">+${minutesDelay}</span>`;
+            }
         }
 
         const iconPath = getProductIcon(dep.line.product);
         const lineContent = iconPath ? `<img src="assets/icons/${iconPath}" alt="${dep.line.product}" class="transport-icon"> ${dep.line.name}` : dep.line.name;
 
+        let platform = dep.platform || dep.plannedPlatform;
+        if (!platform) {
+            if (['bus', 'tram', 'subway', 'ferry', 'taxi'].includes(dep.line.product)) {
+                platform = '';
+            } else {
+                platform = '?';
+            }
+        }
+
         row.innerHTML = `
             <div class="col-time">${timeStr}${delayInfo}</div>
             <div class="col-line">${lineContent}</div>
             <div class="col-dest" title="${dep.direction}">${dep.direction}</div>
-            <div class="col-plat">${dep.platform || dep.plannedPlatform || '?'}</div>
+            <div class="col-plat">${platform}</div>
         `;
 
         departuresList.appendChild(row);
     });
 }
+// Add event delegation for remarks
+departuresList.addEventListener('click', (e) => {
+    const target = e.target.closest('.has-info');
+    if (target && target.dataset.remark) {
+        showRemark(target.dataset.remark);
+    }
+});
 
 function getProductIcon(product) {
     // API product names: nationalExpress, national, regionalExpress, regional, suburban, bus, ferry, subway, tram, taxi

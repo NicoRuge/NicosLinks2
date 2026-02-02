@@ -1,4 +1,7 @@
 :root {
+    /* Global Scale */
+    font-size: 15px;
+
     /* Light Theme Colors */
     --md-sys-color-primary: #6750A4;
     --md-sys-color-on-primary: #FFFFFF;
@@ -139,7 +142,7 @@ body {
     z-index: -1;
     background:
         var(--bg-gradient),
-    background-size: cover;
+        background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     filter: blur(10px);
@@ -403,14 +406,14 @@ body {
     font-family: "bahnschrift", sans-serif;
     font-size: 2rem;
     font-weight: 700;
-    color: #FFFFFF;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--md-sys-color-on-surface);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .profile-bio {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: var(--md-sys-color-on-surface-variant);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Links Container */
@@ -1932,4 +1935,97 @@ body {
 .playlist-item:hover .playlist-action {
     opacity: 1;
     transform: translateX(0);
+}/* Photography Section Background Grid Styles */
+.photography-section-styled {
+    position: relative;
+    overflow: hidden;
+    /* Ensure it takes full height if content is short, but usually content drives it. 
+       However, for background grid to look good, we might want min-height */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-grid-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.photo-grid-background .masonry-grid {
+    /* Override default container-constrained widths */
+    width: 100%;
+    height: 120%;
+    /* Taller than container to allow scroll parallax or just coverage */
+    column-count: 4;
+    /* More dense for background */
+    column-gap: 16px;
+    padding: 0 16px;
+    transform: rotate(0deg) scale(1.05);
+    /* Slight scale to avoid edges */
+    opacity: 0.6;
+    /* Dim it slightly before blur */
+}
+
+/* Adjust grid for background usage */
+.photo-grid-background .masonry-grid a {
+    pointer-events: none;
+    /* Make unclickable in background */
+    margin-bottom: 16px;
+    display: block;
+}
+
+.photo-grid-background .masonry-grid img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: none;
+    /* Simplify for background */
+}
+
+.blur-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--md-sys-color-background-rgb, 20, 20, 20), 0.3);
+    /* Tint */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1;
+    /* Gradient mask to fade edges if needed, or just full blur */
+    background: linear-gradient(to bottom,
+            var(--md-sys-color-background) 0%,
+            rgba(var(--md-sys-color-background), 0.4) 20%,
+            rgba(var(--md-sys-color-background), 0.4) 80%,
+            var(--md-sys-color-background) 100%);
+}
+
+/* Content Overlay */
+.content-overlay {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    /* Container usually has no bg */
+    pointer-events: auto;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    /* Improve text readability */
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .photo-grid-background .masonry-grid {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 600px) {
+    .photo-grid-background .masonry-grid {
+        column-count: 2;
+    }
 }

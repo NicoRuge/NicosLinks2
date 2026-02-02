@@ -23,6 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (chessFrame && chessFrame.contentWindow) {
             chessFrame.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
         }
+        const departureFrame = document.querySelector('iframe[src="departure.html"]');
+        if (departureFrame && departureFrame.contentWindow) {
+            departureFrame.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
+        }
 
         if (theme === 'dark') {
             themeIcon.src = 'assets/icons/sun.svg';
@@ -79,6 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const theme = document.documentElement.getAttribute('data-theme') || 'light';
             if (chessFrame && chessFrame.contentWindow) {
                 chessFrame.contentWindow.postMessage({ type: 'theme-change', theme }, '*');
+            }
+        }
+
+        if (targetId === 'departure-section') {
+            const departureFrame = document.querySelector('iframe[src="departure.html"]');
+            const theme = document.documentElement.getAttribute('data-theme') || 'light';
+            if (departureFrame && departureFrame.contentWindow) {
+                departureFrame.contentWindow.postMessage({ type: 'theme-change', theme }, '*');
             }
         }
     };

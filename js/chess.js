@@ -4,7 +4,7 @@
     const PIECES = { K: '♔', Q: '♕', R: '♖', B: '♗', N: '♘', P: '♙', k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟' };
     const FEN_START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
-    const DEPTH = { dumb: 0, easy: 1, medium: 2, hard: 4 };
+    const DEPTH = { dumb: 0, easy: 1, medium: 2, hard: 3 };
     const PIECE_VAL = { P: 100, N: 320, B: 330, R: 500, Q: 900, K: 20000, p: -100, n: -320, b: -330, r: -500, q: -900, k: -20000 };
 
     let board = [];
@@ -23,6 +23,7 @@
     let moveHistory = [];
     let capturedWhite = []; // Pieces White has taken
     let capturedBlack = []; // Pieces Black has taken
+
 
     // Timer State
     let timeWhite = 0;
@@ -292,7 +293,7 @@
                 if (p) score += PIECE_VAL[p] || 0;
             }
         }
-        return turn === 'w' ? score : -score;
+        return score;
     }
 
     function minimax(depth, alpha, beta, maximizing) {
