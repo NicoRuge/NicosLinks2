@@ -99,6 +99,8 @@ h2 {
     flex-shrink: 0;
 }
 
+/*Test*/
+
 /* Custom crowbar cursor for buttons and interactive elements */
 button,
 [role="button"],
@@ -2034,7 +2036,9 @@ body {
     .photo-grid-background .masonry-grid {
         column-count: 2;
     }
-}/* Photography Subsections */
+}
+
+/* Photography Subsections */
 .photo-subsection {
     width: 100%;
     margin-top: 24px;
@@ -2048,7 +2052,9 @@ body {
     color: var(--md-sys-color-primary);
     margin-bottom: 16px;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}/* Photography Subsection Image Grid */
+}
+
+/* Photography Subsection Image Grid */
 .subsection-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -2078,7 +2084,9 @@ body {
     .subsection-grid {
         grid-template-columns: repeat(4, 1fr);
     }
-}/* Disabled Link Style */
+}
+
+/* Disabled Link Style */
 .sidebar-link.disabled {
     opacity: 0.5;
     cursor: default;
