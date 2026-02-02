@@ -1935,47 +1935,47 @@ body {
 .playlist-item:hover .playlist-action {
     opacity: 1;
     transform: translateX(0);
-}/* Photography Section Background Grid Styles */
+}
+
+/* Photography Section Background Grid Styles */
 .photography-section-styled {
     position: relative;
     overflow: hidden;
-    /* Ensure it takes full height if content is short, but usually content drives it. 
-       However, for background grid to look good, we might want min-height */
     min-height: 100vh;
-    display: flex;
+    /* display: flex; REMOVED to prevent overriding display:none */
     align-items: center;
     justify-content: center;
 }
 
+.photography-section-styled.active {
+    display: flex;
+    /* Only flex when active */
+}
+
 .photo-grid-background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: -1;
+    /* Behind everything by default */
     overflow: hidden;
+    pointer-events: none;
 }
 
 .photo-grid-background .masonry-grid {
-    /* Override default container-constrained widths */
     width: 100%;
     height: 120%;
-    /* Taller than container to allow scroll parallax or just coverage */
     column-count: 4;
-    /* More dense for background */
     column-gap: 16px;
     padding: 0 16px;
     transform: rotate(0deg) scale(1.05);
-    /* Slight scale to avoid edges */
     opacity: 0.6;
-    /* Dim it slightly before blur */
 }
 
-/* Adjust grid for background usage */
 .photo-grid-background .masonry-grid a {
     pointer-events: none;
-    /* Make unclickable in background */
     margin-bottom: 16px;
     display: block;
 }
@@ -1984,7 +1984,6 @@ body {
     width: 100%;
     border-radius: 8px;
     box-shadow: none;
-    /* Simplify for background */
 }
 
 .blur-overlay {
@@ -1993,17 +1992,24 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(var(--md-sys-color-background-rgb, 20, 20, 20), 0.3);
-    /* Tint */
+    background: rgba(0, 0, 0, 0.6);
+    /* Darkened as requested */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 1;
-    /* Gradient mask to fade edges if needed, or just full blur */
-    background: linear-gradient(to bottom,
-            var(--md-sys-color-background) 0%,
-            rgba(var(--md-sys-color-background), 0.4) 20%,
-            rgba(var(--md-sys-color-background), 0.4) 80%,
-            var(--md-sys-color-background) 100%);
+}
+
+/* Content Overlay logic handled by content-area/sections now */
+/* Ensure content sits above fixed background */
+.content-area {
+    z-index: 1;
+    position: relative;
+}
+
+.content-overlay {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Content Overlay */
@@ -2028,4 +2034,56 @@ body {
     .photo-grid-background .masonry-grid {
         column-count: 2;
     }
+}/* Photography Subsections */
+.photo-subsection {
+    width: 100%;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.photo-subsection h3 {
+    font-family: "bahnschrift", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--md-sys-color-primary);
+    margin-bottom: 16px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}/* Photography Subsection Image Grid */
+.subsection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.subsection-grid img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition-speed) var(--transition-ease),
+        box-shadow var(--transition-speed) var(--transition-ease);
+    cursor: pointer;
+}
+
+.subsection-grid img:hover {
+    transform: scale(1.03);
+    box-shadow: var(--card-hover-shadow);
+    z-index: 10;
+}
+
+@media (min-width: 600px) {
+    .subsection-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}/* Disabled Link Style */
+.sidebar-link.disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+    filter: grayscale(1);
+    background: transparent !important;
+    /* Ensure no hover bg */
 }

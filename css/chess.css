@@ -7,7 +7,8 @@ html {
     margin: 0;
     padding: 20px;
     font-family: "bahnschrift", sans-serif;
-    background: transparent;
+    background: var(--md-sys-color-background);
+    /* Solid bg to hide global grid */
     color: var(--md-sys-color-on-background);
     min-height: 100vh;
     overflow-x: hidden;
