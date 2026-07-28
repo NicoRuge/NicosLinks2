@@ -1,8 +1,2 @@
 [build]
 functions = "netlify/functions"
-
-[[redirects]]
-  from = "/*"
-  to = "https://nruge.dev"
-  status = 301
-  force = true
